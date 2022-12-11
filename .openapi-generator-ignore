@@ -1,3 +1,4 @@
 docs/
 test/
-tests/
+.travis.yml
+git_push.sh

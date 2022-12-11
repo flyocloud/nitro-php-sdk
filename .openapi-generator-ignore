@@ -2,3 +2,5 @@ docs/
 test/
 .travis.yml
 git_push.sh
+README.md
+phpunit.xml.dist

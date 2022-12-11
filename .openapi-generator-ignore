@@ -3,4 +3,5 @@ test/
 .travis.yml
 git_push.sh
 README.md
+composer.json
 phpunit.xml.dist

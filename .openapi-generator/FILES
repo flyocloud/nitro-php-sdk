@@ -1,0 +1,16 @@
+.gitignore
+.php-cs-fixer.dist.php
+lib/Api/ConfigApi.php
+lib/Api/PagesApi.php
+lib/ApiException.php
+lib/Configuration.php
+lib/HeaderSelector.php
+lib/Model/Block.php
+lib/Model/BlockSlotsInner.php
+lib/Model/Config200Response.php
+lib/Model/Config200ResponseNav.php
+lib/Model/Config200ResponseNitro.php
+lib/Model/ModelInterface.php
+lib/Model/Page.php
+lib/Model/PagesInner.php
+lib/ObjectSerializer.php

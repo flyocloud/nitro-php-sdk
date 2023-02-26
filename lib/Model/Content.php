@@ -1,6 +1,6 @@
 <?php
 /**
- * Config200Response
+ * Content
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Config200Response Class Doc Comment
+ * Content Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class Content implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'config_200_response';
+    protected static $openAPIModelName = 'content';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'nitro' => '\Flyo\Model\Config200ResponseNitro',
-        'pages' => 'string[]',
-        'nav' => '\Flyo\Model\Config200ResponseNav',
-        'globals' => 'object'
+        'value' => 'string',
+        'identifier' => 'string',
+        'uid' => 'string',
+        'authentication' => 'string'
     ];
 
     /**
@@ -71,10 +71,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'nitro' => null,
-        'pages' => null,
-        'nav' => null,
-        'globals' => null
+        'value' => null,
+        'identifier' => null,
+        'uid' => null,
+        'authentication' => null
     ];
 
     /**
@@ -83,10 +83,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'nitro' => false,
-		'pages' => false,
-		'nav' => false,
-		'globals' => false
+        'value' => false,
+		'identifier' => false,
+		'uid' => false,
+		'authentication' => false
     ];
 
     /**
@@ -175,10 +175,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'nitro' => 'nitro',
-        'pages' => 'pages',
-        'nav' => 'nav',
-        'globals' => 'globals'
+        'value' => 'value',
+        'identifier' => 'identifier',
+        'uid' => 'uid',
+        'authentication' => 'authentication'
     ];
 
     /**
@@ -187,10 +187,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'nitro' => 'setNitro',
-        'pages' => 'setPages',
-        'nav' => 'setNav',
-        'globals' => 'setGlobals'
+        'value' => 'setValue',
+        'identifier' => 'setIdentifier',
+        'uid' => 'setUid',
+        'authentication' => 'setAuthentication'
     ];
 
     /**
@@ -199,10 +199,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'nitro' => 'getNitro',
-        'pages' => 'getPages',
-        'nav' => 'getNav',
-        'globals' => 'getGlobals'
+        'value' => 'getValue',
+        'identifier' => 'getIdentifier',
+        'uid' => 'getUid',
+        'authentication' => 'getAuthentication'
     ];
 
     /**
@@ -262,10 +262,10 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('nitro', $data ?? [], null);
-        $this->setIfExists('pages', $data ?? [], null);
-        $this->setIfExists('nav', $data ?? [], null);
-        $this->setIfExists('globals', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('identifier', $data ?? [], null);
+        $this->setIfExists('uid', $data ?? [], null);
+        $this->setIfExists('authentication', $data ?? [], null);
     }
 
     /**
@@ -295,6 +295,18 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $invalidProperties = [];
 
+        if ($this->container['value'] === null) {
+            $invalidProperties[] = "'value' can't be null";
+        }
+        if ($this->container['identifier'] === null) {
+            $invalidProperties[] = "'identifier' can't be null";
+        }
+        if ($this->container['uid'] === null) {
+            $invalidProperties[] = "'uid' can't be null";
+        }
+        if ($this->container['authentication'] === null) {
+            $invalidProperties[] = "'authentication' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -311,117 +323,117 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets nitro
+     * Gets value
      *
-     * @return \Flyo\Model\Config200ResponseNitro|null
+     * @return string
      */
-    public function getNitro()
+    public function getValue()
     {
-        return $this->container['nitro'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets nitro
+     * Sets value
      *
-     * @param \Flyo\Model\Config200ResponseNitro|null $nitro nitro
+     * @param string $value value
      *
      * @return self
      */
-    public function setNitro($nitro)
+    public function setValue($value)
     {
 
-        if (is_null($nitro)) {
-            throw new \InvalidArgumentException('non-nullable nitro cannot be null');
+        if (is_null($value)) {
+            throw new \InvalidArgumentException('non-nullable value cannot be null');
         }
 
-        $this->container['nitro'] = $nitro;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets pages
+     * Gets identifier
      *
-     * @return string[]|null
+     * @return string
      */
-    public function getPages()
+    public function getIdentifier()
     {
-        return $this->container['pages'];
+        return $this->container['identifier'];
     }
 
     /**
-     * Sets pages
+     * Sets identifier
      *
-     * @param string[]|null $pages pages
+     * @param string $identifier identifier
      *
      * @return self
      */
-    public function setPages($pages)
+    public function setIdentifier($identifier)
     {
 
-        if (is_null($pages)) {
-            throw new \InvalidArgumentException('non-nullable pages cannot be null');
+        if (is_null($identifier)) {
+            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
         }
 
-        $this->container['pages'] = $pages;
+        $this->container['identifier'] = $identifier;
 
         return $this;
     }
 
     /**
-     * Gets nav
+     * Gets uid
      *
-     * @return \Flyo\Model\Config200ResponseNav|null
+     * @return string
      */
-    public function getNav()
+    public function getUid()
     {
-        return $this->container['nav'];
+        return $this->container['uid'];
     }
 
     /**
-     * Sets nav
+     * Sets uid
      *
-     * @param \Flyo\Model\Config200ResponseNav|null $nav nav
+     * @param string $uid uid
      *
      * @return self
      */
-    public function setNav($nav)
+    public function setUid($uid)
     {
 
-        if (is_null($nav)) {
-            throw new \InvalidArgumentException('non-nullable nav cannot be null');
+        if (is_null($uid)) {
+            throw new \InvalidArgumentException('non-nullable uid cannot be null');
         }
 
-        $this->container['nav'] = $nav;
+        $this->container['uid'] = $uid;
 
         return $this;
     }
 
     /**
-     * Gets globals
+     * Gets authentication
      *
-     * @return object|null
+     * @return string
      */
-    public function getGlobals()
+    public function getAuthentication()
     {
-        return $this->container['globals'];
+        return $this->container['authentication'];
     }
 
     /**
-     * Sets globals
+     * Sets authentication
      *
-     * @param object|null $globals globals
+     * @param string $authentication authentication
      *
      * @return self
      */
-    public function setGlobals($globals)
+    public function setAuthentication($authentication)
     {
 
-        if (is_null($globals)) {
-            throw new \InvalidArgumentException('non-nullable globals cannot be null');
+        if (is_null($authentication)) {
+            throw new \InvalidArgumentException('non-nullable authentication cannot be null');
         }
 
-        $this->container['globals'] = $globals;
+        $this->container['authentication'] = $authentication;
 
         return $this;
     }

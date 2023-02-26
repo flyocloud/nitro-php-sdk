@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigApi
+ * ContentApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Flyo\HeaderSelector;
 use Flyo\ObjectSerializer;
 
 /**
- * ConfigApi Class Doc Comment
+ * ContentApi Class Doc Comment
  *
  * @category Class
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ConfigApi
+class ContentApi
 {
     /**
      * @var ClientInterface
@@ -71,7 +71,7 @@ class ConfigApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'config' => [
+        'putContent' => [
             'application/json',
         ],
     ];
@@ -123,36 +123,39 @@ class ConfigApi
     }
 
     /**
-     * Operation config
+     * Operation putContent
      *
-     * Get Config
+     * Put content
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $page_id The id of the given page (required)
+     * @param  \Flyo\Model\Content $content content (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putContent'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\Config200Response
+     * @return void
      */
-    public function config(string $contentType = self::contentTypes['config'][0])
+    public function putContent($page_id, $content = null, string $contentType = self::contentTypes['putContent'][0])
     {
-        list($response) = $this->configWithHttpInfo($contentType);
-        return $response;
+        $this->putContentWithHttpInfo($page_id, $content, $contentType);
     }
 
     /**
-     * Operation configWithHttpInfo
+     * Operation putContentWithHttpInfo
      *
-     * Get Config
+     * Put content
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $page_id The id of the given page (required)
+     * @param  \Flyo\Model\Content $content (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putContent'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\Config200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function configWithHttpInfo(string $contentType = self::contentTypes['config'][0])
+    public function putContentWithHttpInfo($page_id, $content = null, string $contentType = self::contentTypes['putContent'][0])
     {
-        $request = $this->configRequest($contentType);
+        $request = $this->putContentRequest($page_id, $content, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -189,68 +192,30 @@ class ConfigApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('\Flyo\Model\Config200Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Flyo\Model\Config200Response' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Flyo\Model\Config200Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Flyo\Model\Config200Response';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Flyo\Model\Config200Response',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation configAsync
+     * Operation putContentAsync
      *
-     * Get Config
+     * Put content
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $page_id The id of the given page (required)
+     * @param  \Flyo\Model\Content $content (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putContent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function configAsync(string $contentType = self::contentTypes['config'][0])
+    public function putContentAsync($page_id, $content = null, string $contentType = self::contentTypes['putContent'][0])
     {
-        return $this->configAsyncWithHttpInfo($contentType)
+        return $this->putContentAsyncWithHttpInfo($page_id, $content, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -259,38 +224,27 @@ class ConfigApi
     }
 
     /**
-     * Operation configAsyncWithHttpInfo
+     * Operation putContentAsyncWithHttpInfo
      *
-     * Get Config
+     * Put content
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $page_id The id of the given page (required)
+     * @param  \Flyo\Model\Content $content (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putContent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function configAsyncWithHttpInfo(string $contentType = self::contentTypes['config'][0])
+    public function putContentAsyncWithHttpInfo($page_id, $content = null, string $contentType = self::contentTypes['putContent'][0])
     {
-        $returnType = '\Flyo\Model\Config200Response';
-        $request = $this->configRequest($contentType);
+        $returnType = '';
+        $request = $this->putContentRequest($page_id, $content, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -310,18 +264,28 @@ class ConfigApi
     }
 
     /**
-     * Create request for operation 'config'
+     * Create request for operation 'putContent'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $page_id The id of the given page (required)
+     * @param  \Flyo\Model\Content $content (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['putContent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function configRequest(string $contentType = self::contentTypes['config'][0])
+    public function putContentRequest($page_id, $content = null, string $contentType = self::contentTypes['putContent'][0])
     {
 
+        // verify the required parameter 'page_id' is set
+        if ($page_id === null || (is_array($page_id) && count($page_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_id when calling putContent'
+            );
+        }
 
-        $resourcePath = '/config';
+
+
+        $resourcePath = '/content/{pageId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -330,16 +294,31 @@ class ConfigApi
 
 
 
+        // path params
+        if ($page_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageId' . '}',
+                ObjectSerializer::toPathValue($page_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            [],
             $contentType,
             $multipart
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($content)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($content));
+            } else {
+                $httpBody = $content;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -383,7 +362,7 @@ class ConfigApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'GET',
+            'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

@@ -1,6 +1,6 @@
 <?php
 /**
- * Config200Response
+ * PageMetaJson
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Config200Response Class Doc Comment
+ * PageMetaJson Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class PageMetaJson implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'config_200_response';
+    protected static $openAPIModelName = 'page_meta_json';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'nitro' => '\Flyo\Model\Config200ResponseNitro',
-        'pages' => 'string[]',
-        'nav' => '\Flyo\Model\Config200ResponseNav',
-        'globals' => 'object'
+        'description' => 'string',
+        'image' => 'string',
+        'title' => 'string'
     ];
 
     /**
@@ -71,10 +70,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'nitro' => null,
-        'pages' => null,
-        'nav' => null,
-        'globals' => null
+        'description' => null,
+        'image' => null,
+        'title' => null
     ];
 
     /**
@@ -83,10 +81,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'nitro' => false,
-		'pages' => false,
-		'nav' => false,
-		'globals' => false
+        'description' => false,
+		'image' => false,
+		'title' => false
     ];
 
     /**
@@ -175,10 +172,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'nitro' => 'nitro',
-        'pages' => 'pages',
-        'nav' => 'nav',
-        'globals' => 'globals'
+        'description' => 'description',
+        'image' => 'image',
+        'title' => 'title'
     ];
 
     /**
@@ -187,10 +183,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'nitro' => 'setNitro',
-        'pages' => 'setPages',
-        'nav' => 'setNav',
-        'globals' => 'setGlobals'
+        'description' => 'setDescription',
+        'image' => 'setImage',
+        'title' => 'setTitle'
     ];
 
     /**
@@ -199,10 +194,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'nitro' => 'getNitro',
-        'pages' => 'getPages',
-        'nav' => 'getNav',
-        'globals' => 'getGlobals'
+        'description' => 'getDescription',
+        'image' => 'getImage',
+        'title' => 'getTitle'
     ];
 
     /**
@@ -262,10 +256,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('nitro', $data ?? [], null);
-        $this->setIfExists('pages', $data ?? [], null);
-        $this->setIfExists('nav', $data ?? [], null);
-        $this->setIfExists('globals', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('image', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
     }
 
     /**
@@ -311,117 +304,88 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets nitro
+     * Gets description
      *
-     * @return \Flyo\Model\Config200ResponseNitro|null
+     * @return string|null
      */
-    public function getNitro()
+    public function getDescription()
     {
-        return $this->container['nitro'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets nitro
+     * Sets description
      *
-     * @param \Flyo\Model\Config200ResponseNitro|null $nitro nitro
+     * @param string|null $description Meta Description
      *
      * @return self
      */
-    public function setNitro($nitro)
+    public function setDescription($description)
     {
 
-        if (is_null($nitro)) {
-            throw new \InvalidArgumentException('non-nullable nitro cannot be null');
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
 
-        $this->container['nitro'] = $nitro;
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets pages
+     * Gets image
      *
-     * @return string[]|null
+     * @return string|null
      */
-    public function getPages()
+    public function getImage()
     {
-        return $this->container['pages'];
+        return $this->container['image'];
     }
 
     /**
-     * Sets pages
+     * Sets image
      *
-     * @param string[]|null $pages pages
+     * @param string|null $image Path to meta image
      *
      * @return self
      */
-    public function setPages($pages)
+    public function setImage($image)
     {
 
-        if (is_null($pages)) {
-            throw new \InvalidArgumentException('non-nullable pages cannot be null');
+        if (is_null($image)) {
+            throw new \InvalidArgumentException('non-nullable image cannot be null');
         }
 
-        $this->container['pages'] = $pages;
+        $this->container['image'] = $image;
 
         return $this;
     }
 
     /**
-     * Gets nav
+     * Gets title
      *
-     * @return \Flyo\Model\Config200ResponseNav|null
+     * @return string|null
      */
-    public function getNav()
+    public function getTitle()
     {
-        return $this->container['nav'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets nav
+     * Sets title
      *
-     * @param \Flyo\Model\Config200ResponseNav|null $nav nav
+     * @param string|null $title Meta page title
      *
      * @return self
      */
-    public function setNav($nav)
+    public function setTitle($title)
     {
 
-        if (is_null($nav)) {
-            throw new \InvalidArgumentException('non-nullable nav cannot be null');
+        if (is_null($title)) {
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
 
-        $this->container['nav'] = $nav;
-
-        return $this;
-    }
-
-    /**
-     * Gets globals
-     *
-     * @return object|null
-     */
-    public function getGlobals()
-    {
-        return $this->container['globals'];
-    }
-
-    /**
-     * Sets globals
-     *
-     * @param object|null $globals globals
-     *
-     * @return self
-     */
-    public function setGlobals($globals)
-    {
-
-        if (is_null($globals)) {
-            throw new \InvalidArgumentException('non-nullable globals cannot be null');
-        }
-
-        $this->container['globals'] = $globals;
+        $this->container['title'] = $title;
 
         return $this;
     }

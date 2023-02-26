@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigApi
+ * EntitiesApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Flyo\HeaderSelector;
 use Flyo\ObjectSerializer;
 
 /**
- * ConfigApi Class Doc Comment
+ * EntitiesApi Class Doc Comment
  *
  * @category Class
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ConfigApi
+class EntitiesApi
 {
     /**
      * @var ClientInterface
@@ -71,7 +71,7 @@ class ConfigApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'config' => [
+        'entity' => [
             'application/json',
         ],
     ];
@@ -123,36 +123,38 @@ class ConfigApi
     }
 
     /**
-     * Operation config
+     * Operation entity
      *
-     * Get Config
+     * Get entity by uniqueid
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $uniqueid The unique id of the given entity (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\Config200Response
+     * @return \Flyo\Model\Entity200Response
      */
-    public function config(string $contentType = self::contentTypes['config'][0])
+    public function entity($uniqueid, string $contentType = self::contentTypes['entity'][0])
     {
-        list($response) = $this->configWithHttpInfo($contentType);
+        list($response) = $this->entityWithHttpInfo($uniqueid, $contentType);
         return $response;
     }
 
     /**
-     * Operation configWithHttpInfo
+     * Operation entityWithHttpInfo
      *
-     * Get Config
+     * Get entity by uniqueid
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $uniqueid The unique id of the given entity (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\Config200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\Entity200Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function configWithHttpInfo(string $contentType = self::contentTypes['config'][0])
+    public function entityWithHttpInfo($uniqueid, string $contentType = self::contentTypes['entity'][0])
     {
-        $request = $this->configRequest($contentType);
+        $request = $this->entityRequest($uniqueid, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -191,23 +193,23 @@ class ConfigApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Flyo\Model\Config200Response' === '\SplFileObject') {
+                    if ('\Flyo\Model\Entity200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Flyo\Model\Config200Response' !== 'string') {
+                        if ('\Flyo\Model\Entity200Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Flyo\Model\Config200Response', []),
+                        ObjectSerializer::deserialize($content, '\Flyo\Model\Entity200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Flyo\Model\Config200Response';
+            $returnType = '\Flyo\Model\Entity200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -228,7 +230,7 @@ class ConfigApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Flyo\Model\Config200Response',
+                        '\Flyo\Model\Entity200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -239,18 +241,19 @@ class ConfigApi
     }
 
     /**
-     * Operation configAsync
+     * Operation entityAsync
      *
-     * Get Config
+     * Get entity by uniqueid
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $uniqueid The unique id of the given entity (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function configAsync(string $contentType = self::contentTypes['config'][0])
+    public function entityAsync($uniqueid, string $contentType = self::contentTypes['entity'][0])
     {
-        return $this->configAsyncWithHttpInfo($contentType)
+        return $this->entityAsyncWithHttpInfo($uniqueid, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -259,19 +262,20 @@ class ConfigApi
     }
 
     /**
-     * Operation configAsyncWithHttpInfo
+     * Operation entityAsyncWithHttpInfo
      *
-     * Get Config
+     * Get entity by uniqueid
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $uniqueid The unique id of the given entity (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function configAsyncWithHttpInfo(string $contentType = self::contentTypes['config'][0])
+    public function entityAsyncWithHttpInfo($uniqueid, string $contentType = self::contentTypes['entity'][0])
     {
-        $returnType = '\Flyo\Model\Config200Response';
-        $request = $this->configRequest($contentType);
+        $returnType = '\Flyo\Model\Entity200Response';
+        $request = $this->entityRequest($uniqueid, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -310,18 +314,26 @@ class ConfigApi
     }
 
     /**
-     * Create request for operation 'config'
+     * Create request for operation 'entity'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $uniqueid The unique id of the given entity (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function configRequest(string $contentType = self::contentTypes['config'][0])
+    public function entityRequest($uniqueid, string $contentType = self::contentTypes['entity'][0])
     {
 
+        // verify the required parameter 'uniqueid' is set
+        if ($uniqueid === null || (is_array($uniqueid) && count($uniqueid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $uniqueid when calling entity'
+            );
+        }
 
-        $resourcePath = '/config';
+
+        $resourcePath = '/entities/{uniqueid}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -330,6 +342,14 @@ class ConfigApi
 
 
 
+        // path params
+        if ($uniqueid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'uniqueid' . '}',
+                ObjectSerializer::toPathValue($uniqueid),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(

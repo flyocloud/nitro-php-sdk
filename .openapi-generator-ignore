@@ -1,4 +1,3 @@
-docs/
 test/
 .travis.yml
 git_push.sh

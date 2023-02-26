@@ -1,6 +1,6 @@
 <?php
 /**
- * Config200Response
+ * Sitemap200ResponseInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Config200Response Class Doc Comment
+ * Sitemap200ResponseInner Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class Sitemap200ResponseInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'config_200_response';
+    protected static $openAPIModelName = 'sitemap_200_response_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'nitro' => '\Flyo\Model\Config200ResponseNitro',
-        'pages' => 'string[]',
-        'nav' => '\Flyo\Model\Config200ResponseNav',
-        'globals' => 'object'
+        'entity_unique_id' => 'string',
+        'entity_title' => 'string',
+        'entity_slug' => 'string',
+        'entity_type' => 'string',
+        'entity_type_id' => 'float',
+        'entity_time_start' => 'string'
     ];
 
     /**
@@ -71,10 +73,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'nitro' => null,
-        'pages' => null,
-        'nav' => null,
-        'globals' => null
+        'entity_unique_id' => null,
+        'entity_title' => null,
+        'entity_slug' => null,
+        'entity_type' => null,
+        'entity_type_id' => null,
+        'entity_time_start' => null
     ];
 
     /**
@@ -83,10 +87,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'nitro' => false,
-		'pages' => false,
-		'nav' => false,
-		'globals' => false
+        'entity_unique_id' => false,
+		'entity_title' => false,
+		'entity_slug' => false,
+		'entity_type' => false,
+		'entity_type_id' => false,
+		'entity_time_start' => false
     ];
 
     /**
@@ -175,10 +181,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'nitro' => 'nitro',
-        'pages' => 'pages',
-        'nav' => 'nav',
-        'globals' => 'globals'
+        'entity_unique_id' => 'entity_unique_id',
+        'entity_title' => 'entity_title',
+        'entity_slug' => 'entity_slug',
+        'entity_type' => 'entity_type',
+        'entity_type_id' => 'entity_type_id',
+        'entity_time_start' => 'entity_time_start'
     ];
 
     /**
@@ -187,10 +195,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'nitro' => 'setNitro',
-        'pages' => 'setPages',
-        'nav' => 'setNav',
-        'globals' => 'setGlobals'
+        'entity_unique_id' => 'setEntityUniqueId',
+        'entity_title' => 'setEntityTitle',
+        'entity_slug' => 'setEntitySlug',
+        'entity_type' => 'setEntityType',
+        'entity_type_id' => 'setEntityTypeId',
+        'entity_time_start' => 'setEntityTimeStart'
     ];
 
     /**
@@ -199,10 +209,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'nitro' => 'getNitro',
-        'pages' => 'getPages',
-        'nav' => 'getNav',
-        'globals' => 'getGlobals'
+        'entity_unique_id' => 'getEntityUniqueId',
+        'entity_title' => 'getEntityTitle',
+        'entity_slug' => 'getEntitySlug',
+        'entity_type' => 'getEntityType',
+        'entity_type_id' => 'getEntityTypeId',
+        'entity_time_start' => 'getEntityTimeStart'
     ];
 
     /**
@@ -262,10 +274,12 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('nitro', $data ?? [], null);
-        $this->setIfExists('pages', $data ?? [], null);
-        $this->setIfExists('nav', $data ?? [], null);
-        $this->setIfExists('globals', $data ?? [], null);
+        $this->setIfExists('entity_unique_id', $data ?? [], null);
+        $this->setIfExists('entity_title', $data ?? [], null);
+        $this->setIfExists('entity_slug', $data ?? [], null);
+        $this->setIfExists('entity_type', $data ?? [], null);
+        $this->setIfExists('entity_type_id', $data ?? [], null);
+        $this->setIfExists('entity_time_start', $data ?? [], null);
     }
 
     /**
@@ -311,117 +325,175 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets nitro
+     * Gets entity_unique_id
      *
-     * @return \Flyo\Model\Config200ResponseNitro|null
+     * @return string|null
      */
-    public function getNitro()
+    public function getEntityUniqueId()
     {
-        return $this->container['nitro'];
+        return $this->container['entity_unique_id'];
     }
 
     /**
-     * Sets nitro
+     * Sets entity_unique_id
      *
-     * @param \Flyo\Model\Config200ResponseNitro|null $nitro nitro
+     * @param string|null $entity_unique_id Unique ID
      *
      * @return self
      */
-    public function setNitro($nitro)
+    public function setEntityUniqueId($entity_unique_id)
     {
 
-        if (is_null($nitro)) {
-            throw new \InvalidArgumentException('non-nullable nitro cannot be null');
+        if (is_null($entity_unique_id)) {
+            throw new \InvalidArgumentException('non-nullable entity_unique_id cannot be null');
         }
 
-        $this->container['nitro'] = $nitro;
+        $this->container['entity_unique_id'] = $entity_unique_id;
 
         return $this;
     }
 
     /**
-     * Gets pages
+     * Gets entity_title
      *
-     * @return string[]|null
+     * @return string|null
      */
-    public function getPages()
+    public function getEntityTitle()
     {
-        return $this->container['pages'];
+        return $this->container['entity_title'];
     }
 
     /**
-     * Sets pages
+     * Sets entity_title
      *
-     * @param string[]|null $pages pages
+     * @param string|null $entity_title entity_title
      *
      * @return self
      */
-    public function setPages($pages)
+    public function setEntityTitle($entity_title)
     {
 
-        if (is_null($pages)) {
-            throw new \InvalidArgumentException('non-nullable pages cannot be null');
+        if (is_null($entity_title)) {
+            throw new \InvalidArgumentException('non-nullable entity_title cannot be null');
         }
 
-        $this->container['pages'] = $pages;
+        $this->container['entity_title'] = $entity_title;
 
         return $this;
     }
 
     /**
-     * Gets nav
+     * Gets entity_slug
      *
-     * @return \Flyo\Model\Config200ResponseNav|null
+     * @return string|null
      */
-    public function getNav()
+    public function getEntitySlug()
     {
-        return $this->container['nav'];
+        return $this->container['entity_slug'];
     }
 
     /**
-     * Sets nav
+     * Sets entity_slug
      *
-     * @param \Flyo\Model\Config200ResponseNav|null $nav nav
+     * @param string|null $entity_slug entity_slug
      *
      * @return self
      */
-    public function setNav($nav)
+    public function setEntitySlug($entity_slug)
     {
 
-        if (is_null($nav)) {
-            throw new \InvalidArgumentException('non-nullable nav cannot be null');
+        if (is_null($entity_slug)) {
+            throw new \InvalidArgumentException('non-nullable entity_slug cannot be null');
         }
 
-        $this->container['nav'] = $nav;
+        $this->container['entity_slug'] = $entity_slug;
 
         return $this;
     }
 
     /**
-     * Gets globals
+     * Gets entity_type
      *
-     * @return object|null
+     * @return string|null
      */
-    public function getGlobals()
+    public function getEntityType()
     {
-        return $this->container['globals'];
+        return $this->container['entity_type'];
     }
 
     /**
-     * Sets globals
+     * Sets entity_type
      *
-     * @param object|null $globals globals
+     * @param string|null $entity_type entity_type
      *
      * @return self
      */
-    public function setGlobals($globals)
+    public function setEntityType($entity_type)
     {
 
-        if (is_null($globals)) {
-            throw new \InvalidArgumentException('non-nullable globals cannot be null');
+        if (is_null($entity_type)) {
+            throw new \InvalidArgumentException('non-nullable entity_type cannot be null');
         }
 
-        $this->container['globals'] = $globals;
+        $this->container['entity_type'] = $entity_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity_type_id
+     *
+     * @return float|null
+     */
+    public function getEntityTypeId()
+    {
+        return $this->container['entity_type_id'];
+    }
+
+    /**
+     * Sets entity_type_id
+     *
+     * @param float|null $entity_type_id entity_type_id
+     *
+     * @return self
+     */
+    public function setEntityTypeId($entity_type_id)
+    {
+
+        if (is_null($entity_type_id)) {
+            throw new \InvalidArgumentException('non-nullable entity_type_id cannot be null');
+        }
+
+        $this->container['entity_type_id'] = $entity_type_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity_time_start
+     *
+     * @return string|null
+     */
+    public function getEntityTimeStart()
+    {
+        return $this->container['entity_time_start'];
+    }
+
+    /**
+     * Sets entity_time_start
+     *
+     * @param string|null $entity_time_start entity_time_start
+     *
+     * @return self
+     */
+    public function setEntityTimeStart($entity_time_start)
+    {
+
+        if (is_null($entity_time_start)) {
+            throw new \InvalidArgumentException('non-nullable entity_time_start cannot be null');
+        }
+
+        $this->container['entity_time_start'] = $entity_time_start;
 
         return $this;
     }

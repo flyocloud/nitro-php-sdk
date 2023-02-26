@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigApi
+ * SitemapApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Flyo\HeaderSelector;
 use Flyo\ObjectSerializer;
 
 /**
- * ConfigApi Class Doc Comment
+ * SitemapApi Class Doc Comment
  *
  * @category Class
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ConfigApi
+class SitemapApi
 {
     /**
      * @var ClientInterface
@@ -71,7 +71,7 @@ class ConfigApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'config' => [
+        'sitemap' => [
             'application/json',
         ],
     ];
@@ -123,36 +123,36 @@ class ConfigApi
     }
 
     /**
-     * Operation config
+     * Operation sitemap
      *
-     * Get Config
+     * Get Sitemap
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sitemap'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\Config200Response
+     * @return \Flyo\Model\Sitemap200ResponseInner[]
      */
-    public function config(string $contentType = self::contentTypes['config'][0])
+    public function sitemap(string $contentType = self::contentTypes['sitemap'][0])
     {
-        list($response) = $this->configWithHttpInfo($contentType);
+        list($response) = $this->sitemapWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation configWithHttpInfo
+     * Operation sitemapWithHttpInfo
      *
-     * Get Config
+     * Get Sitemap
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sitemap'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\Config200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\Sitemap200ResponseInner[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function configWithHttpInfo(string $contentType = self::contentTypes['config'][0])
+    public function sitemapWithHttpInfo(string $contentType = self::contentTypes['sitemap'][0])
     {
-        $request = $this->configRequest($contentType);
+        $request = $this->sitemapRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -191,23 +191,23 @@ class ConfigApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Flyo\Model\Config200Response' === '\SplFileObject') {
+                    if ('\Flyo\Model\Sitemap200ResponseInner[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Flyo\Model\Config200Response' !== 'string') {
+                        if ('\Flyo\Model\Sitemap200ResponseInner[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Flyo\Model\Config200Response', []),
+                        ObjectSerializer::deserialize($content, '\Flyo\Model\Sitemap200ResponseInner[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Flyo\Model\Config200Response';
+            $returnType = '\Flyo\Model\Sitemap200ResponseInner[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -228,7 +228,7 @@ class ConfigApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Flyo\Model\Config200Response',
+                        '\Flyo\Model\Sitemap200ResponseInner[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -239,18 +239,18 @@ class ConfigApi
     }
 
     /**
-     * Operation configAsync
+     * Operation sitemapAsync
      *
-     * Get Config
+     * Get Sitemap
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sitemap'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function configAsync(string $contentType = self::contentTypes['config'][0])
+    public function sitemapAsync(string $contentType = self::contentTypes['sitemap'][0])
     {
-        return $this->configAsyncWithHttpInfo($contentType)
+        return $this->sitemapAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -259,19 +259,19 @@ class ConfigApi
     }
 
     /**
-     * Operation configAsyncWithHttpInfo
+     * Operation sitemapAsyncWithHttpInfo
      *
-     * Get Config
+     * Get Sitemap
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sitemap'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function configAsyncWithHttpInfo(string $contentType = self::contentTypes['config'][0])
+    public function sitemapAsyncWithHttpInfo(string $contentType = self::contentTypes['sitemap'][0])
     {
-        $returnType = '\Flyo\Model\Config200Response';
-        $request = $this->configRequest($contentType);
+        $returnType = '\Flyo\Model\Sitemap200ResponseInner[]';
+        $request = $this->sitemapRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -310,18 +310,18 @@ class ConfigApi
     }
 
     /**
-     * Create request for operation 'config'
+     * Create request for operation 'sitemap'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['config'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sitemap'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function configRequest(string $contentType = self::contentTypes['config'][0])
+    public function sitemapRequest(string $contentType = self::contentTypes['sitemap'][0])
     {
 
 
-        $resourcePath = '/config';
+        $resourcePath = '/sitemap';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

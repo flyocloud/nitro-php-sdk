@@ -1,6 +1,6 @@
 <?php
 /**
- * Config200Response
+ * Entity200Response
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Config200Response Class Doc Comment
+ * Entity200Response Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class Entity200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'config_200_response';
+    protected static $openAPIModelName = 'entity_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'nitro' => '\Flyo\Model\Config200ResponseNitro',
-        'pages' => 'string[]',
-        'nav' => '\Flyo\Model\Config200ResponseNav',
-        'globals' => 'object'
+        'entity' => '\Flyo\Model\Entity200ResponseEntity',
+        'model' => 'object',
+        'language' => 'string'
     ];
 
     /**
@@ -71,10 +70,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'nitro' => null,
-        'pages' => null,
-        'nav' => null,
-        'globals' => null
+        'entity' => null,
+        'model' => null,
+        'language' => null
     ];
 
     /**
@@ -83,10 +81,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'nitro' => false,
-		'pages' => false,
-		'nav' => false,
-		'globals' => false
+        'entity' => false,
+		'model' => false,
+		'language' => false
     ];
 
     /**
@@ -175,10 +172,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'nitro' => 'nitro',
-        'pages' => 'pages',
-        'nav' => 'nav',
-        'globals' => 'globals'
+        'entity' => 'entity',
+        'model' => 'model',
+        'language' => 'language'
     ];
 
     /**
@@ -187,10 +183,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'nitro' => 'setNitro',
-        'pages' => 'setPages',
-        'nav' => 'setNav',
-        'globals' => 'setGlobals'
+        'entity' => 'setEntity',
+        'model' => 'setModel',
+        'language' => 'setLanguage'
     ];
 
     /**
@@ -199,10 +194,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'nitro' => 'getNitro',
-        'pages' => 'getPages',
-        'nav' => 'getNav',
-        'globals' => 'getGlobals'
+        'entity' => 'getEntity',
+        'model' => 'getModel',
+        'language' => 'getLanguage'
     ];
 
     /**
@@ -262,10 +256,9 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('nitro', $data ?? [], null);
-        $this->setIfExists('pages', $data ?? [], null);
-        $this->setIfExists('nav', $data ?? [], null);
-        $this->setIfExists('globals', $data ?? [], null);
+        $this->setIfExists('entity', $data ?? [], null);
+        $this->setIfExists('model', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
     }
 
     /**
@@ -311,117 +304,88 @@ class Config200Response implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets nitro
+     * Gets entity
      *
-     * @return \Flyo\Model\Config200ResponseNitro|null
+     * @return \Flyo\Model\Entity200ResponseEntity|null
      */
-    public function getNitro()
+    public function getEntity()
     {
-        return $this->container['nitro'];
+        return $this->container['entity'];
     }
 
     /**
-     * Sets nitro
+     * Sets entity
      *
-     * @param \Flyo\Model\Config200ResponseNitro|null $nitro nitro
+     * @param \Flyo\Model\Entity200ResponseEntity|null $entity entity
      *
      * @return self
      */
-    public function setNitro($nitro)
+    public function setEntity($entity)
     {
 
-        if (is_null($nitro)) {
-            throw new \InvalidArgumentException('non-nullable nitro cannot be null');
+        if (is_null($entity)) {
+            throw new \InvalidArgumentException('non-nullable entity cannot be null');
         }
 
-        $this->container['nitro'] = $nitro;
+        $this->container['entity'] = $entity;
 
         return $this;
     }
 
     /**
-     * Gets pages
-     *
-     * @return string[]|null
-     */
-    public function getPages()
-    {
-        return $this->container['pages'];
-    }
-
-    /**
-     * Sets pages
-     *
-     * @param string[]|null $pages pages
-     *
-     * @return self
-     */
-    public function setPages($pages)
-    {
-
-        if (is_null($pages)) {
-            throw new \InvalidArgumentException('non-nullable pages cannot be null');
-        }
-
-        $this->container['pages'] = $pages;
-
-        return $this;
-    }
-
-    /**
-     * Gets nav
-     *
-     * @return \Flyo\Model\Config200ResponseNav|null
-     */
-    public function getNav()
-    {
-        return $this->container['nav'];
-    }
-
-    /**
-     * Sets nav
-     *
-     * @param \Flyo\Model\Config200ResponseNav|null $nav nav
-     *
-     * @return self
-     */
-    public function setNav($nav)
-    {
-
-        if (is_null($nav)) {
-            throw new \InvalidArgumentException('non-nullable nav cannot be null');
-        }
-
-        $this->container['nav'] = $nav;
-
-        return $this;
-    }
-
-    /**
-     * Gets globals
+     * Gets model
      *
      * @return object|null
      */
-    public function getGlobals()
+    public function getModel()
     {
-        return $this->container['globals'];
+        return $this->container['model'];
     }
 
     /**
-     * Sets globals
+     * Sets model
      *
-     * @param object|null $globals globals
+     * @param object|null $model model
      *
      * @return self
      */
-    public function setGlobals($globals)
+    public function setModel($model)
     {
 
-        if (is_null($globals)) {
-            throw new \InvalidArgumentException('non-nullable globals cannot be null');
+        if (is_null($model)) {
+            throw new \InvalidArgumentException('non-nullable model cannot be null');
         }
 
-        $this->container['globals'] = $globals;
+        $this->container['model'] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     *
+     * @return string|null
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string|null $language Current language context for entite details
+     *
+     * @return self
+     */
+    public function setLanguage($language)
+    {
+
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+
+        $this->container['language'] = $language;
 
         return $this;
     }

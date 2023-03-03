@@ -1,6 +1,6 @@
 <?php
 /**
- * EntitiesApi
+ * SearchApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Flyo\HeaderSelector;
 use Flyo\ObjectSerializer;
 
 /**
- * EntitiesApi Class Doc Comment
+ * SearchApi Class Doc Comment
  *
  * @category Class
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class EntitiesApi
+class SearchApi
 {
     /**
      * @var ClientInterface
@@ -71,7 +71,7 @@ class EntitiesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'entity' => [
+        'search' => [
             'application/json',
         ],
     ];
@@ -123,38 +123,38 @@ class EntitiesApi
     }
 
     /**
-     * Operation entity
+     * Operation search
      *
-     * Get entity by uniqueid
+     * Get Search
      *
-     * @param  string $uniqueid The unique id of the given entity (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
+     * @param  string $query The query which should be looked up in the site index. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\EntityResponse
+     * @return \Flyo\Model\SitemapResponseInner[]
      */
-    public function entity($uniqueid, string $contentType = self::contentTypes['entity'][0])
+    public function search($query, string $contentType = self::contentTypes['search'][0])
     {
-        list($response) = $this->entityWithHttpInfo($uniqueid, $contentType);
+        list($response) = $this->searchWithHttpInfo($query, $contentType);
         return $response;
     }
 
     /**
-     * Operation entityWithHttpInfo
+     * Operation searchWithHttpInfo
      *
-     * Get entity by uniqueid
+     * Get Search
      *
-     * @param  string $uniqueid The unique id of the given entity (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
+     * @param  string $query The query which should be looked up in the site index. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\EntityResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\SitemapResponseInner[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function entityWithHttpInfo($uniqueid, string $contentType = self::contentTypes['entity'][0])
+    public function searchWithHttpInfo($query, string $contentType = self::contentTypes['search'][0])
     {
-        $request = $this->entityRequest($uniqueid, $contentType);
+        $request = $this->searchRequest($query, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -193,23 +193,23 @@ class EntitiesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Flyo\Model\EntityResponse' === '\SplFileObject') {
+                    if ('\Flyo\Model\SitemapResponseInner[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Flyo\Model\EntityResponse' !== 'string') {
+                        if ('\Flyo\Model\SitemapResponseInner[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Flyo\Model\EntityResponse', []),
+                        ObjectSerializer::deserialize($content, '\Flyo\Model\SitemapResponseInner[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Flyo\Model\EntityResponse';
+            $returnType = '\Flyo\Model\SitemapResponseInner[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -230,7 +230,7 @@ class EntitiesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Flyo\Model\EntityResponse',
+                        '\Flyo\Model\SitemapResponseInner[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -241,19 +241,19 @@ class EntitiesApi
     }
 
     /**
-     * Operation entityAsync
+     * Operation searchAsync
      *
-     * Get entity by uniqueid
+     * Get Search
      *
-     * @param  string $uniqueid The unique id of the given entity (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
+     * @param  string $query The query which should be looked up in the site index. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entityAsync($uniqueid, string $contentType = self::contentTypes['entity'][0])
+    public function searchAsync($query, string $contentType = self::contentTypes['search'][0])
     {
-        return $this->entityAsyncWithHttpInfo($uniqueid, $contentType)
+        return $this->searchAsyncWithHttpInfo($query, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -262,20 +262,20 @@ class EntitiesApi
     }
 
     /**
-     * Operation entityAsyncWithHttpInfo
+     * Operation searchAsyncWithHttpInfo
      *
-     * Get entity by uniqueid
+     * Get Search
      *
-     * @param  string $uniqueid The unique id of the given entity (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
+     * @param  string $query The query which should be looked up in the site index. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entityAsyncWithHttpInfo($uniqueid, string $contentType = self::contentTypes['entity'][0])
+    public function searchAsyncWithHttpInfo($query, string $contentType = self::contentTypes['search'][0])
     {
-        $returnType = '\Flyo\Model\EntityResponse';
-        $request = $this->entityRequest($uniqueid, $contentType);
+        $returnType = '\Flyo\Model\SitemapResponseInner[]';
+        $request = $this->searchRequest($query, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -314,42 +314,43 @@ class EntitiesApi
     }
 
     /**
-     * Create request for operation 'entity'
+     * Create request for operation 'search'
      *
-     * @param  string $uniqueid The unique id of the given entity (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entity'] to see the possible values for this operation
+     * @param  string $query The query which should be looked up in the site index. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entityRequest($uniqueid, string $contentType = self::contentTypes['entity'][0])
+    public function searchRequest($query, string $contentType = self::contentTypes['search'][0])
     {
 
-        // verify the required parameter 'uniqueid' is set
-        if ($uniqueid === null || (is_array($uniqueid) && count($uniqueid) === 0)) {
+        // verify the required parameter 'query' is set
+        if ($query === null || (is_array($query) && count($query) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $uniqueid when calling entity'
+                'Missing the required parameter $query when calling search'
             );
         }
 
 
-        $resourcePath = '/entities/{uniqueid}';
+        $resourcePath = '/search';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $query,
+            'query', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
 
 
-        // path params
-        if ($uniqueid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'uniqueid' . '}',
-                ObjectSerializer::toPathValue($uniqueid),
-                $resourcePath
-            );
-        }
 
 
         $headers = $this->headerSelector->selectHeaders(

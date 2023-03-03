@@ -1,6 +1,6 @@
 # Flyo\EntitiesApi
 
-All URIs are relative to https://edgeapi.flyo.cloud/nitro, except if the operation defines another base path.
+All URIs are relative to https://api.flyo.cloud/nitro, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
@@ -10,7 +10,7 @@ All URIs are relative to https://edgeapi.flyo.cloud/nitro, except if the operati
 ## `entity()`
 
 ```php
-entity($uniqueid): \Flyo\Model\Entity200Response
+entity($uniqueid): \Flyo\Model\EntityResponse
 ```
 
 Get entity by uniqueid
@@ -52,7 +52,7 @@ try {
 
 ### Return type
 
-[**\Flyo\Model\Entity200Response**](../Model/Entity200Response.md)
+[**\Flyo\Model\EntityResponse**](../Model/EntityResponse.md)
 
 ### Authorization
 

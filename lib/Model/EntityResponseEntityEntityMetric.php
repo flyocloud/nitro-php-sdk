@@ -1,6 +1,6 @@
 <?php
 /**
- * Content
+ * EntityResponseEntityEntityMetric
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Content Class Doc Comment
+ * EntityResponseEntityEntityMetric Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Content implements ModelInterface, ArrayAccess, \JsonSerializable
+class EntityResponseEntityEntityMetric implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'content';
+    protected static $openAPIModelName = 'Entity_Response_entity_entity_metric';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'value' => 'string',
-        'identifier' => 'string',
-        'uid' => 'string',
-        'authentication' => 'string'
+        'api' => 'string',
+        'image' => 'string'
     ];
 
     /**
@@ -71,10 +69,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'value' => null,
-        'identifier' => null,
-        'uid' => null,
-        'authentication' => null
+        'api' => null,
+        'image' => null
     ];
 
     /**
@@ -83,10 +79,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'value' => false,
-		'identifier' => false,
-		'uid' => false,
-		'authentication' => false
+        'api' => false,
+		'image' => false
     ];
 
     /**
@@ -175,10 +169,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'value' => 'value',
-        'identifier' => 'identifier',
-        'uid' => 'uid',
-        'authentication' => 'authentication'
+        'api' => 'api',
+        'image' => 'image'
     ];
 
     /**
@@ -187,10 +179,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'value' => 'setValue',
-        'identifier' => 'setIdentifier',
-        'uid' => 'setUid',
-        'authentication' => 'setAuthentication'
+        'api' => 'setApi',
+        'image' => 'setImage'
     ];
 
     /**
@@ -199,10 +189,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'value' => 'getValue',
-        'identifier' => 'getIdentifier',
-        'uid' => 'getUid',
-        'authentication' => 'getAuthentication'
+        'api' => 'getApi',
+        'image' => 'getImage'
     ];
 
     /**
@@ -262,10 +250,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('value', $data ?? [], null);
-        $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('uid', $data ?? [], null);
-        $this->setIfExists('authentication', $data ?? [], null);
+        $this->setIfExists('api', $data ?? [], null);
+        $this->setIfExists('image', $data ?? [], null);
     }
 
     /**
@@ -295,18 +281,6 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['value'] === null) {
-            $invalidProperties[] = "'value' can't be null";
-        }
-        if ($this->container['identifier'] === null) {
-            $invalidProperties[] = "'identifier' can't be null";
-        }
-        if ($this->container['uid'] === null) {
-            $invalidProperties[] = "'uid' can't be null";
-        }
-        if ($this->container['authentication'] === null) {
-            $invalidProperties[] = "'authentication' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -323,117 +297,59 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets value
+     * Gets api
      *
-     * @return string
+     * @return string|null
      */
-    public function getValue()
+    public function getApi()
     {
-        return $this->container['value'];
+        return $this->container['api'];
     }
 
     /**
-     * Sets value
+     * Sets api
      *
-     * @param string $value value
+     * @param string|null $api This url can be used to send a GET request from either frontend or backend.
      *
      * @return self
      */
-    public function setValue($value)
+    public function setApi($api)
     {
 
-        if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
+        if (is_null($api)) {
+            throw new \InvalidArgumentException('non-nullable api cannot be null');
         }
 
-        $this->container['value'] = $value;
+        $this->container['api'] = $api;
 
         return $this;
     }
 
     /**
-     * Gets identifier
+     * Gets image
      *
-     * @return string
+     * @return string|null
      */
-    public function getIdentifier()
+    public function getImage()
     {
-        return $this->container['identifier'];
+        return $this->container['image'];
     }
 
     /**
-     * Sets identifier
+     * Sets image
      *
-     * @param string $identifier identifier
+     * @param string|null $image Use the image as image src in order to track metrics for the given resource.
      *
      * @return self
      */
-    public function setIdentifier($identifier)
+    public function setImage($image)
     {
 
-        if (is_null($identifier)) {
-            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
+        if (is_null($image)) {
+            throw new \InvalidArgumentException('non-nullable image cannot be null');
         }
 
-        $this->container['identifier'] = $identifier;
-
-        return $this;
-    }
-
-    /**
-     * Gets uid
-     *
-     * @return string
-     */
-    public function getUid()
-    {
-        return $this->container['uid'];
-    }
-
-    /**
-     * Sets uid
-     *
-     * @param string $uid uid
-     *
-     * @return self
-     */
-    public function setUid($uid)
-    {
-
-        if (is_null($uid)) {
-            throw new \InvalidArgumentException('non-nullable uid cannot be null');
-        }
-
-        $this->container['uid'] = $uid;
-
-        return $this;
-    }
-
-    /**
-     * Gets authentication
-     *
-     * @return string
-     */
-    public function getAuthentication()
-    {
-        return $this->container['authentication'];
-    }
-
-    /**
-     * Sets authentication
-     *
-     * @param string $authentication authentication
-     *
-     * @return self
-     */
-    public function setAuthentication($authentication)
-    {
-
-        if (is_null($authentication)) {
-            throw new \InvalidArgumentException('non-nullable authentication cannot be null');
-        }
-
-        $this->container['authentication'] = $authentication;
+        $this->container['image'] = $image;
 
         return $this;
     }

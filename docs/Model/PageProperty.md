@@ -1,10 +1,11 @@
-# # BlockSlotsInner
+# # PageProperty
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifier** | **string** | The unique identifier of the slot | [optional]
-**content** | [**\Flyo\Model\Block[]**](Block.md) |  | [optional]
+**value** | [**\Flyo\Model\PagePropertyValue**](PagePropertyValue.md) |  | [optional]
+**navigation** | **bool** |  | [optional]
+**propagate** | **bool** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

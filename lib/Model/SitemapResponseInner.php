@@ -1,6 +1,6 @@
 <?php
 /**
- * Content
+ * SitemapResponseInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Content Class Doc Comment
+ * SitemapResponseInner Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Content implements ModelInterface, ArrayAccess, \JsonSerializable
+class SitemapResponseInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'content';
+    protected static $openAPIModelName = 'Sitemap_Response_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'value' => 'string',
-        'identifier' => 'string',
-        'uid' => 'string',
-        'authentication' => 'string'
+        'entity_unique_id' => 'string',
+        'entity_title' => 'string',
+        'entity_teaser' => 'string',
+        'entity_slug' => 'string',
+        'entity_type' => 'string',
+        'entity_type_id' => 'float',
+        'entity_time_start' => 'string',
+        'entity_image' => 'string'
     ];
 
     /**
@@ -71,10 +75,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'value' => null,
-        'identifier' => null,
-        'uid' => null,
-        'authentication' => null
+        'entity_unique_id' => null,
+        'entity_title' => null,
+        'entity_teaser' => null,
+        'entity_slug' => null,
+        'entity_type' => null,
+        'entity_type_id' => null,
+        'entity_time_start' => null,
+        'entity_image' => null
     ];
 
     /**
@@ -83,10 +91,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'value' => false,
-		'identifier' => false,
-		'uid' => false,
-		'authentication' => false
+        'entity_unique_id' => false,
+		'entity_title' => false,
+		'entity_teaser' => false,
+		'entity_slug' => false,
+		'entity_type' => false,
+		'entity_type_id' => false,
+		'entity_time_start' => false,
+		'entity_image' => false
     ];
 
     /**
@@ -175,10 +187,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'value' => 'value',
-        'identifier' => 'identifier',
-        'uid' => 'uid',
-        'authentication' => 'authentication'
+        'entity_unique_id' => 'entity_unique_id',
+        'entity_title' => 'entity_title',
+        'entity_teaser' => 'entity_teaser',
+        'entity_slug' => 'entity_slug',
+        'entity_type' => 'entity_type',
+        'entity_type_id' => 'entity_type_id',
+        'entity_time_start' => 'entity_time_start',
+        'entity_image' => 'entity_image'
     ];
 
     /**
@@ -187,10 +203,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'value' => 'setValue',
-        'identifier' => 'setIdentifier',
-        'uid' => 'setUid',
-        'authentication' => 'setAuthentication'
+        'entity_unique_id' => 'setEntityUniqueId',
+        'entity_title' => 'setEntityTitle',
+        'entity_teaser' => 'setEntityTeaser',
+        'entity_slug' => 'setEntitySlug',
+        'entity_type' => 'setEntityType',
+        'entity_type_id' => 'setEntityTypeId',
+        'entity_time_start' => 'setEntityTimeStart',
+        'entity_image' => 'setEntityImage'
     ];
 
     /**
@@ -199,10 +219,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'value' => 'getValue',
-        'identifier' => 'getIdentifier',
-        'uid' => 'getUid',
-        'authentication' => 'getAuthentication'
+        'entity_unique_id' => 'getEntityUniqueId',
+        'entity_title' => 'getEntityTitle',
+        'entity_teaser' => 'getEntityTeaser',
+        'entity_slug' => 'getEntitySlug',
+        'entity_type' => 'getEntityType',
+        'entity_type_id' => 'getEntityTypeId',
+        'entity_time_start' => 'getEntityTimeStart',
+        'entity_image' => 'getEntityImage'
     ];
 
     /**
@@ -262,10 +286,14 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('value', $data ?? [], null);
-        $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('uid', $data ?? [], null);
-        $this->setIfExists('authentication', $data ?? [], null);
+        $this->setIfExists('entity_unique_id', $data ?? [], null);
+        $this->setIfExists('entity_title', $data ?? [], null);
+        $this->setIfExists('entity_teaser', $data ?? [], null);
+        $this->setIfExists('entity_slug', $data ?? [], null);
+        $this->setIfExists('entity_type', $data ?? [], null);
+        $this->setIfExists('entity_type_id', $data ?? [], null);
+        $this->setIfExists('entity_time_start', $data ?? [], null);
+        $this->setIfExists('entity_image', $data ?? [], null);
     }
 
     /**
@@ -295,18 +323,6 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['value'] === null) {
-            $invalidProperties[] = "'value' can't be null";
-        }
-        if ($this->container['identifier'] === null) {
-            $invalidProperties[] = "'identifier' can't be null";
-        }
-        if ($this->container['uid'] === null) {
-            $invalidProperties[] = "'uid' can't be null";
-        }
-        if ($this->container['authentication'] === null) {
-            $invalidProperties[] = "'authentication' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -323,117 +339,233 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets value
+     * Gets entity_unique_id
      *
-     * @return string
+     * @return string|null
      */
-    public function getValue()
+    public function getEntityUniqueId()
     {
-        return $this->container['value'];
+        return $this->container['entity_unique_id'];
     }
 
     /**
-     * Sets value
+     * Sets entity_unique_id
      *
-     * @param string $value value
+     * @param string|null $entity_unique_id Unique ID
      *
      * @return self
      */
-    public function setValue($value)
+    public function setEntityUniqueId($entity_unique_id)
     {
 
-        if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
+        if (is_null($entity_unique_id)) {
+            throw new \InvalidArgumentException('non-nullable entity_unique_id cannot be null');
         }
 
-        $this->container['value'] = $value;
+        $this->container['entity_unique_id'] = $entity_unique_id;
 
         return $this;
     }
 
     /**
-     * Gets identifier
+     * Gets entity_title
      *
-     * @return string
+     * @return string|null
      */
-    public function getIdentifier()
+    public function getEntityTitle()
     {
-        return $this->container['identifier'];
+        return $this->container['entity_title'];
     }
 
     /**
-     * Sets identifier
+     * Sets entity_title
      *
-     * @param string $identifier identifier
+     * @param string|null $entity_title entity_title
      *
      * @return self
      */
-    public function setIdentifier($identifier)
+    public function setEntityTitle($entity_title)
     {
 
-        if (is_null($identifier)) {
-            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
+        if (is_null($entity_title)) {
+            throw new \InvalidArgumentException('non-nullable entity_title cannot be null');
         }
 
-        $this->container['identifier'] = $identifier;
+        $this->container['entity_title'] = $entity_title;
 
         return $this;
     }
 
     /**
-     * Gets uid
+     * Gets entity_teaser
      *
-     * @return string
+     * @return string|null
      */
-    public function getUid()
+    public function getEntityTeaser()
     {
-        return $this->container['uid'];
+        return $this->container['entity_teaser'];
     }
 
     /**
-     * Sets uid
+     * Sets entity_teaser
      *
-     * @param string $uid uid
+     * @param string|null $entity_teaser entity_teaser
      *
      * @return self
      */
-    public function setUid($uid)
+    public function setEntityTeaser($entity_teaser)
     {
 
-        if (is_null($uid)) {
-            throw new \InvalidArgumentException('non-nullable uid cannot be null');
+        if (is_null($entity_teaser)) {
+            throw new \InvalidArgumentException('non-nullable entity_teaser cannot be null');
         }
 
-        $this->container['uid'] = $uid;
+        $this->container['entity_teaser'] = $entity_teaser;
 
         return $this;
     }
 
     /**
-     * Gets authentication
+     * Gets entity_slug
      *
-     * @return string
+     * @return string|null
      */
-    public function getAuthentication()
+    public function getEntitySlug()
     {
-        return $this->container['authentication'];
+        return $this->container['entity_slug'];
     }
 
     /**
-     * Sets authentication
+     * Sets entity_slug
      *
-     * @param string $authentication authentication
+     * @param string|null $entity_slug entity_slug
      *
      * @return self
      */
-    public function setAuthentication($authentication)
+    public function setEntitySlug($entity_slug)
     {
 
-        if (is_null($authentication)) {
-            throw new \InvalidArgumentException('non-nullable authentication cannot be null');
+        if (is_null($entity_slug)) {
+            throw new \InvalidArgumentException('non-nullable entity_slug cannot be null');
         }
 
-        $this->container['authentication'] = $authentication;
+        $this->container['entity_slug'] = $entity_slug;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity_type
+     *
+     * @return string|null
+     */
+    public function getEntityType()
+    {
+        return $this->container['entity_type'];
+    }
+
+    /**
+     * Sets entity_type
+     *
+     * @param string|null $entity_type entity_type
+     *
+     * @return self
+     */
+    public function setEntityType($entity_type)
+    {
+
+        if (is_null($entity_type)) {
+            throw new \InvalidArgumentException('non-nullable entity_type cannot be null');
+        }
+
+        $this->container['entity_type'] = $entity_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity_type_id
+     *
+     * @return float|null
+     */
+    public function getEntityTypeId()
+    {
+        return $this->container['entity_type_id'];
+    }
+
+    /**
+     * Sets entity_type_id
+     *
+     * @param float|null $entity_type_id entity_type_id
+     *
+     * @return self
+     */
+    public function setEntityTypeId($entity_type_id)
+    {
+
+        if (is_null($entity_type_id)) {
+            throw new \InvalidArgumentException('non-nullable entity_type_id cannot be null');
+        }
+
+        $this->container['entity_type_id'] = $entity_type_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity_time_start
+     *
+     * @return string|null
+     */
+    public function getEntityTimeStart()
+    {
+        return $this->container['entity_time_start'];
+    }
+
+    /**
+     * Sets entity_time_start
+     *
+     * @param string|null $entity_time_start entity_time_start
+     *
+     * @return self
+     */
+    public function setEntityTimeStart($entity_time_start)
+    {
+
+        if (is_null($entity_time_start)) {
+            throw new \InvalidArgumentException('non-nullable entity_time_start cannot be null');
+        }
+
+        $this->container['entity_time_start'] = $entity_time_start;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity_image
+     *
+     * @return string|null
+     */
+    public function getEntityImage()
+    {
+        return $this->container['entity_image'];
+    }
+
+    /**
+     * Sets entity_image
+     *
+     * @param string|null $entity_image entity_image
+     *
+     * @return self
+     */
+    public function setEntityImage($entity_image)
+    {
+
+        if (is_null($entity_image)) {
+            throw new \InvalidArgumentException('non-nullable entity_image cannot be null');
+        }
+
+        $this->container['entity_image'] = $entity_image;
 
         return $this;
     }

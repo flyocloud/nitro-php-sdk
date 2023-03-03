@@ -1,6 +1,6 @@
 # Flyo\ConfigApi
 
-All URIs are relative to https://edgeapi.flyo.cloud/nitro, except if the operation defines another base path.
+All URIs are relative to https://api.flyo.cloud/nitro, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
@@ -10,7 +10,7 @@ All URIs are relative to https://edgeapi.flyo.cloud/nitro, except if the operati
 ## `config()`
 
 ```php
-config(): \Flyo\Model\Config200Response
+config(): \Flyo\Model\ConfigResponse
 ```
 
 Get Config
@@ -51,7 +51,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Flyo\Model\Config200Response**](../Model/Config200Response.md)
+[**\Flyo\Model\ConfigResponse**](../Model/ConfigResponse.md)
 
 ### Authorization
 

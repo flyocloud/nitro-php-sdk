@@ -1,6 +1,6 @@
 <?php
 /**
- * Content
+ * Slots
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Content Class Doc Comment
+ * Slots Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Content implements ModelInterface, ArrayAccess, \JsonSerializable
+class Slots implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'content';
+    protected static $openAPIModelName = 'Slots';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'value' => 'string',
         'identifier' => 'string',
-        'uid' => 'string',
-        'authentication' => 'string'
+        'content' => '\Flyo\Model\Block[]'
     ];
 
     /**
@@ -71,10 +69,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'value' => null,
         'identifier' => null,
-        'uid' => null,
-        'authentication' => null
+        'content' => null
     ];
 
     /**
@@ -83,10 +79,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'value' => false,
-		'identifier' => false,
-		'uid' => false,
-		'authentication' => false
+        'identifier' => false,
+		'content' => false
     ];
 
     /**
@@ -175,10 +169,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'value' => 'value',
         'identifier' => 'identifier',
-        'uid' => 'uid',
-        'authentication' => 'authentication'
+        'content' => 'content'
     ];
 
     /**
@@ -187,10 +179,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'value' => 'setValue',
         'identifier' => 'setIdentifier',
-        'uid' => 'setUid',
-        'authentication' => 'setAuthentication'
+        'content' => 'setContent'
     ];
 
     /**
@@ -199,10 +189,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'value' => 'getValue',
         'identifier' => 'getIdentifier',
-        'uid' => 'getUid',
-        'authentication' => 'getAuthentication'
+        'content' => 'getContent'
     ];
 
     /**
@@ -262,10 +250,8 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('value', $data ?? [], null);
         $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('uid', $data ?? [], null);
-        $this->setIfExists('authentication', $data ?? [], null);
+        $this->setIfExists('content', $data ?? [], null);
     }
 
     /**
@@ -295,18 +281,6 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['value'] === null) {
-            $invalidProperties[] = "'value' can't be null";
-        }
-        if ($this->container['identifier'] === null) {
-            $invalidProperties[] = "'identifier' can't be null";
-        }
-        if ($this->container['uid'] === null) {
-            $invalidProperties[] = "'uid' can't be null";
-        }
-        if ($this->container['authentication'] === null) {
-            $invalidProperties[] = "'authentication' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -323,38 +297,9 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets value
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->container['value'];
-    }
-
-    /**
-     * Sets value
-     *
-     * @param string $value value
-     *
-     * @return self
-     */
-    public function setValue($value)
-    {
-
-        if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
-        }
-
-        $this->container['value'] = $value;
-
-        return $this;
-    }
-
-    /**
      * Gets identifier
      *
-     * @return string
+     * @return string|null
      */
     public function getIdentifier()
     {
@@ -364,7 +309,7 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets identifier
      *
-     * @param string $identifier identifier
+     * @param string|null $identifier The unique identifier of the slot
      *
      * @return self
      */
@@ -381,59 +326,30 @@ class Content implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets uid
+     * Gets content
      *
-     * @return string
+     * @return \Flyo\Model\Block[]|null
      */
-    public function getUid()
+    public function getContent()
     {
-        return $this->container['uid'];
+        return $this->container['content'];
     }
 
     /**
-     * Sets uid
+     * Sets content
      *
-     * @param string $uid uid
+     * @param \Flyo\Model\Block[]|null $content content
      *
      * @return self
      */
-    public function setUid($uid)
+    public function setContent($content)
     {
 
-        if (is_null($uid)) {
-            throw new \InvalidArgumentException('non-nullable uid cannot be null');
+        if (is_null($content)) {
+            throw new \InvalidArgumentException('non-nullable content cannot be null');
         }
 
-        $this->container['uid'] = $uid;
-
-        return $this;
-    }
-
-    /**
-     * Gets authentication
-     *
-     * @return string
-     */
-    public function getAuthentication()
-    {
-        return $this->container['authentication'];
-    }
-
-    /**
-     * Sets authentication
-     *
-     * @param string $authentication authentication
-     *
-     * @return self
-     */
-    public function setAuthentication($authentication)
-    {
-
-        if (is_null($authentication)) {
-            throw new \InvalidArgumentException('non-nullable authentication cannot be null');
-        }
-
-        $this->container['authentication'] = $authentication;
+        $this->container['content'] = $content;
 
         return $this;
     }

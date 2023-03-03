@@ -1,4 +1,4 @@
-# # Entity200ResponseEntity
+# # EntityResponseEntity
 
 ## Properties
 
@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **_id** | **string** | An identifier from the database index | [optional]
 **_version** | **float** | A sequential index as version of the item | [optional]
-**entity_metric** | [**\Flyo\Model\Entity200ResponseEntityEntityMetric**](Entity200ResponseEntityEntityMetric.md) |  | [optional]
+**entity_metric** | [**\Flyo\Model\EntityResponseEntityEntityMetric**](EntityResponseEntityEntityMetric.md) |  | [optional]
 **entity_unique_id** | **string** |  | [optional]
 **entity_id** | **string** |  | [optional]
 **entity_image** | **string** |  | [optional]

@@ -1,21 +1,21 @@
-# Flyo\SitemapApi
+# Flyo\SearchApi
 
 All URIs are relative to https://api.flyo.cloud/nitro, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**sitemap()**](SitemapApi.md#sitemap) | **GET** /sitemap | Get Sitemap |
+| [**search()**](SearchApi.md#search) | **GET** /search | Get Search |
 
 
-## `sitemap()`
+## `search()`
 
 ```php
-sitemap(): \Flyo\Model\SitemapResponseInner[]
+search($query): \Flyo\Model\SitemapResponseInner[]
 ```
 
-Get Sitemap
+Get Search
 
-Get all entities to build a sitemap. Pages are not included.
+Search inside pages and entities.
 
 ### Example
 
@@ -30,24 +30,27 @@ $config = Flyo\Configuration::getDefaultConfiguration()->setApiKey('token', 'YOU
 // $config = Flyo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('token', 'Bearer');
 
 
-$apiInstance = new Flyo\Api\SitemapApi(
+$apiInstance = new Flyo\Api\SearchApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
+$query = foobar; // string | The query which should be looked up in the site index.
 
 try {
-    $result = $apiInstance->sitemap();
+    $result = $apiInstance->search($query);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling SitemapApi->sitemap: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling SearchApi->search: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **query** | **string**| The query which should be looked up in the site index. | |
 
 ### Return type
 

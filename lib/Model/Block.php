@@ -58,12 +58,12 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'items' => 'mixed[]',
-        'content' => 'array<string,object>',
-        'config' => 'array<string,object>',
+        'content' => 'object',
+        'config' => 'object',
         'identifier' => 'string',
         'uid' => 'string',
         'component' => 'string',
-        'slots' => 'array<string,\Flyo\Model\Slots>'
+        'slots' => 'array<string,\Flyo\Model\BlockSlots>'
     ];
 
     /**
@@ -363,7 +363,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets content
      *
-     * @return array<string,object>|null
+     * @return object|null
      */
     public function getContent()
     {
@@ -373,7 +373,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets content
      *
-     * @param array<string,object>|null $content Text Contents
+     * @param object|null $content Text Contents
      *
      * @return self
      */
@@ -392,7 +392,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets config
      *
-     * @return array<string,object>|null
+     * @return object|null
      */
     public function getConfig()
     {
@@ -402,7 +402,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets config
      *
-     * @param array<string,object>|null $config Configuration Options
+     * @param object|null $config Configuration Options
      *
      * @return self
      */
@@ -508,7 +508,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets slots
      *
-     * @return array<string,\Flyo\Model\Slots>|null
+     * @return array<string,\Flyo\Model\BlockSlots>|null
      */
     public function getSlots()
     {
@@ -518,7 +518,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets slots
      *
-     * @param array<string,\Flyo\Model\Slots>|null $slots slots
+     * @param array<string,\Flyo\Model\BlockSlots>|null $slots slots
      *
      * @return self
      */

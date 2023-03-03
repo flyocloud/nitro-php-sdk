@@ -1,6 +1,6 @@
 <?php
 /**
- * Slots
+ * BlockSlots
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Slots Class Doc Comment
+ * BlockSlots Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Slots implements ModelInterface, ArrayAccess, \JsonSerializable
+class BlockSlots implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Slots implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Slots';
+    protected static $openAPIModelName = 'BlockSlots';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

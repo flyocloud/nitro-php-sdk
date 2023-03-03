@@ -1,4 +1,4 @@
-# # Slots
+# # BlockSlots
 
 ## Properties
 

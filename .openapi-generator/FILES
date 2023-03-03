@@ -7,6 +7,7 @@ docs/Api/PagesApi.md
 docs/Api/SearchApi.md
 docs/Api/SitemapApi.md
 docs/Model/Block.md
+docs/Model/BlockSlots.md
 docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseNav.md
 docs/Model/ConfigResponseNitro.md
@@ -21,7 +22,6 @@ docs/Model/PageProperty.md
 docs/Model/PagePropertyValue.md
 docs/Model/PagesInner.md
 docs/Model/SitemapResponseInner.md
-docs/Model/Slots.md
 lib/Api/ConfigApi.php
 lib/Api/ContentApi.php
 lib/Api/EntitiesApi.php
@@ -32,6 +32,7 @@ lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
 lib/Model/Block.php
+lib/Model/BlockSlots.php
 lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseNav.php
 lib/Model/ConfigResponseNitro.php
@@ -47,5 +48,4 @@ lib/Model/PageProperty.php
 lib/Model/PagePropertyValue.php
 lib/Model/PagesInner.php
 lib/Model/SitemapResponseInner.php
-lib/Model/Slots.php
 lib/ObjectSerializer.php

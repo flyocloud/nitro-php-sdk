@@ -1,7 +1,6 @@
 .gitignore
 .php-cs-fixer.dist.php
 docs/Api/ConfigApi.md
-docs/Api/ContentApi.md
 docs/Api/EntitiesApi.md
 docs/Api/PagesApi.md
 docs/Api/SearchApi.md
@@ -12,7 +11,6 @@ docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseNav.md
 docs/Model/ConfigResponseNitro.md
 docs/Model/ContainerPageProperty.md
-docs/Model/Content.md
 docs/Model/EntityResponse.md
 docs/Model/EntityResponseEntity.md
 docs/Model/EntityResponseEntityEntityMetric.md
@@ -23,7 +21,6 @@ docs/Model/PagePropertyValue.md
 docs/Model/PagesInner.md
 docs/Model/SitemapResponseInner.md
 lib/Api/ConfigApi.php
-lib/Api/ContentApi.php
 lib/Api/EntitiesApi.php
 lib/Api/PagesApi.php
 lib/Api/SearchApi.php
@@ -37,7 +34,6 @@ lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseNav.php
 lib/Model/ConfigResponseNitro.php
 lib/Model/ContainerPageProperty.php
-lib/Model/Content.php
 lib/Model/EntityResponse.php
 lib/Model/EntityResponseEntity.php
 lib/Model/EntityResponseEntityEntityMetric.php

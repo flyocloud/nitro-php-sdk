@@ -1,6 +1,6 @@
 # Flyo\EntitiesApi
 
-All URIs are relative to https://api.flyo.cloud/nitro, except if the operation defines another base path.
+All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |

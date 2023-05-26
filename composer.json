@@ -1,6 +1,6 @@
 {
-    "name": "flyo/nitrocms-php",
-    "description": "Flyo Nitro Headless CMS",
+    "name": "flyo/nitro-php",
+    "description": "Flyo Nitro PHP SDK",
     "keywords": [
         "openapitools",
         "openapi-generator",

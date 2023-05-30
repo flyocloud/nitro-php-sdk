@@ -15,7 +15,7 @@ config(): \Flyo\Model\ConfigResponse
 
 Get Config
 
-Return the nitro cms config including pages, paths and everything which is required for a layout.
+Return the nitro config including pages, paths and everything which is required for a layout.
 
 ### Example
 

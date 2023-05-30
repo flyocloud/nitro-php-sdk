@@ -57,7 +57,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        '_id' => 'string',
         '_version' => 'float',
         'entity_metric' => '\Flyo\Model\EntityResponseEntityEntityMetric',
         'entity_unique_id' => 'string',
@@ -81,7 +80,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        '_id' => null,
         '_version' => null,
         'entity_metric' => null,
         'entity_unique_id' => null,
@@ -103,8 +101,7 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        '_id' => false,
-		'_version' => false,
+        '_version' => false,
 		'entity_metric' => false,
 		'entity_unique_id' => false,
 		'entity_id' => false,
@@ -205,7 +202,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        '_id' => '_id',
         '_version' => '_version',
         'entity_metric' => 'entity_metric',
         'entity_unique_id' => 'entity_unique_id',
@@ -227,7 +223,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        '_id' => 'setId',
         '_version' => 'setVersion',
         'entity_metric' => 'setEntityMetric',
         'entity_unique_id' => 'setEntityUniqueId',
@@ -249,7 +244,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        '_id' => 'getId',
         '_version' => 'getVersion',
         'entity_metric' => 'getEntityMetric',
         'entity_unique_id' => 'getEntityUniqueId',
@@ -322,7 +316,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('_id', $data ?? [], null);
         $this->setIfExists('_version', $data ?? [], null);
         $this->setIfExists('entity_metric', $data ?? [], null);
         $this->setIfExists('entity_unique_id', $data ?? [], null);
@@ -379,35 +372,6 @@ class EntityResponseEntity implements ModelInterface, ArrayAccess, \JsonSerializ
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets _id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['_id'];
-    }
-
-    /**
-     * Sets _id
-     *
-     * @param string|null $_id An identifier from the database index
-     *
-     * @return self
-     */
-    public function setId($_id)
-    {
-
-        if (is_null($_id)) {
-            throw new \InvalidArgumentException('non-nullable _id cannot be null');
-        }
-
-        $this->container['_id'] = $_id;
-
-        return $this;
-    }
 
     /**
      * Gets _version

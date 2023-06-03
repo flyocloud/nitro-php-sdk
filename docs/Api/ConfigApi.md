@@ -15,7 +15,7 @@ config(): \Flyo\Model\ConfigResponse
 
 Get Config
 
-Return the nitro config including pages, paths and everything which is required for a layout.
+The config API endpoint provides comprehensive information required for configuring the layout of websites. It encompasses various essential elements, including containers with pages, an extensive list of available slugs, globals containing content pool data, and crucial details about the Nitro configuration itself. By accessing this endpoint, developers can gather all the necessary data to effectively design and structure their websites. The endpoint offers a holistic view of the website's layout, empowering developers to tailor the user experience and optimize the overall design.
 
 ### Example
 
@@ -24,7 +24,7 @@ Return the nitro config including pages, paths and everything which is required 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: ApiKeyAuth
+// Configure API key authorization: ApiToken
 $config = Flyo\Configuration::getDefaultConfiguration()->setApiKey('token', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Flyo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('token', 'Bearer');
@@ -55,7 +55,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[ApiKeyAuth](../../README.md#ApiKeyAuth)
+[ApiToken](../../README.md#ApiToken)
 
 ### HTTP request headers
 

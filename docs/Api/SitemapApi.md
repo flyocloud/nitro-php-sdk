@@ -10,12 +10,12 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 ## `sitemap()`
 
 ```php
-sitemap(): \Flyo\Model\SitemapResponseInner[]
+sitemap(): \Flyo\Model\EntityinterfaceInner[]
 ```
 
 Get Sitemap
 
-Get all entities to build a sitemap. Pages are not included.
+This endpoint provides comprehensive data for generating the sitemap. It encompasses all the necessary information, including pages from containers, as well as all entities that have been mapped.
 
 ### Example
 
@@ -24,7 +24,7 @@ Get all entities to build a sitemap. Pages are not included.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: ApiKeyAuth
+// Configure API key authorization: ApiToken
 $config = Flyo\Configuration::getDefaultConfiguration()->setApiKey('token', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Flyo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('token', 'Bearer');
@@ -51,11 +51,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Flyo\Model\SitemapResponseInner[]**](../Model/SitemapResponseInner.md)
+[**\Flyo\Model\EntityinterfaceInner[]**](../Model/EntityinterfaceInner.md)
 
 ### Authorization
 
-[ApiKeyAuth](../../README.md#ApiKeyAuth)
+[ApiToken](../../README.md#ApiToken)
 
 ### HTTP request headers
 

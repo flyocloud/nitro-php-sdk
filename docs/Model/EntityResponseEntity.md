@@ -4,8 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**_id** | **string** | An identifier from the database index | [optional]
-**_version** | **float** | A sequential index as version of the item | [optional]
+**_version** | **float** | A sequential index serves as a version identifier for an item, allowing for improved organization and extended functionality. By assigning a unique numerical value to each version, it becomes easier to track and manage different iterations of an item over time. | [optional]
 **entity_metric** | [**\Flyo\Model\EntityResponseEntityEntityMetric**](EntityResponseEntityEntityMetric.md) |  | [optional]
 **entity_unique_id** | **string** |  | [optional]
 **entity_id** | **string** |  | [optional]

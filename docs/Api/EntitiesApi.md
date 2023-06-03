@@ -15,6 +15,8 @@ entity($uniqueid): \Flyo\Model\EntityResponse
 
 Get entity by uniqueid
 
+The endpoint provides comprehensive information about a specified entity. An entity represents a collection of information pertaining to a specific data type and is defined by a key-value pair. You can use various data types such as blogs, events, or any other relevant data. However, in order to access an entity, it must be properly configured within the nitro config.
+
 ### Example
 
 ```php
@@ -22,7 +24,7 @@ Get entity by uniqueid
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: ApiKeyAuth
+// Configure API key authorization: ApiToken
 $config = Flyo\Configuration::getDefaultConfiguration()->setApiKey('token', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Flyo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('token', 'Bearer');
@@ -34,7 +36,7 @@ $apiInstance = new Flyo\Api\EntitiesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$uniqueid = 2348uc; // string | The unique id of the given entity
+$uniqueid = 2348uc; // string | The unique identifier of the given entity is a string composed solely of lowercase alphabetic characters (a-z). This identifier is meticulously generated for each data row, ensuring its uniqueness and facilitating efficient data management and retrieval.
 
 try {
     $result = $apiInstance->entity($uniqueid);
@@ -48,7 +50,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **uniqueid** | **string**| The unique id of the given entity | |
+| **uniqueid** | **string**| The unique identifier of the given entity is a string composed solely of lowercase alphabetic characters (a-z). This identifier is meticulously generated for each data row, ensuring its uniqueness and facilitating efficient data management and retrieval. | |
 
 ### Return type
 
@@ -56,7 +58,7 @@ try {
 
 ### Authorization
 
-[ApiKeyAuth](../../README.md#ApiKeyAuth)
+[ApiToken](../../README.md#ApiToken)
 
 ### HTTP request headers
 

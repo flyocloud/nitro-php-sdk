@@ -4,18 +4,18 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**search()**](SearchApi.md#search) | **GET** /search | Get Search |
+| [**search()**](SearchApi.md#search) | **GET** /search | Get Search by query |
 
 
 ## `search()`
 
 ```php
-search($query): \Flyo\Model\SitemapResponseInner[]
+search($query): \Flyo\Model\EntityinterfaceInner[]
 ```
 
-Get Search
+Get Search by query
 
-Search inside pages and entities.
+This endpoint offers a powerful capability to search through the websites sitemap, encompassing both pages and entities. With this endpoint, users can efficiently explore and retrieve information from your sitemap by creating a paginated search experience.
 
 ### Example
 
@@ -24,7 +24,7 @@ Search inside pages and entities.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: ApiKeyAuth
+// Configure API key authorization: ApiToken
 $config = Flyo\Configuration::getDefaultConfiguration()->setApiKey('token', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Flyo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('token', 'Bearer');
@@ -36,7 +36,7 @@ $apiInstance = new Flyo\Api\SearchApi(
     new GuzzleHttp\Client(),
     $config
 );
-$query = foobar; // string | The query which should be looked up in the site index.
+$query = foobar; // string | The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval.
 
 try {
     $result = $apiInstance->search($query);
@@ -50,15 +50,15 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **query** | **string**| The query which should be looked up in the site index. | |
+| **query** | **string**| The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. | |
 
 ### Return type
 
-[**\Flyo\Model\SitemapResponseInner[]**](../Model/SitemapResponseInner.md)
+[**\Flyo\Model\EntityinterfaceInner[]**](../Model/EntityinterfaceInner.md)
 
 ### Authorization
 
-[ApiKeyAuth](../../README.md#ApiKeyAuth)
+[ApiToken](../../README.md#ApiToken)
 
 ### HTTP request headers
 

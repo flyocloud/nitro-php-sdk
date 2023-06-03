@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **domain** | **string** |  | [optional]
 **slug** | **string** |  | [optional]
-**version** | **int** | Whenever flyo generates new data, this version will be increased. This can be used for cache informnations. | [optional]
+**version** | **int** | Whenever Flyo generates new data, the version number will be incremented accordingly. This version number serves as a valuable tool for caching storage of your application. | [optional]
 **updated_at** | **int** |  | [optional]
 **language** | **string** |  | [optional]
 

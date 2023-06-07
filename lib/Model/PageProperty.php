@@ -57,7 +57,7 @@ class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'value' => '\Flyo\Model\PagePropertyValue',
+        'value' => 'mixed',
         'navigation' => 'bool',
         'propagate' => 'bool'
     ];
@@ -81,7 +81,7 @@ class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'value' => false,
+        'value' => true,
 		'navigation' => false,
 		'propagate' => false
     ];
@@ -306,7 +306,7 @@ class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets value
      *
-     * @return \Flyo\Model\PagePropertyValue|null
+     * @return mixed|null
      */
     public function getValue()
     {
@@ -316,14 +316,21 @@ class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets value
      *
-     * @param \Flyo\Model\PagePropertyValue|null $value value
+     * @param mixed|null $value value
      *
      * @return self
      */
     public function setValue($value)
     {
         if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'value');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('value', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['value'] = $value;
 

@@ -343,7 +343,7 @@ class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets navigation
      *
-     * @param bool|null $navigation navigation
+     * @param bool|null $navigation Whether or not this item is visible in the navigation.
      *
      * @return self
      */
@@ -370,7 +370,7 @@ class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets propagate
      *
-     * @param bool|null $propagate propagate
+     * @param bool|null $propagate Determining whether the value is carried over from the parent page or not.
      *
      * @return self
      */

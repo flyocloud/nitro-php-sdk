@@ -62,7 +62,7 @@ class PagesInner implements ModelInterface, ArrayAccess, \JsonSerializable
         'label' => 'string',
         'href' => 'string',
         'path' => 'string',
-        'properties' => '\Flyo\Model\ContainerPageProperty',
+        'properties' => 'array<string,mixed>',
         'children' => '\Flyo\Model\PagesInner[]'
     ];
 
@@ -469,7 +469,7 @@ class PagesInner implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets properties
      *
-     * @return \Flyo\Model\ContainerPageProperty|null
+     * @return array<string,mixed>|null
      */
     public function getProperties()
     {
@@ -479,7 +479,7 @@ class PagesInner implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets properties
      *
-     * @param \Flyo\Model\ContainerPageProperty|null $properties properties
+     * @param array<string,mixed>|null $properties properties
      *
      * @return self
      */

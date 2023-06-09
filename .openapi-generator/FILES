@@ -10,7 +10,6 @@ docs/Model/BlockSlots.md
 docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseContainersValue.md
 docs/Model/ConfigResponseNitro.md
-docs/Model/ContainerPageProperty.md
 docs/Model/EntityResponse.md
 docs/Model/EntityResponseEntity.md
 docs/Model/EntityResponseEntityEntityMetric.md
@@ -19,7 +18,6 @@ docs/Model/Meta.md
 docs/Model/Page.md
 docs/Model/PageBreadcrumbInner.md
 docs/Model/PageProperty.md
-docs/Model/PagePropertyValue.md
 docs/Model/PagesInner.md
 lib/Api/ConfigApi.php
 lib/Api/EntitiesApi.php
@@ -34,7 +32,6 @@ lib/Model/BlockSlots.php
 lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseContainersValue.php
 lib/Model/ConfigResponseNitro.php
-lib/Model/ContainerPageProperty.php
 lib/Model/EntityResponse.php
 lib/Model/EntityResponseEntity.php
 lib/Model/EntityResponseEntityEntityMetric.php
@@ -44,6 +41,5 @@ lib/Model/ModelInterface.php
 lib/Model/Page.php
 lib/Model/PageBreadcrumbInner.php
 lib/Model/PageProperty.php
-lib/Model/PagePropertyValue.php
 lib/Model/PagesInner.php
 lib/ObjectSerializer.php

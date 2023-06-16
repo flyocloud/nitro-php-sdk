@@ -1,10 +1,10 @@
-# # EntityResponse
+# # Entity
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity** | [**\Flyo\Model\EntityResponseEntity**](EntityResponseEntity.md) |  | [optional]
+**entity** | [**\Flyo\Model\EntityEntity**](EntityEntity.md) |  | [optional]
 **model** | **object** |  | [optional]
 **language** | **string** | Current language context for entity model data | [optional]
 

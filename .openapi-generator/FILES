@@ -10,9 +10,9 @@ docs/Model/BlockSlots.md
 docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseContainersValue.md
 docs/Model/ConfigResponseNitro.md
-docs/Model/EntityResponse.md
-docs/Model/EntityResponseEntity.md
-docs/Model/EntityResponseEntityEntityMetric.md
+docs/Model/Entity.md
+docs/Model/EntityEntity.md
+docs/Model/EntityEntityEntityMetric.md
 docs/Model/EntityinterfaceInner.md
 docs/Model/Meta.md
 docs/Model/Page.md
@@ -32,9 +32,9 @@ lib/Model/BlockSlots.php
 lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseContainersValue.php
 lib/Model/ConfigResponseNitro.php
-lib/Model/EntityResponse.php
-lib/Model/EntityResponseEntity.php
-lib/Model/EntityResponseEntityEntityMetric.php
+lib/Model/Entity.php
+lib/Model/EntityEntity.php
+lib/Model/EntityEntityEntityMetric.php
 lib/Model/EntityinterfaceInner.php
 lib/Model/Meta.php
 lib/Model/ModelInterface.php

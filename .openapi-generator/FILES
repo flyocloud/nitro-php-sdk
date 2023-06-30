@@ -11,8 +11,8 @@ docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseContainersValue.md
 docs/Model/ConfigResponseNitro.md
 docs/Model/Entity.md
-docs/Model/EntityEntity.md
-docs/Model/EntityEntityEntityMetric.md
+docs/Model/EntityInterface.md
+docs/Model/EntityMetric.md
 docs/Model/EntityinterfaceInner.md
 docs/Model/Meta.md
 docs/Model/Page.md
@@ -33,8 +33,8 @@ lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseContainersValue.php
 lib/Model/ConfigResponseNitro.php
 lib/Model/Entity.php
-lib/Model/EntityEntity.php
-lib/Model/EntityEntityEntityMetric.php
+lib/Model/EntityInterface.php
+lib/Model/EntityMetric.php
 lib/Model/EntityinterfaceInner.php
 lib/Model/Meta.php
 lib/Model/ModelInterface.php

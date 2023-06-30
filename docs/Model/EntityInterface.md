@@ -1,11 +1,11 @@
-# # EntityEntity
+# # EntityInterface
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **_version** | **float** | A sequential index serves as a version identifier for an item, allowing for improved organization and extended functionality. By assigning a unique numerical value to each version, it becomes easier to track and manage different iterations of an item over time. | [optional]
-**entity_metric** | [**\Flyo\Model\EntityEntityEntityMetric**](EntityEntityEntityMetric.md) |  | [optional]
+**entity_metric** | [**\Flyo\Model\EntityMetric**](EntityMetric.md) |  | [optional]
 **entity_unique_id** | **string** |  | [optional]
 **entity_id** | **string** |  | [optional]
 **entity_image** | **string** |  | [optional]

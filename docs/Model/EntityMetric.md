@@ -1,4 +1,4 @@
-# # EntityEntityEntityMetric
+# # EntityMetric
 
 ## Properties
 

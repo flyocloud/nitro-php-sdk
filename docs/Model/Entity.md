@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity** | [**\Flyo\Model\EntityEntity**](EntityEntity.md) |  | [optional]
+**entity** | [**\Flyo\Model\EntityInterface**](EntityInterface.md) |  | [optional]
 **model** | **object** |  | [optional]
 **language** | **string** | Current language context for entity model data | [optional]
 

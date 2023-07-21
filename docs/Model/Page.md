@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional]
 **title** | **string** |  | [optional]
-**slug** | **string** |  | [optional]
+**href** | **string** | Returns the completed href tag. Internal links are appended with trailing slashes, such as &#x60;/about-me&#x60;, while email links are formatted with &#x60;mailto:hello@flyo.ch&#x60;. | [optional]
+**slug** | **string** | The slug, in its current form, contains the full path of nested slugs and serves as the identifier for querying the respective page. | [optional]
 **json** | [**\Flyo\Model\Block[]**](Block.md) |  | [optional]
 **depth** | **int** |  | [optional]
 **is_home** | **int** |  | [optional]

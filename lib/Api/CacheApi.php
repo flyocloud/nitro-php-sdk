@@ -1,6 +1,6 @@
 <?php
 /**
- * SearchApi
+ * CacheApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Flyo\HeaderSelector;
 use Flyo\ObjectSerializer;
 
 /**
- * SearchApi Class Doc Comment
+ * CacheApi Class Doc Comment
  *
  * @category Class
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SearchApi
+class CacheApi
 {
     /**
      * @var ClientInterface
@@ -71,7 +71,7 @@ class SearchApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'search' => [
+        'cache' => [
             'application/json',
         ],
     ];
@@ -123,38 +123,36 @@ class SearchApi
     }
 
     /**
-     * Operation search
+     * Operation cache
      *
-     * Get Search by query
+     * Get Cache Information
      *
-     * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\EntityinterfaceInner[]
+     * @return \Flyo\Model\CacheResponse
      */
-    public function search($query, string $contentType = self::contentTypes['search'][0])
+    public function cache(string $contentType = self::contentTypes['cache'][0])
     {
-        list($response) = $this->searchWithHttpInfo($query, $contentType);
+        list($response) = $this->cacheWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation searchWithHttpInfo
+     * Operation cacheWithHttpInfo
      *
-     * Get Search by query
+     * Get Cache Information
      *
-     * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\EntityinterfaceInner[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\CacheResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function searchWithHttpInfo($query, string $contentType = self::contentTypes['search'][0])
+    public function cacheWithHttpInfo(string $contentType = self::contentTypes['cache'][0])
     {
-        $request = $this->searchRequest($query, $contentType);
+        $request = $this->cacheRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -193,23 +191,23 @@ class SearchApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Flyo\Model\EntityinterfaceInner[]' === '\SplFileObject') {
+                    if ('\Flyo\Model\CacheResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Flyo\Model\EntityinterfaceInner[]' !== 'string') {
+                        if ('\Flyo\Model\CacheResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Flyo\Model\EntityinterfaceInner[]', []),
+                        ObjectSerializer::deserialize($content, '\Flyo\Model\CacheResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Flyo\Model\EntityinterfaceInner[]';
+            $returnType = '\Flyo\Model\CacheResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -230,7 +228,7 @@ class SearchApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Flyo\Model\EntityinterfaceInner[]',
+                        '\Flyo\Model\CacheResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -241,19 +239,18 @@ class SearchApi
     }
 
     /**
-     * Operation searchAsync
+     * Operation cacheAsync
      *
-     * Get Search by query
+     * Get Cache Information
      *
-     * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchAsync($query, string $contentType = self::contentTypes['search'][0])
+    public function cacheAsync(string $contentType = self::contentTypes['cache'][0])
     {
-        return $this->searchAsyncWithHttpInfo($query, $contentType)
+        return $this->cacheAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -262,20 +259,19 @@ class SearchApi
     }
 
     /**
-     * Operation searchAsyncWithHttpInfo
+     * Operation cacheAsyncWithHttpInfo
      *
-     * Get Search by query
+     * Get Cache Information
      *
-     * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchAsyncWithHttpInfo($query, string $contentType = self::contentTypes['search'][0])
+    public function cacheAsyncWithHttpInfo(string $contentType = self::contentTypes['cache'][0])
     {
-        $returnType = '\Flyo\Model\EntityinterfaceInner[]';
-        $request = $this->searchRequest($query, $contentType);
+        $returnType = '\Flyo\Model\CacheResponse';
+        $request = $this->cacheRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -314,41 +310,24 @@ class SearchApi
     }
 
     /**
-     * Create request for operation 'search'
+     * Create request for operation 'cache'
      *
-     * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function searchRequest($query, string $contentType = self::contentTypes['search'][0])
+    public function cacheRequest(string $contentType = self::contentTypes['cache'][0])
     {
 
-        // verify the required parameter 'query' is set
-        if ($query === null || (is_array($query) && count($query) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $query when calling search'
-            );
-        }
 
-
-        $resourcePath = '/search';
+        $resourcePath = '/version';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $query,
-            'query', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
 
 
 

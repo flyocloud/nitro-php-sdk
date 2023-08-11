@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigResponseContainersValue
+ * CacheResponse
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponseContainersValue Class Doc Comment
+ * CacheResponse Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class CacheResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response_containers_value';
+    protected static $openAPIModelName = 'Cache_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'items' => '\Flyo\Model\PagesInner[]',
-        'uid' => 'string',
-        'identifier' => 'string',
-        'label' => 'string'
+        'version' => 'int',
+        'updated_at' => 'int'
     ];
 
     /**
@@ -71,10 +69,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'items' => null,
-        'uid' => null,
-        'identifier' => null,
-        'label' => null
+        'version' => null,
+        'updated_at' => null
     ];
 
     /**
@@ -83,10 +79,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'items' => false,
-		'uid' => false,
-		'identifier' => false,
-		'label' => false
+        'version' => false,
+		'updated_at' => false
     ];
 
     /**
@@ -175,10 +169,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'items' => 'items',
-        'uid' => 'uid',
-        'identifier' => 'identifier',
-        'label' => 'label'
+        'version' => 'version',
+        'updated_at' => 'updated_at'
     ];
 
     /**
@@ -187,10 +179,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'items' => 'setItems',
-        'uid' => 'setUid',
-        'identifier' => 'setIdentifier',
-        'label' => 'setLabel'
+        'version' => 'setVersion',
+        'updated_at' => 'setUpdatedAt'
     ];
 
     /**
@@ -199,10 +189,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'items' => 'getItems',
-        'uid' => 'getUid',
-        'identifier' => 'getIdentifier',
-        'label' => 'getLabel'
+        'version' => 'getVersion',
+        'updated_at' => 'getUpdatedAt'
     ];
 
     /**
@@ -262,10 +250,8 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('items', $data ?? [], null);
-        $this->setIfExists('uid', $data ?? [], null);
-        $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('label', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -311,109 +297,55 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets items
+     * Gets version
      *
-     * @return \Flyo\Model\PagesInner[]|null
+     * @return int|null
      */
-    public function getItems()
+    public function getVersion()
     {
-        return $this->container['items'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets items
+     * Sets version
      *
-     * @param \Flyo\Model\PagesInner[]|null $items Represents a comprehensive collection of pages within the specified container. These pages are organized in a nested tree structure, where each page can have child pages associated with it. These child pages are conveniently stored within the children property of their respective parent page.
+     * @param int|null $version Whenever Flyo generates new data, the version number will be appropriately incremented. If this value is employed for caching, it will undergo less frequent purging in comparison to the `updated_at` value, thus extending its longevity. (last longer)
      *
      * @return self
      */
-    public function setItems($items)
+    public function setVersion($version)
     {
-        if (is_null($items)) {
-            throw new \InvalidArgumentException('non-nullable items cannot be null');
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
-        $this->container['items'] = $items;
+        $this->container['version'] = $version;
 
         return $this;
     }
 
     /**
-     * Gets uid
+     * Gets updated_at
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getUid()
+    public function getUpdatedAt()
     {
-        return $this->container['uid'];
+        return $this->container['updated_at'];
     }
 
     /**
-     * Sets uid
+     * Sets updated_at
      *
-     * @param string|null $uid A unique identifier, known as a container ID, is assigned to each container during its creation and remains unchanged throughout its lifespan. This container ID serves as a permanent and unalterable reference for the container.
+     * @param int|null $updated_at A Unix timestamp indicating when the Nitro was last updated. This timestamp does not correlate with the version number. If this value is utilized for caching purposes, it will experience more frequent purges compared to the version number, leading to shorter caching intervals. (last shorter)
      *
      * @return self
      */
-    public function setUid($uid)
+    public function setUpdatedAt($updated_at)
     {
-        if (is_null($uid)) {
-            throw new \InvalidArgumentException('non-nullable uid cannot be null');
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
         }
-        $this->container['uid'] = $uid;
-
-        return $this;
-    }
-
-    /**
-     * Gets identifier
-     *
-     * @return string|null
-     */
-    public function getIdentifier()
-    {
-        return $this->container['identifier'];
-    }
-
-    /**
-     * Sets identifier
-     *
-     * @param string|null $identifier The identifier is a unique string consisting solely of lowercase letters, and it is intended to remain constant throughout its usage. However, in the event that there are no associated pages linked to the identifier, it can be modified within the nitro configuration.
-     *
-     * @return self
-     */
-    public function setIdentifier($identifier)
-    {
-        if (is_null($identifier)) {
-            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
-        }
-        $this->container['identifier'] = $identifier;
-
-        return $this;
-    }
-
-    /**
-     * Gets label
-     *
-     * @return string|null
-     */
-    public function getLabel()
-    {
-        return $this->container['label'];
-    }
-
-    /**
-     * Sets label
-     *
-     * @param string|null $label You can customize and assign a unique label to the container of your choice. This label can be easily modified through the nitro configuration settings. This flexibility allows you to personalize and adapt the container's identification based on your specific needs.
-     *
-     * @return self
-     */
-    public function setLabel($label)
-    {
-        if (is_null($label)) {
-            throw new \InvalidArgumentException('non-nullable label cannot be null');
-        }
-        $this->container['label'] = $label;
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

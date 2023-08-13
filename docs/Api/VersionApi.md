@@ -1,21 +1,21 @@
-# Flyo\CacheApi
+# Flyo\VersionApi
 
 All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**cache()**](CacheApi.md#cache) | **GET** /version | Get Cache Information |
+| [**version()**](VersionApi.md#version) | **GET** /version | Get Version Information |
 
 
-## `cache()`
+## `version()`
 
 ```php
-cache(): \Flyo\Model\CacheResponse
+version(): \Flyo\Model\VersionResponse
 ```
 
-Get Cache Information
+Get Version Information
 
-The Cache API endpoint offers a highly efficient solution for evaluating the current caching status of your application's caching mechanism. This functionality allows you to cache the entire application configuration and page responses indefinitely. However, utilizing this endpoint enables you to assess the validity of the cache by sending a request to determine its current status. This caching endpoint is specifically designed for optimal performance when compared to the configuration endpoint, which requires more thorough evaluation and encompasses a substantial response body.
+The Version API endpoint offers a highly efficient solution for evaluating the current caching status of your application's caching mechanism. This functionality allows you to cache the entire application configuration and page responses indefinitely. However, utilizing this endpoint enables you to assess the validity of the cache by sending a request to determine its current status. This caching endpoint is specifically designed for optimal performance when compared to the configuration endpoint, which requires more thorough evaluation and encompasses a substantial response body.
 
 ### Example
 
@@ -30,7 +30,7 @@ $config = Flyo\Configuration::getDefaultConfiguration()->setApiKey('token', 'YOU
 // $config = Flyo\Configuration::getDefaultConfiguration()->setApiKeyPrefix('token', 'Bearer');
 
 
-$apiInstance = new Flyo\Api\CacheApi(
+$apiInstance = new Flyo\Api\VersionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -38,10 +38,10 @@ $apiInstance = new Flyo\Api\CacheApi(
 );
 
 try {
-    $result = $apiInstance->cache();
+    $result = $apiInstance->version();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CacheApi->cache: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling VersionApi->version: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -51,7 +51,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Flyo\Model\CacheResponse**](../Model/CacheResponse.md)
+[**\Flyo\Model\VersionResponse**](../Model/VersionResponse.md)
 
 ### Authorization
 

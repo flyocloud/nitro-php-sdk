@@ -1,4 +1,4 @@
-# # CacheResponse
+# # VersionResponse
 
 ## Properties
 

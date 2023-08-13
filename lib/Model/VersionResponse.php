@@ -1,6 +1,6 @@
 <?php
 /**
- * CacheResponse
+ * VersionResponse
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * CacheResponse Class Doc Comment
+ * VersionResponse Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CacheResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class VersionResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CacheResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Cache_Response';
+    protected static $openAPIModelName = 'Version_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

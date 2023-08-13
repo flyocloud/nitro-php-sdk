@@ -1,6 +1,6 @@
 <?php
 /**
- * CacheApi
+ * VersionApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Flyo\HeaderSelector;
 use Flyo\ObjectSerializer;
 
 /**
- * CacheApi Class Doc Comment
+ * VersionApi Class Doc Comment
  *
  * @category Class
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CacheApi
+class VersionApi
 {
     /**
      * @var ClientInterface
@@ -71,7 +71,7 @@ class CacheApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'cache' => [
+        'version' => [
             'application/json',
         ],
     ];
@@ -123,36 +123,36 @@ class CacheApi
     }
 
     /**
-     * Operation cache
+     * Operation version
      *
-     * Get Cache Information
+     * Get Version Information
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['version'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\CacheResponse
+     * @return \Flyo\Model\VersionResponse
      */
-    public function cache(string $contentType = self::contentTypes['cache'][0])
+    public function version(string $contentType = self::contentTypes['version'][0])
     {
-        list($response) = $this->cacheWithHttpInfo($contentType);
+        list($response) = $this->versionWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation cacheWithHttpInfo
+     * Operation versionWithHttpInfo
      *
-     * Get Cache Information
+     * Get Version Information
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['version'] to see the possible values for this operation
      *
      * @throws \Flyo\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\CacheResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\VersionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function cacheWithHttpInfo(string $contentType = self::contentTypes['cache'][0])
+    public function versionWithHttpInfo(string $contentType = self::contentTypes['version'][0])
     {
-        $request = $this->cacheRequest($contentType);
+        $request = $this->versionRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -191,23 +191,23 @@ class CacheApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Flyo\Model\CacheResponse' === '\SplFileObject') {
+                    if ('\Flyo\Model\VersionResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Flyo\Model\CacheResponse' !== 'string') {
+                        if ('\Flyo\Model\VersionResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Flyo\Model\CacheResponse', []),
+                        ObjectSerializer::deserialize($content, '\Flyo\Model\VersionResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Flyo\Model\CacheResponse';
+            $returnType = '\Flyo\Model\VersionResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -228,7 +228,7 @@ class CacheApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Flyo\Model\CacheResponse',
+                        '\Flyo\Model\VersionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -239,18 +239,18 @@ class CacheApi
     }
 
     /**
-     * Operation cacheAsync
+     * Operation versionAsync
      *
-     * Get Cache Information
+     * Get Version Information
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['version'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cacheAsync(string $contentType = self::contentTypes['cache'][0])
+    public function versionAsync(string $contentType = self::contentTypes['version'][0])
     {
-        return $this->cacheAsyncWithHttpInfo($contentType)
+        return $this->versionAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -259,19 +259,19 @@ class CacheApi
     }
 
     /**
-     * Operation cacheAsyncWithHttpInfo
+     * Operation versionAsyncWithHttpInfo
      *
-     * Get Cache Information
+     * Get Version Information
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['version'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cacheAsyncWithHttpInfo(string $contentType = self::contentTypes['cache'][0])
+    public function versionAsyncWithHttpInfo(string $contentType = self::contentTypes['version'][0])
     {
-        $returnType = '\Flyo\Model\CacheResponse';
-        $request = $this->cacheRequest($contentType);
+        $returnType = '\Flyo\Model\VersionResponse';
+        $request = $this->versionRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -310,14 +310,14 @@ class CacheApi
     }
 
     /**
-     * Create request for operation 'cache'
+     * Create request for operation 'version'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cache'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['version'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function cacheRequest(string $contentType = self::contentTypes['cache'][0])
+    public function versionRequest(string $contentType = self::contentTypes['version'][0])
     {
 
 

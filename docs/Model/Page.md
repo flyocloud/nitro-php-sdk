@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** |  | [optional]
+**id** | **int** | The ID for the page | [optional]
 **title** | **string** |  | [optional]
 **href** | **string** | Returns the completed href tag. Internal links are appended with trailing slashes, such as &#x60;/about-me&#x60;, while email links are formatted with &#x60;mailto:hello@flyo.ch&#x60;. | [optional]
 **slug** | **string** | The slug, in its current form, contains the full path of nested slugs and serves as the identifier for querying the respective page. | [optional]
 **json** | [**\Flyo\Model\Block[]**](Block.md) |  | [optional]
-**depth** | **int** |  | [optional]
-**is_home** | **int** |  | [optional]
-**created_at** | **int** |  | [optional]
-**updated_at** | **int** |  | [optional]
-**is_visible** | **int** |  | [optional]
+**depth** | **int** | The depth of the page in the tree structure | [optional]
+**is_home** | **int** | Determining whether the page is the homepage or not. | [optional]
+**created_at** | **int** | A Unix timestamp indicating when the page was created. | [optional]
+**updated_at** | **int** | A Unix timestamp indicating when the page was last updated. | [optional]
+**is_visible** | **int** | Determining whether the page is visible or not. | [optional]
 **meta_json** | [**\Flyo\Model\Meta**](Meta.md) |  | [optional]
 **properties** | [**array<string,\Flyo\Model\PageProperty>**](PageProperty.md) |  | [optional]
 **uid** | **string** | A unique identifier for the page | [optional]

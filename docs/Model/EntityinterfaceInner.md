@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **entity_title** | **string** | The standard interface title resolved for the current entity | [optional]
 **entity_teaser** | **string** | The standard interface teaser resolved for the current entity | [optional]
 **entity_slug** | **string** | The slug for the given item, this can be either unique or not, depending on the configuration of the entity definition schema. | [optional]
-**entity_time_start** | **string** | If not defined, null is returned | [optional]
+**entity_time_start** | **float** | The shared entity interface time start attribute. If not defined, null or 0 is returned | [optional]
 **entity_type** | **string** |  | [optional]
 **entity_type_id** | **float** | The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema. | [optional]
 **entity_image** | **string** | For image manipulation please see https://dev.flyo.cloud/dev/infos/images.html | [optional]

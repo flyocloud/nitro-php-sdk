@@ -4,19 +4,19 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**entityBySlug()**](EntitiesApi.md#entityBySlug) | **GET** /entities/slug/{slug} | Find entity by slug and optional Type-ID |
+| [**entityBySlug()**](EntitiesApi.md#entityBySlug) | **GET** /entities/slug/{slug} | Find entity by slug and optional Entity-Type-ID |
 | [**entityByUniqueid()**](EntitiesApi.md#entityByUniqueid) | **GET** /entities/uniqueid/{uniqueid} | Find entity by uniqueid |
 
 
 ## `entityBySlug()`
 
 ```php
-entityBySlug($slug, $type_id): \Flyo\Model\Entity
+entityBySlug($slug, $lang, $type_id): \Flyo\Model\Entity
 ```
 
-Find entity by slug and optional Type-ID
+Find entity by slug and optional Entity-Type-ID
 
-
+The endpoint allows for the retrieval of entities based on their slug, with an optional Entity-Type-ID for more accurate results. The endpoint requires a `slug` parameter to be passed in the path, which is necessary for identifying the entity. However, since slugs are not unique across different entities, it is highly recommended to also provide the `typeId` parameter through the query to avoid incorrect or unintended results. This `typeId` serves as an Entity-Definition-Schema ID, ensuring a more precise and targeted entity retrieval by distinguishing the entities more clearly. The `slug` parameter is mandatory and should be a string (e.g., 'hello-world'), while the `typeId` parameter is optional and should be an integer (e.g., 123), representing the Entity-Definition-Schema ID.
 
 ### Example
 
@@ -38,10 +38,11 @@ $apiInstance = new Flyo\Api\EntitiesApi(
     $config
 );
 $slug = hello-world; // string | When looking up an entity slug, it is advisable to provide the typeId parameter along with it, as slugs are not unique among other entities. Failing to include the typeId parameter may lead to unintended or incorrect results. By specifying the typeId, you can ensure more accurate and targeted retrieval of the desired entity.
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 $type_id = 123; // int | To ensure accurate lookup, it is considered a best practice to include the Type-ID of the entity associated with the slug. The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema.
 
 try {
-    $result = $apiInstance->entityBySlug($slug, $type_id);
+    $result = $apiInstance->entityBySlug($slug, $lang, $type_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EntitiesApi->entityBySlug: ', $e->getMessage(), PHP_EOL;
@@ -53,6 +54,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **slug** | **string**| When looking up an entity slug, it is advisable to provide the typeId parameter along with it, as slugs are not unique among other entities. Failing to include the typeId parameter may lead to unintended or incorrect results. By specifying the typeId, you can ensure more accurate and targeted retrieval of the desired entity. | |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 | **type_id** | **int**| To ensure accurate lookup, it is considered a best practice to include the Type-ID of the entity associated with the slug. The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema. | [optional] |
 
 ### Return type
@@ -75,7 +77,7 @@ try {
 ## `entityByUniqueid()`
 
 ```php
-entityByUniqueid($uniqueid): \Flyo\Model\Entity
+entityByUniqueid($uniqueid, $lang): \Flyo\Model\Entity
 ```
 
 Find entity by uniqueid
@@ -102,9 +104,10 @@ $apiInstance = new Flyo\Api\EntitiesApi(
     $config
 );
 $uniqueid = 2348uc; // string | The unique identifier of the given entity is a string composed solely of lowercase alphabetic characters (a-z) and numbers. This identifier is meticulously generated for each data row, ensuring its uniqueness and facilitating efficient data management and retrieval across content pools.
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 
 try {
-    $result = $apiInstance->entityByUniqueid($uniqueid);
+    $result = $apiInstance->entityByUniqueid($uniqueid, $lang);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EntitiesApi->entityByUniqueid: ', $e->getMessage(), PHP_EOL;
@@ -116,6 +119,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **uniqueid** | **string**| The unique identifier of the given entity is a string composed solely of lowercase alphabetic characters (a-z) and numbers. This identifier is meticulously generated for each data row, ensuring its uniqueness and facilitating efficient data management and retrieval across content pools. | |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 
 ### Return type
 

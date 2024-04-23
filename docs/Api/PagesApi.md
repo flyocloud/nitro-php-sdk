@@ -11,7 +11,7 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 ## `home()`
 
 ```php
-home(): \Flyo\Model\Page
+home($lang): \Flyo\Model\Page
 ```
 
 Get Home
@@ -37,9 +37,10 @@ $apiInstance = new Flyo\Api\PagesApi(
     new GuzzleHttp\Client(),
     $config
 );
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 
 try {
-    $result = $apiInstance->home();
+    $result = $apiInstance->home($lang);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PagesApi->home: ', $e->getMessage(), PHP_EOL;
@@ -48,7 +49,9 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 
 ### Return type
 
@@ -70,7 +73,7 @@ This endpoint does not need any parameter.
 ## `page()`
 
 ```php
-page($slug): \Flyo\Model\Page
+page($lang, $slug): \Flyo\Model\Page
 ```
 
 Get Page by slug
@@ -96,10 +99,11 @@ $apiInstance = new Flyo\Api\PagesApi(
     new GuzzleHttp\Client(),
     $config
 );
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 $slug = foo/bar; // string | The function retrieves a specific page by its slug. If no slug is provided, it automatically returns the homepage. Moreover, it seamlessly handles paths with subpages, allowing for nested URLs like \"testpage/subpage\". In this way, a forward slash (\"/\") within the path is recognized as a valid character and processed accordingly.
 
 try {
-    $result = $apiInstance->page($slug);
+    $result = $apiInstance->page($lang, $slug);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PagesApi->page: ', $e->getMessage(), PHP_EOL;
@@ -110,6 +114,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 | **slug** | **string**| The function retrieves a specific page by its slug. If no slug is provided, it automatically returns the homepage. Moreover, it seamlessly handles paths with subpages, allowing for nested URLs like \&quot;testpage/subpage\&quot;. In this way, a forward slash (\&quot;/\&quot;) within the path is recognized as a valid character and processed accordingly. | [optional] |
 
 ### Return type

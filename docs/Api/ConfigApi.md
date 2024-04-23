@@ -10,7 +10,7 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 ## `config()`
 
 ```php
-config(): \Flyo\Model\ConfigResponse
+config($lang): \Flyo\Model\ConfigResponse
 ```
 
 Get Config
@@ -36,9 +36,10 @@ $apiInstance = new Flyo\Api\ConfigApi(
     new GuzzleHttp\Client(),
     $config
 );
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 
 try {
-    $result = $apiInstance->config();
+    $result = $apiInstance->config($lang);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ConfigApi->config: ', $e->getMessage(), PHP_EOL;
@@ -47,7 +48,9 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 
 ### Return type
 

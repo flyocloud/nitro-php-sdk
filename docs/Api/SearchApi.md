@@ -10,7 +10,7 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 ## `search()`
 
 ```php
-search($query): \Flyo\Model\EntityinterfaceInner[]
+search($query, $lang): \Flyo\Model\EntityinterfaceInner[]
 ```
 
 Get Search by query
@@ -37,9 +37,10 @@ $apiInstance = new Flyo\Api\SearchApi(
     $config
 );
 $query = foobar; // string | The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval.
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 
 try {
-    $result = $apiInstance->search($query);
+    $result = $apiInstance->search($query, $lang);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SearchApi->search: ', $e->getMessage(), PHP_EOL;
@@ -51,6 +52,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **query** | **string**| The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. | |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 
 ### Return type
 

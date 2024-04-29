@@ -11,7 +11,7 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 ## `entityBySlug()`
 
 ```php
-entityBySlug($slug, $lang, $type_id): \Flyo\Model\Entity
+entityBySlug($slug, $type_id, $lang): \Flyo\Model\Entity
 ```
 
 Find entity by slug and optional Entity-Type-ID
@@ -38,11 +38,11 @@ $apiInstance = new Flyo\Api\EntitiesApi(
     $config
 );
 $slug = hello-world; // string | When looking up an entity slug, it is advisable to provide the typeId parameter along with it, as slugs are not unique among other entities. Failing to include the typeId parameter may lead to unintended or incorrect results. By specifying the typeId, you can ensure more accurate and targeted retrieval of the desired entity.
-$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 $type_id = 123; // int | To ensure accurate lookup, it is considered a best practice to include the Type-ID of the entity associated with the slug. The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema.
+$lang = de; // string | The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won't have any effect
 
 try {
-    $result = $apiInstance->entityBySlug($slug, $lang, $type_id);
+    $result = $apiInstance->entityBySlug($slug, $type_id, $lang);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EntitiesApi->entityBySlug: ', $e->getMessage(), PHP_EOL;
@@ -54,8 +54,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **slug** | **string**| When looking up an entity slug, it is advisable to provide the typeId parameter along with it, as slugs are not unique among other entities. Failing to include the typeId parameter may lead to unintended or incorrect results. By specifying the typeId, you can ensure more accurate and targeted retrieval of the desired entity. | |
-| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 | **type_id** | **int**| To ensure accurate lookup, it is considered a best practice to include the Type-ID of the entity associated with the slug. The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema. | [optional] |
+| **lang** | **string**| The language context for the current request. If not defined, the defed primary language will be used. If the nitro setup is not configured as multi lingual, the language parameter won&#39;t have any effect | [optional] |
 
 ### Return type
 

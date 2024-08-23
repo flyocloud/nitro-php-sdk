@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigResponseNitro
+ * FieldAddress
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponseNitro Class Doc Comment
+ * FieldAddress Class Doc Comment
  *
  * @category Class
- * @description The Nitro section of the API provides essential details about the currently configured Nitro system.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializable
+class FieldAddress implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response_nitro';
+    protected static $openAPIModelName = 'fieldAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +57,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'domain' => 'string',
-        'slug' => 'string',
-        'version' => 'int',
-        'updated_at' => 'int',
-        'language' => 'string',
-        'primary_language' => 'string'
+        'zip' => 'float',
+        'city' => 'string',
+        'street_name' => 'string',
+        'street_nr' => 'string',
+        'street' => 'string',
+        'address' => 'string',
+        'cords_lat' => 'float',
+        'cords_lng' => 'float'
     ];
 
     /**
@@ -74,12 +75,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'domain' => null,
-        'slug' => null,
-        'version' => null,
-        'updated_at' => null,
-        'language' => null,
-        'primary_language' => null
+        'zip' => null,
+        'city' => null,
+        'street_name' => null,
+        'street_nr' => null,
+        'street' => null,
+        'address' => null,
+        'cords_lat' => null,
+        'cords_lng' => null
     ];
 
     /**
@@ -88,12 +91,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'domain' => false,
-        'slug' => false,
-        'version' => false,
-        'updated_at' => false,
-        'language' => false,
-        'primary_language' => false
+        'zip' => false,
+        'city' => false,
+        'street_name' => false,
+        'street_nr' => false,
+        'street' => false,
+        'address' => false,
+        'cords_lat' => false,
+        'cords_lng' => false
     ];
 
     /**
@@ -182,12 +187,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'domain' => 'domain',
-        'slug' => 'slug',
-        'version' => 'version',
-        'updated_at' => 'updated_at',
-        'language' => 'language',
-        'primary_language' => 'primary_language'
+        'zip' => 'zip',
+        'city' => 'city',
+        'street_name' => 'street_name',
+        'street_nr' => 'street_nr',
+        'street' => 'street',
+        'address' => 'address',
+        'cords_lat' => 'cords_lat',
+        'cords_lng' => 'cords_lng'
     ];
 
     /**
@@ -196,12 +203,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'domain' => 'setDomain',
-        'slug' => 'setSlug',
-        'version' => 'setVersion',
-        'updated_at' => 'setUpdatedAt',
-        'language' => 'setLanguage',
-        'primary_language' => 'setPrimaryLanguage'
+        'zip' => 'setZip',
+        'city' => 'setCity',
+        'street_name' => 'setStreetName',
+        'street_nr' => 'setStreetNr',
+        'street' => 'setStreet',
+        'address' => 'setAddress',
+        'cords_lat' => 'setCordsLat',
+        'cords_lng' => 'setCordsLng'
     ];
 
     /**
@@ -210,12 +219,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'domain' => 'getDomain',
-        'slug' => 'getSlug',
-        'version' => 'getVersion',
-        'updated_at' => 'getUpdatedAt',
-        'language' => 'getLanguage',
-        'primary_language' => 'getPrimaryLanguage'
+        'zip' => 'getZip',
+        'city' => 'getCity',
+        'street_name' => 'getStreetName',
+        'street_nr' => 'getStreetNr',
+        'street' => 'getStreet',
+        'address' => 'getAddress',
+        'cords_lat' => 'getCordsLat',
+        'cords_lng' => 'getCordsLng'
     ];
 
     /**
@@ -275,12 +286,14 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('slug', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('primary_language', $data ?? [], null);
+        $this->setIfExists('zip', $data ?? [], null);
+        $this->setIfExists('city', $data ?? [], null);
+        $this->setIfExists('street_name', $data ?? [], null);
+        $this->setIfExists('street_nr', $data ?? [], null);
+        $this->setIfExists('street', $data ?? [], null);
+        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('cords_lat', $data ?? [], null);
+        $this->setIfExists('cords_lng', $data ?? [], null);
     }
 
     /**
@@ -326,163 +339,217 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets domain
+     * Gets zip
+     *
+     * @return float|null
+     */
+    public function getZip()
+    {
+        return $this->container['zip'];
+    }
+
+    /**
+     * Sets zip
+     *
+     * @param float|null $zip zip
+     *
+     * @return self
+     */
+    public function setZip($zip)
+    {
+        if (is_null($zip)) {
+            throw new \InvalidArgumentException('non-nullable zip cannot be null');
+        }
+        $this->container['zip'] = $zip;
+
+        return $this;
+    }
+
+    /**
+     * Gets city
      *
      * @return string|null
      */
-    public function getDomain()
+    public function getCity()
     {
-        return $this->container['domain'];
+        return $this->container['city'];
     }
 
     /**
-     * Sets domain
+     * Sets city
      *
-     * @param string|null $domain domain
+     * @param string|null $city city
      *
      * @return self
      */
-    public function setDomain($domain)
+    public function setCity($city)
     {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
+        if (is_null($city)) {
+            throw new \InvalidArgumentException('non-nullable city cannot be null');
         }
-        $this->container['domain'] = $domain;
+        $this->container['city'] = $city;
 
         return $this;
     }
 
     /**
-     * Gets slug
+     * Gets street_name
      *
      * @return string|null
      */
-    public function getSlug()
+    public function getStreetName()
     {
-        return $this->container['slug'];
+        return $this->container['street_name'];
     }
 
     /**
-     * Sets slug
+     * Sets street_name
      *
-     * @param string|null $slug slug
+     * @param string|null $street_name street_name
      *
      * @return self
      */
-    public function setSlug($slug)
+    public function setStreetName($street_name)
     {
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+        if (is_null($street_name)) {
+            throw new \InvalidArgumentException('non-nullable street_name cannot be null');
         }
-        $this->container['slug'] = $slug;
+        $this->container['street_name'] = $street_name;
 
         return $this;
     }
 
     /**
-     * Gets version
-     *
-     * @return int|null
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int|null $version Whenever Flyo generates new data, the version number will be appropriately incremented. If this value is employed for caching, it will undergo less frequent purging in comparison to the `updated_at` value, thus extending its longevity. (last longer)
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return int|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param int|null $updated_at A Unix timestamp indicating when the Nitro was last updated. This timestamp does not correlate with the version number. If this value is utilized for caching purposes, it will experience more frequent purges compared to the version number, leading to shorter caching intervals. (last shorter)
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
+     * Gets street_nr
      *
      * @return string|null
      */
-    public function getLanguage()
+    public function getStreetNr()
     {
-        return $this->container['language'];
+        return $this->container['street_nr'];
     }
 
     /**
-     * Sets language
+     * Sets street_nr
      *
-     * @param string|null $language Current language context for the config.
+     * @param string|null $street_nr street_nr
      *
      * @return self
      */
-    public function setLanguage($language)
+    public function setStreetNr($street_nr)
     {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        if (is_null($street_nr)) {
+            throw new \InvalidArgumentException('non-nullable street_nr cannot be null');
         }
-        $this->container['language'] = $language;
+        $this->container['street_nr'] = $street_nr;
 
         return $this;
     }
 
     /**
-     * Gets primary_language
+     * Gets street
      *
      * @return string|null
      */
-    public function getPrimaryLanguage()
+    public function getStreet()
     {
-        return $this->container['primary_language'];
+        return $this->container['street'];
     }
 
     /**
-     * Sets primary_language
+     * Sets street
      *
-     * @param string|null $primary_language The primary language of the nitro integration
+     * @param string|null $street street
      *
      * @return self
      */
-    public function setPrimaryLanguage($primary_language)
+    public function setStreet($street)
     {
-        if (is_null($primary_language)) {
-            throw new \InvalidArgumentException('non-nullable primary_language cannot be null');
+        if (is_null($street)) {
+            throw new \InvalidArgumentException('non-nullable street cannot be null');
         }
-        $this->container['primary_language'] = $primary_language;
+        $this->container['street'] = $street;
+
+        return $this;
+    }
+
+    /**
+     * Gets address
+     *
+     * @return string|null
+     */
+    public function getAddress()
+    {
+        return $this->container['address'];
+    }
+
+    /**
+     * Sets address
+     *
+     * @param string|null $address address
+     *
+     * @return self
+     */
+    public function setAddress($address)
+    {
+        if (is_null($address)) {
+            throw new \InvalidArgumentException('non-nullable address cannot be null');
+        }
+        $this->container['address'] = $address;
+
+        return $this;
+    }
+
+    /**
+     * Gets cords_lat
+     *
+     * @return float|null
+     */
+    public function getCordsLat()
+    {
+        return $this->container['cords_lat'];
+    }
+
+    /**
+     * Sets cords_lat
+     *
+     * @param float|null $cords_lat cords_lat
+     *
+     * @return self
+     */
+    public function setCordsLat($cords_lat)
+    {
+        if (is_null($cords_lat)) {
+            throw new \InvalidArgumentException('non-nullable cords_lat cannot be null');
+        }
+        $this->container['cords_lat'] = $cords_lat;
+
+        return $this;
+    }
+
+    /**
+     * Gets cords_lng
+     *
+     * @return float|null
+     */
+    public function getCordsLng()
+    {
+        return $this->container['cords_lng'];
+    }
+
+    /**
+     * Sets cords_lng
+     *
+     * @param float|null $cords_lng cords_lng
+     *
+     * @return self
+     */
+    public function setCordsLng($cords_lng)
+    {
+        if (is_null($cords_lng)) {
+            throw new \InvalidArgumentException('non-nullable cords_lng cannot be null');
+        }
+        $this->container['cords_lng'] = $cords_lng;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigResponseNitro
+ * FieldFile
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponseNitro Class Doc Comment
+ * FieldFile Class Doc Comment
  *
  * @category Class
- * @description The Nitro section of the API provides essential details about the currently configured Nitro system.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializable
+class FieldFile implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response_nitro';
+    protected static $openAPIModelName = 'fieldFile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +57,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'domain' => 'string',
-        'slug' => 'string',
-        'version' => 'int',
-        'updated_at' => 'int',
-        'language' => 'string',
-        'primary_language' => 'string'
+        'source' => 'string',
+        'caption' => 'string',
+        'copyright' => 'string',
+        'name' => 'string',
+        'id' => 'float'
     ];
 
     /**
@@ -74,12 +72,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'domain' => null,
-        'slug' => null,
-        'version' => null,
-        'updated_at' => null,
-        'language' => null,
-        'primary_language' => null
+        'source' => null,
+        'caption' => null,
+        'copyright' => null,
+        'name' => null,
+        'id' => null
     ];
 
     /**
@@ -88,12 +85,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'domain' => false,
-        'slug' => false,
-        'version' => false,
-        'updated_at' => false,
-        'language' => false,
-        'primary_language' => false
+        'source' => false,
+        'caption' => false,
+        'copyright' => false,
+        'name' => false,
+        'id' => false
     ];
 
     /**
@@ -182,12 +178,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'domain' => 'domain',
-        'slug' => 'slug',
-        'version' => 'version',
-        'updated_at' => 'updated_at',
-        'language' => 'language',
-        'primary_language' => 'primary_language'
+        'source' => 'source',
+        'caption' => 'caption',
+        'copyright' => 'copyright',
+        'name' => 'name',
+        'id' => 'id'
     ];
 
     /**
@@ -196,12 +191,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'domain' => 'setDomain',
-        'slug' => 'setSlug',
-        'version' => 'setVersion',
-        'updated_at' => 'setUpdatedAt',
-        'language' => 'setLanguage',
-        'primary_language' => 'setPrimaryLanguage'
+        'source' => 'setSource',
+        'caption' => 'setCaption',
+        'copyright' => 'setCopyright',
+        'name' => 'setName',
+        'id' => 'setId'
     ];
 
     /**
@@ -210,12 +204,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'domain' => 'getDomain',
-        'slug' => 'getSlug',
-        'version' => 'getVersion',
-        'updated_at' => 'getUpdatedAt',
-        'language' => 'getLanguage',
-        'primary_language' => 'getPrimaryLanguage'
+        'source' => 'getSource',
+        'caption' => 'getCaption',
+        'copyright' => 'getCopyright',
+        'name' => 'getName',
+        'id' => 'getId'
     ];
 
     /**
@@ -275,12 +268,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('slug', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('primary_language', $data ?? [], null);
+        $this->setIfExists('source', $data ?? [], null);
+        $this->setIfExists('caption', $data ?? [], null);
+        $this->setIfExists('copyright', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -326,163 +318,136 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets domain
+     * Gets source
      *
      * @return string|null
      */
-    public function getDomain()
+    public function getSource()
     {
-        return $this->container['domain'];
+        return $this->container['source'];
     }
 
     /**
-     * Sets domain
+     * Sets source
      *
-     * @param string|null $domain domain
+     * @param string|null $source Manipulatable image path, see https://dev.flyo.cloud/infos/images.html.
      *
      * @return self
      */
-    public function setDomain($domain)
+    public function setSource($source)
     {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
+        if (is_null($source)) {
+            throw new \InvalidArgumentException('non-nullable source cannot be null');
         }
-        $this->container['domain'] = $domain;
+        $this->container['source'] = $source;
 
         return $this;
     }
 
     /**
-     * Gets slug
+     * Gets caption
      *
      * @return string|null
      */
-    public function getSlug()
+    public function getCaption()
     {
-        return $this->container['slug'];
+        return $this->container['caption'];
     }
 
     /**
-     * Sets slug
+     * Sets caption
      *
-     * @param string|null $slug slug
+     * @param string|null $caption Describes the file or image
      *
      * @return self
      */
-    public function setSlug($slug)
+    public function setCaption($caption)
     {
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+        if (is_null($caption)) {
+            throw new \InvalidArgumentException('non-nullable caption cannot be null');
         }
-        $this->container['slug'] = $slug;
+        $this->container['caption'] = $caption;
 
         return $this;
     }
 
     /**
-     * Gets version
-     *
-     * @return int|null
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int|null $version Whenever Flyo generates new data, the version number will be appropriately incremented. If this value is employed for caching, it will undergo less frequent purging in comparison to the `updated_at` value, thus extending its longevity. (last longer)
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return int|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param int|null $updated_at A Unix timestamp indicating when the Nitro was last updated. This timestamp does not correlate with the version number. If this value is utilized for caching purposes, it will experience more frequent purges compared to the version number, leading to shorter caching intervals. (last shorter)
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
+     * Gets copyright
      *
      * @return string|null
      */
-    public function getLanguage()
+    public function getCopyright()
     {
-        return $this->container['language'];
+        return $this->container['copyright'];
     }
 
     /**
-     * Sets language
+     * Sets copyright
      *
-     * @param string|null $language Current language context for the config.
+     * @param string|null $copyright copyright
      *
      * @return self
      */
-    public function setLanguage($language)
+    public function setCopyright($copyright)
     {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        if (is_null($copyright)) {
+            throw new \InvalidArgumentException('non-nullable copyright cannot be null');
         }
-        $this->container['language'] = $language;
+        $this->container['copyright'] = $copyright;
 
         return $this;
     }
 
     /**
-     * Gets primary_language
+     * Gets name
      *
      * @return string|null
      */
-    public function getPrimaryLanguage()
+    public function getName()
     {
-        return $this->container['primary_language'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets primary_language
+     * Sets name
      *
-     * @param string|null $primary_language The primary language of the nitro integration
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setPrimaryLanguage($primary_language)
+    public function setName($name)
     {
-        if (is_null($primary_language)) {
-            throw new \InvalidArgumentException('non-nullable primary_language cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['primary_language'] = $primary_language;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return float|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param float|null $id The unique identifier of the file or image as incremental number.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
 
         return $this;
     }

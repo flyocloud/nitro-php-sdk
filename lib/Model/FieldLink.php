@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigResponseNitro
+ * FieldLink
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponseNitro Class Doc Comment
+ * FieldLink Class Doc Comment
  *
  * @category Class
- * @description The Nitro section of the API provides essential details about the currently configured Nitro system.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializable
+class FieldLink implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response_nitro';
+    protected static $openAPIModelName = 'fieldLink';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +57,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'domain' => 'string',
-        'slug' => 'string',
-        'version' => 'int',
-        'updated_at' => 'int',
-        'language' => 'string',
-        'primary_language' => 'string'
+        'type' => 'string',
+        'target' => 'string',
+        'raw' => 'string',
+        'href' => 'string',
+        'extras' => 'object'
     ];
 
     /**
@@ -74,12 +72,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'domain' => null,
-        'slug' => null,
-        'version' => null,
-        'updated_at' => null,
-        'language' => null,
-        'primary_language' => null
+        'type' => null,
+        'target' => null,
+        'raw' => null,
+        'href' => null,
+        'extras' => null
     ];
 
     /**
@@ -88,12 +85,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'domain' => false,
-        'slug' => false,
-        'version' => false,
-        'updated_at' => false,
-        'language' => false,
-        'primary_language' => false
+        'type' => false,
+        'target' => false,
+        'raw' => false,
+        'href' => false,
+        'extras' => false
     ];
 
     /**
@@ -182,12 +178,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'domain' => 'domain',
-        'slug' => 'slug',
-        'version' => 'version',
-        'updated_at' => 'updated_at',
-        'language' => 'language',
-        'primary_language' => 'primary_language'
+        'type' => 'type',
+        'target' => 'target',
+        'raw' => 'raw',
+        'href' => 'href',
+        'extras' => 'extras'
     ];
 
     /**
@@ -196,12 +191,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'domain' => 'setDomain',
-        'slug' => 'setSlug',
-        'version' => 'setVersion',
-        'updated_at' => 'setUpdatedAt',
-        'language' => 'setLanguage',
-        'primary_language' => 'setPrimaryLanguage'
+        'type' => 'setType',
+        'target' => 'setTarget',
+        'raw' => 'setRaw',
+        'href' => 'setHref',
+        'extras' => 'setExtras'
     ];
 
     /**
@@ -210,12 +204,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'domain' => 'getDomain',
-        'slug' => 'getSlug',
-        'version' => 'getVersion',
-        'updated_at' => 'getUpdatedAt',
-        'language' => 'getLanguage',
-        'primary_language' => 'getPrimaryLanguage'
+        'type' => 'getType',
+        'target' => 'getTarget',
+        'raw' => 'getRaw',
+        'href' => 'getHref',
+        'extras' => 'getExtras'
     ];
 
     /**
@@ -275,12 +268,11 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('slug', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('primary_language', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('target', $data ?? [], null);
+        $this->setIfExists('raw', $data ?? [], null);
+        $this->setIfExists('href', $data ?? [], null);
+        $this->setIfExists('extras', $data ?? [], null);
     }
 
     /**
@@ -326,163 +318,136 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets domain
+     * Gets type
      *
      * @return string|null
      */
-    public function getDomain()
+    public function getType()
     {
-        return $this->container['domain'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets domain
+     * Sets type
      *
-     * @param string|null $domain domain
+     * @param string|null $type The type of the link. Possible values are: nitropagelink, url, email, tel, file
      *
      * @return self
      */
-    public function setDomain($domain)
+    public function setType($type)
     {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['domain'] = $domain;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets slug
+     * Gets target
      *
      * @return string|null
      */
-    public function getSlug()
+    public function getTarget()
     {
-        return $this->container['slug'];
+        return $this->container['target'];
     }
 
     /**
-     * Sets slug
+     * Sets target
      *
-     * @param string|null $slug slug
+     * @param string|null $target The target attribute of the link. Possible values are: _blank, _self
      *
      * @return self
      */
-    public function setSlug($slug)
+    public function setTarget($target)
     {
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+        if (is_null($target)) {
+            throw new \InvalidArgumentException('non-nullable target cannot be null');
         }
-        $this->container['slug'] = $slug;
+        $this->container['target'] = $target;
 
         return $this;
     }
 
     /**
-     * Gets version
-     *
-     * @return int|null
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int|null $version Whenever Flyo generates new data, the version number will be appropriately incremented. If this value is employed for caching, it will undergo less frequent purging in comparison to the `updated_at` value, thus extending its longevity. (last longer)
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return int|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param int|null $updated_at A Unix timestamp indicating when the Nitro was last updated. This timestamp does not correlate with the version number. If this value is utilized for caching purposes, it will experience more frequent purges compared to the version number, leading to shorter caching intervals. (last shorter)
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
+     * Gets raw
      *
      * @return string|null
      */
-    public function getLanguage()
+    public function getRaw()
     {
-        return $this->container['language'];
+        return $this->container['raw'];
     }
 
     /**
-     * Sets language
+     * Sets raw
      *
-     * @param string|null $language Current language context for the config.
+     * @param string|null $raw The not modified raw input value of flyo.
      *
      * @return self
      */
-    public function setLanguage($language)
+    public function setRaw($raw)
     {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        if (is_null($raw)) {
+            throw new \InvalidArgumentException('non-nullable raw cannot be null');
         }
-        $this->container['language'] = $language;
+        $this->container['raw'] = $raw;
 
         return $this;
     }
 
     /**
-     * Gets primary_language
+     * Gets href
      *
      * @return string|null
      */
-    public function getPrimaryLanguage()
+    public function getHref()
     {
-        return $this->container['primary_language'];
+        return $this->container['href'];
     }
 
     /**
-     * Sets primary_language
+     * Sets href
      *
-     * @param string|null $primary_language The primary language of the nitro integration
+     * @param string|null $href The link in a href format. Which means links have a trailing slash. E-Mail links start with mailto: and phone links start with tel:
      *
      * @return self
      */
-    public function setPrimaryLanguage($primary_language)
+    public function setHref($href)
     {
-        if (is_null($primary_language)) {
-            throw new \InvalidArgumentException('non-nullable primary_language cannot be null');
+        if (is_null($href)) {
+            throw new \InvalidArgumentException('non-nullable href cannot be null');
         }
-        $this->container['primary_language'] = $primary_language;
+        $this->container['href'] = $href;
+
+        return $this;
+    }
+
+    /**
+     * Gets extras
+     *
+     * @return object|null
+     */
+    public function getExtras()
+    {
+        return $this->container['extras'];
+    }
+
+    /**
+     * Sets extras
+     *
+     * @param object|null $extras Additional information about the link. This information can vary depending on the type of link.
+     *
+     * @return self
+     */
+    public function setExtras($extras)
+    {
+        if (is_null($extras)) {
+            throw new \InvalidArgumentException('non-nullable extras cannot be null');
+        }
+        $this->container['extras'] = $extras;
 
         return $this;
     }

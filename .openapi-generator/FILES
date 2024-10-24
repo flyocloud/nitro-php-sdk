@@ -7,7 +7,7 @@ docs/Api/SearchApi.md
 docs/Api/SitemapApi.md
 docs/Api/VersionApi.md
 docs/Model/Block.md
-docs/Model/BlockSlots.md
+docs/Model/BlockSlot.md
 docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseContainersValue.md
 docs/Model/ConfigResponseNitro.md
@@ -15,14 +15,6 @@ docs/Model/Entity.md
 docs/Model/EntityInterface.md
 docs/Model/EntityMetric.md
 docs/Model/EntityinterfaceInner.md
-docs/Model/FieldAddress.md
-docs/Model/FieldCheckboxList.md
-docs/Model/FieldDropdown.md
-docs/Model/FieldFile.md
-docs/Model/FieldImage.md
-docs/Model/FieldLink.md
-docs/Model/FieldSchema.md
-docs/Model/FieldWysiwyg.md
 docs/Model/Meta.md
 docs/Model/Page.md
 docs/Model/PageBreadcrumbInner.md
@@ -39,7 +31,7 @@ lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
 lib/Model/Block.php
-lib/Model/BlockSlots.php
+lib/Model/BlockSlot.php
 lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseContainersValue.php
 lib/Model/ConfigResponseNitro.php
@@ -47,14 +39,6 @@ lib/Model/Entity.php
 lib/Model/EntityInterface.php
 lib/Model/EntityMetric.php
 lib/Model/EntityinterfaceInner.php
-lib/Model/FieldAddress.php
-lib/Model/FieldCheckboxList.php
-lib/Model/FieldDropdown.php
-lib/Model/FieldFile.php
-lib/Model/FieldImage.php
-lib/Model/FieldLink.php
-lib/Model/FieldSchema.php
-lib/Model/FieldWysiwyg.php
 lib/Model/Meta.php
 lib/Model/ModelInterface.php
 lib/Model/Page.php

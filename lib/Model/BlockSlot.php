@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfigResponse
+ * BlockSlot
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponse Class Doc Comment
+ * BlockSlot Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class BlockSlot implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response';
+    protected static $openAPIModelName = 'BlockSlot';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'nitro' => '\Flyo\Model\ConfigResponseNitro',
-        'pages' => 'string[]',
-        'containers' => 'array<string,\Flyo\Model\ConfigResponseContainersValue>',
-        'globals' => 'object'
+        'identifier' => 'string',
+        'content' => '\Flyo\Model\Block[]'
     ];
 
     /**
@@ -71,10 +69,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'nitro' => null,
-        'pages' => null,
-        'containers' => null,
-        'globals' => null
+        'identifier' => null,
+        'content' => null
     ];
 
     /**
@@ -83,10 +79,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'nitro' => false,
-        'pages' => false,
-        'containers' => false,
-        'globals' => false
+        'identifier' => false,
+        'content' => false
     ];
 
     /**
@@ -175,10 +169,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'nitro' => 'nitro',
-        'pages' => 'pages',
-        'containers' => 'containers',
-        'globals' => 'globals'
+        'identifier' => 'identifier',
+        'content' => 'content'
     ];
 
     /**
@@ -187,10 +179,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'nitro' => 'setNitro',
-        'pages' => 'setPages',
-        'containers' => 'setContainers',
-        'globals' => 'setGlobals'
+        'identifier' => 'setIdentifier',
+        'content' => 'setContent'
     ];
 
     /**
@@ -199,10 +189,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'nitro' => 'getNitro',
-        'pages' => 'getPages',
-        'containers' => 'getContainers',
-        'globals' => 'getGlobals'
+        'identifier' => 'getIdentifier',
+        'content' => 'getContent'
     ];
 
     /**
@@ -262,10 +250,8 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('nitro', $data ?? [], null);
-        $this->setIfExists('pages', $data ?? [], null);
-        $this->setIfExists('containers', $data ?? [], null);
-        $this->setIfExists('globals', $data ?? [], null);
+        $this->setIfExists('identifier', $data ?? [], null);
+        $this->setIfExists('content', $data ?? [], null);
     }
 
     /**
@@ -311,109 +297,55 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets nitro
+     * Gets identifier
      *
-     * @return \Flyo\Model\ConfigResponseNitro|null
+     * @return string|null
      */
-    public function getNitro()
+    public function getIdentifier()
     {
-        return $this->container['nitro'];
+        return $this->container['identifier'];
     }
 
     /**
-     * Sets nitro
+     * Sets identifier
      *
-     * @param \Flyo\Model\ConfigResponseNitro|null $nitro nitro
+     * @param string|null $identifier The unique identifier of the slot
      *
      * @return self
      */
-    public function setNitro($nitro)
+    public function setIdentifier($identifier)
     {
-        if (is_null($nitro)) {
-            throw new \InvalidArgumentException('non-nullable nitro cannot be null');
+        if (is_null($identifier)) {
+            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
         }
-        $this->container['nitro'] = $nitro;
+        $this->container['identifier'] = $identifier;
 
         return $this;
     }
 
     /**
-     * Gets pages
+     * Gets content
      *
-     * @return string[]|null
+     * @return \Flyo\Model\Block[]|null
      */
-    public function getPages()
+    public function getContent()
     {
-        return $this->container['pages'];
+        return $this->container['content'];
     }
 
     /**
-     * Sets pages
+     * Sets content
      *
-     * @param string[]|null $pages A unique array of slugs is available for the entire site configuration, providing you with the flexibility to register specific routes for your application or compare a slug against this array. This comparison enables you to determine whether to return a \"404 Not Found\" exception or handle the request differently. By utilizing this array, you can easily manage and control the slugs used in your application, ensuring that only valid and registered routes are accessible. This approach helps maintain the integrity and security of your site's navigation, preventing users from accessing undefined or unauthorized pages.
+     * @param \Flyo\Model\Block[]|null $content content
      *
      * @return self
      */
-    public function setPages($pages)
+    public function setContent($content)
     {
-        if (is_null($pages)) {
-            throw new \InvalidArgumentException('non-nullable pages cannot be null');
+        if (is_null($content)) {
+            throw new \InvalidArgumentException('non-nullable content cannot be null');
         }
-        $this->container['pages'] = $pages;
-
-        return $this;
-    }
-
-    /**
-     * Gets containers
-     *
-     * @return array<string,\Flyo\Model\ConfigResponseContainersValue>|null
-     */
-    public function getContainers()
-    {
-        return $this->container['containers'];
-    }
-
-    /**
-     * Sets containers
-     *
-     * @param array<string,\Flyo\Model\ConfigResponseContainersValue>|null $containers This endpoint manages containers, which are essential for constructing navigation menus. Each navigation menu is housed within a distinct container. These containers are identified by two key attributes: a label and an identifier. The label describes the menu's purpose or position (e.g., \"Footer Nav\" or \"Main Nav\"), while the identifier is a slug-formatted text for easy reference (e.g., \"footer\"). Within each container, there is an \"items\" object. This object contains the actual page items that make up the menu's structure.
-     *
-     * @return self
-     */
-    public function setContainers($containers)
-    {
-        if (is_null($containers)) {
-            throw new \InvalidArgumentException('non-nullable containers cannot be null');
-        }
-        $this->container['containers'] = $containers;
-
-        return $this;
-    }
-
-    /**
-     * Gets globals
-     *
-     * @return object|null
-     */
-    public function getGlobals()
-    {
-        return $this->container['globals'];
-    }
-
-    /**
-     * Sets globals
-     *
-     * @param object|null $globals The globals section serves as a crucial component in the overall structure of the code. It consists of an associative array that allows users to define their own unique keys, each of which contains an array of items representing data sourced from a Content Pool. This data is essential as it needs to be accessible throughout the entire scope of the website, ensuring its availability whenever required. By leveraging this globals section, developers can efficiently manage and access these globally significant data sets.
-     *
-     * @return self
-     */
-    public function setGlobals($globals)
-    {
-        if (is_null($globals)) {
-            throw new \InvalidArgumentException('non-nullable globals cannot be null');
-        }
-        $this->container['globals'] = $globals;
+        $this->container['content'] = $content;
 
         return $this;
     }

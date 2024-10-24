@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **type** | **string** | Can be either a page with content (which is default behavior), email, file, url, tel | [optional]
 **target** | **string** | can be either _self (which is default) or _blank | [optional]
 **container** | **string** | The container this page belongs, by default all pages belong to the default container which is the main nav. | [optional]
-**breadcrumb** | [**\Flyo\Model\PageBreadcrumbInner[]**](PageBreadcrumbInner.md) | The breadcrumb of the current site is represented by an array of pages, forming a navigational path. It provides a hierarchical representation of the user&#39;s current location within the website. The array is ordered from the innermost page, closest to the current page, to the outermost page, with the current page itself residing at the last position. | [optional]
+**breadcrumb** | [**\Flyo\Model\Breadcrumb[]**](Breadcrumb.md) | The breadcrumb of the current site is represented by an array of pages, forming a navigational path. It provides a hierarchical representation of the user&#39;s current location within the website. The array is ordered from the innermost page, closest to the current page, to the outermost page, with the current page itself residing at the last position. | [optional]
+**translation** | [**\Flyo\Model\Translation[]**](Translation.md) | The translation contains information about further data in different languages. If the integration is not defined as multi lingual, the translations will be empty. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

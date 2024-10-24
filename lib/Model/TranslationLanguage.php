@@ -1,6 +1,6 @@
 <?php
 /**
- * Block
+ * TranslationLanguage
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Block Class Doc Comment
+ * TranslationLanguage Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -40,7 +40,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Block implements ModelInterface, ArrayAccess, \JsonSerializable
+class TranslationLanguage implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'block';
+    protected static $openAPIModelName = 'Translation_language';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,13 +57,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'items' => 'mixed[]',
-        'content' => 'object',
-        'config' => 'object',
-        'identifier' => 'string',
-        'uid' => 'string',
-        'component' => 'string',
-        'slots' => 'array<string,\Flyo\Model\BlockSlot>'
+        'shortcode' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -74,13 +69,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'items' => null,
-        'content' => null,
-        'config' => null,
-        'identifier' => null,
-        'uid' => null,
-        'component' => null,
-        'slots' => null
+        'shortcode' => null,
+        'name' => null
     ];
 
     /**
@@ -89,13 +79,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'items' => false,
-        'content' => false,
-        'config' => false,
-        'identifier' => false,
-        'uid' => false,
-        'component' => false,
-        'slots' => false
+        'shortcode' => false,
+        'name' => false
     ];
 
     /**
@@ -184,13 +169,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'items' => 'items',
-        'content' => 'content',
-        'config' => 'config',
-        'identifier' => 'identifier',
-        'uid' => 'uid',
-        'component' => 'component',
-        'slots' => 'slots'
+        'shortcode' => 'shortcode',
+        'name' => 'name'
     ];
 
     /**
@@ -199,13 +179,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'items' => 'setItems',
-        'content' => 'setContent',
-        'config' => 'setConfig',
-        'identifier' => 'setIdentifier',
-        'uid' => 'setUid',
-        'component' => 'setComponent',
-        'slots' => 'setSlots'
+        'shortcode' => 'setShortcode',
+        'name' => 'setName'
     ];
 
     /**
@@ -214,13 +189,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'items' => 'getItems',
-        'content' => 'getContent',
-        'config' => 'getConfig',
-        'identifier' => 'getIdentifier',
-        'uid' => 'getUid',
-        'component' => 'getComponent',
-        'slots' => 'getSlots'
+        'shortcode' => 'getShortcode',
+        'name' => 'getName'
     ];
 
     /**
@@ -280,13 +250,8 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('items', $data ?? [], null);
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('config', $data ?? [], null);
-        $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('uid', $data ?? [], null);
-        $this->setIfExists('component', $data ?? [], null);
-        $this->setIfExists('slots', $data ?? [], null);
+        $this->setIfExists('shortcode', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -332,190 +297,55 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets items
-     *
-     * @return mixed[]|null
-     */
-    public function getItems()
-    {
-        return $this->container['items'];
-    }
-
-    /**
-     * Sets items
-     *
-     * @param mixed[]|null $items The \"Items\" variable stores an array of items that have been obtained through the mapping process between content pools and fields. This mapping step allows for the seamless connection between various content sources and the corresponding data fields.
-     *
-     * @return self
-     */
-    public function setItems($items)
-    {
-        if (is_null($items)) {
-            throw new \InvalidArgumentException('non-nullable items cannot be null');
-        }
-        $this->container['items'] = $items;
-
-        return $this;
-    }
-
-    /**
-     * Gets content
-     *
-     * @return object|null
-     */
-    public function getContent()
-    {
-        return $this->container['content'];
-    }
-
-    /**
-     * Sets content
-     *
-     * @param object|null $content Content serves as the primary source for generating invaluable blocks of information.
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        if (is_null($content)) {
-            throw new \InvalidArgumentException('non-nullable content cannot be null');
-        }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets config
-     *
-     * @return object|null
-     */
-    public function getConfig()
-    {
-        return $this->container['config'];
-    }
-
-    /**
-     * Sets config
-     *
-     * @param object|null $config The Configuration section contains essential information that greatly facilitates the transformation of the output into various visually appealing styles and formats. This section is instrumental in customizing the appearance and presentation of the output.
-     *
-     * @return self
-     */
-    public function setConfig($config)
-    {
-        if (is_null($config)) {
-            throw new \InvalidArgumentException('non-nullable config cannot be null');
-        }
-        $this->container['config'] = $config;
-
-        return $this;
-    }
-
-    /**
-     * Gets identifier
+     * Gets shortcode
      *
      * @return string|null
      */
-    public function getIdentifier()
+    public function getShortcode()
     {
-        return $this->container['identifier'];
+        return $this->container['shortcode'];
     }
 
     /**
-     * Sets identifier
+     * Sets shortcode
      *
-     * @param string|null $identifier The unique identifier for the current block type
+     * @param string|null $shortcode Language shortcode, e.g., \"de\" or \"fr\".
      *
      * @return self
      */
-    public function setIdentifier($identifier)
+    public function setShortcode($shortcode)
     {
-        if (is_null($identifier)) {
-            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
+        if (is_null($shortcode)) {
+            throw new \InvalidArgumentException('non-nullable shortcode cannot be null');
         }
-        $this->container['identifier'] = $identifier;
+        $this->container['shortcode'] = $shortcode;
 
         return $this;
     }
 
     /**
-     * Gets uid
+     * Gets name
      *
      * @return string|null
      */
-    public function getUid()
+    public function getName()
     {
-        return $this->container['uid'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets uid
+     * Sets name
      *
-     * @param string|null $uid An unique identifier across all blocks
+     * @param string|null $name Full name of the language, e.g., \"Deutsch\" or \"Französisch\".
      *
      * @return self
      */
-    public function setUid($uid)
+    public function setName($name)
     {
-        if (is_null($uid)) {
-            throw new \InvalidArgumentException('non-nullable uid cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['uid'] = $uid;
-
-        return $this;
-    }
-
-    /**
-     * Gets component
-     *
-     * @return string|null
-     */
-    public function getComponent()
-    {
-        return $this->container['component'];
-    }
-
-    /**
-     * Sets component
-     *
-     * @param string|null $component An unique identifier for a component annotation for the current block type
-     *
-     * @return self
-     */
-    public function setComponent($component)
-    {
-        if (is_null($component)) {
-            throw new \InvalidArgumentException('non-nullable component cannot be null');
-        }
-        $this->container['component'] = $component;
-
-        return $this;
-    }
-
-    /**
-     * Gets slots
-     *
-     * @return array<string,\Flyo\Model\BlockSlot>|null
-     */
-    public function getSlots()
-    {
-        return $this->container['slots'];
-    }
-
-    /**
-     * Sets slots
-     *
-     * @param array<string,\Flyo\Model\BlockSlot>|null $slots slots
-     *
-     * @return self
-     */
-    public function setSlots($slots)
-    {
-        if (is_null($slots)) {
-            throw new \InvalidArgumentException('non-nullable slots cannot be null');
-        }
-        $this->container['slots'] = $slots;
+        $this->container['name'] = $name;
 
         return $this;
     }

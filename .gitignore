@@ -14,3 +14,4 @@ composer.phar
 # PHPUnit cache
 .phpunit.result.cache
 .tmp
+.phpunit.cache

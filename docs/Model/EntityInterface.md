@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **entity_metric** | [**\Flyo\Model\EntityMetric**](EntityMetric.md) |  | [optional]
 **entity_unique_id** | **string** | Unique ID | [optional]
 **entity_id** | **float** | An unique ID across the flyo sytem | [optional]
-**entity_image** | **string** | For image manipulation please see https://dev.flyo.cloud/dev/infos/images.html | [optional]
+**entity_image** | **string** | For image manipulation please see https://docs.flyo.cloud/doc/assets-images | [optional]
 **entity_slug** | **string** | The slug for the given item, this can be either unique or not, depending on the configuration of the entity definition schema. | [optional]
 **entity_teaser** | **string** | The standard interface teaser resolved for the current entity | [optional]
 **entity_time_end** | **float** | The shared entity interface time end attribute. If not defined, null or 0 is returned | [optional]

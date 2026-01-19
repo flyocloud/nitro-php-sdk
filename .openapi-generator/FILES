@@ -6,7 +6,7 @@ docs/Api/SearchApi.md
 docs/Api/SitemapApi.md
 docs/Api/VersionApi.md
 docs/Model/Block.md
-docs/Model/BlockSlot.md
+docs/Model/BlockSlotValue.md
 docs/Model/Breadcrumb.md
 docs/Model/ConfigResponse.md
 docs/Model/ConfigResponseContainersValue.md
@@ -18,7 +18,7 @@ docs/Model/EntityMetric.md
 docs/Model/EntityinterfaceInner.md
 docs/Model/Meta.md
 docs/Model/Page.md
-docs/Model/PageProperty.md
+docs/Model/PagePropertyValue.md
 docs/Model/Translation.md
 docs/Model/TranslationLanguage.md
 docs/Model/VersionResponse.md
@@ -30,9 +30,10 @@ lib/Api/SitemapApi.php
 lib/Api/VersionApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/Block.php
-lib/Model/BlockSlot.php
+lib/Model/BlockSlotValue.php
 lib/Model/Breadcrumb.php
 lib/Model/ConfigResponse.php
 lib/Model/ConfigResponseContainersValue.php
@@ -45,7 +46,7 @@ lib/Model/EntityinterfaceInner.php
 lib/Model/Meta.php
 lib/Model/ModelInterface.php
 lib/Model/Page.php
-lib/Model/PageProperty.php
+lib/Model/PagePropertyValue.php
 lib/Model/Translation.php
 lib/Model/TranslationLanguage.php
 lib/Model/VersionResponse.php

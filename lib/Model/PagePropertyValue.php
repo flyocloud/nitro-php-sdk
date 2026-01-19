@@ -1,6 +1,6 @@
 <?php
 /**
- * EntityinterfaceInner
+ * PagePropertyValue
  *
  * PHP version 7.4
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * EntityinterfaceInner Class Doc Comment
+ * PagePropertyValue Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -39,7 +39,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'entityinterface_inner';
+    protected static $openAPIModelName = 'pageProperty_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,15 +56,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'entity_unique_id' => 'string',
-        'entity_title' => 'string',
-        'entity_teaser' => 'string',
-        'entity_slug' => 'string',
-        'entity_time_start' => 'float',
-        'entity_type' => 'string',
-        'entity_type_id' => 'float',
-        'entity_image' => 'string',
-        'routes' => 'array<string,string>'
+        'value' => 'mixed',
+        'navigation' => 'bool',
+        'propagate' => 'bool'
     ];
 
     /**
@@ -75,15 +69,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'entity_unique_id' => null,
-        'entity_title' => null,
-        'entity_teaser' => null,
-        'entity_slug' => null,
-        'entity_time_start' => null,
-        'entity_type' => null,
-        'entity_type_id' => null,
-        'entity_image' => null,
-        'routes' => null
+        'value' => null,
+        'navigation' => null,
+        'propagate' => null
     ];
 
     /**
@@ -92,15 +80,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'entity_unique_id' => false,
-        'entity_title' => false,
-        'entity_teaser' => false,
-        'entity_slug' => false,
-        'entity_time_start' => false,
-        'entity_type' => false,
-        'entity_type_id' => false,
-        'entity_image' => false,
-        'routes' => false
+        'value' => true,
+        'navigation' => false,
+        'propagate' => false
     ];
 
     /**
@@ -189,15 +171,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'entity_unique_id' => 'entity_unique_id',
-        'entity_title' => 'entity_title',
-        'entity_teaser' => 'entity_teaser',
-        'entity_slug' => 'entity_slug',
-        'entity_time_start' => 'entity_time_start',
-        'entity_type' => 'entity_type',
-        'entity_type_id' => 'entity_type_id',
-        'entity_image' => 'entity_image',
-        'routes' => 'routes'
+        'value' => 'value',
+        'navigation' => 'navigation',
+        'propagate' => 'propagate'
     ];
 
     /**
@@ -206,15 +182,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'entity_unique_id' => 'setEntityUniqueId',
-        'entity_title' => 'setEntityTitle',
-        'entity_teaser' => 'setEntityTeaser',
-        'entity_slug' => 'setEntitySlug',
-        'entity_time_start' => 'setEntityTimeStart',
-        'entity_type' => 'setEntityType',
-        'entity_type_id' => 'setEntityTypeId',
-        'entity_image' => 'setEntityImage',
-        'routes' => 'setRoutes'
+        'value' => 'setValue',
+        'navigation' => 'setNavigation',
+        'propagate' => 'setPropagate'
     ];
 
     /**
@@ -223,15 +193,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'entity_unique_id' => 'getEntityUniqueId',
-        'entity_title' => 'getEntityTitle',
-        'entity_teaser' => 'getEntityTeaser',
-        'entity_slug' => 'getEntitySlug',
-        'entity_time_start' => 'getEntityTimeStart',
-        'entity_type' => 'getEntityType',
-        'entity_type_id' => 'getEntityTypeId',
-        'entity_image' => 'getEntityImage',
-        'routes' => 'getRoutes'
+        'value' => 'getValue',
+        'navigation' => 'getNavigation',
+        'propagate' => 'getPropagate'
     ];
 
     /**
@@ -291,15 +255,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('entity_unique_id', $data ?? [], null);
-        $this->setIfExists('entity_title', $data ?? [], null);
-        $this->setIfExists('entity_teaser', $data ?? [], null);
-        $this->setIfExists('entity_slug', $data ?? [], null);
-        $this->setIfExists('entity_time_start', $data ?? [], null);
-        $this->setIfExists('entity_type', $data ?? [], null);
-        $this->setIfExists('entity_type_id', $data ?? [], null);
-        $this->setIfExists('entity_image', $data ?? [], null);
-        $this->setIfExists('routes', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('navigation', $data ?? [], null);
+        $this->setIfExists('propagate', $data ?? [], null);
     }
 
     /**
@@ -345,244 +303,89 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets entity_unique_id
+     * Gets value
      *
-     * @return string|null
+     * @return mixed|null
      */
-    public function getEntityUniqueId()
+    public function getValue()
     {
-        return $this->container['entity_unique_id'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets entity_unique_id
+     * Sets value
      *
-     * @param string|null $entity_unique_id Unique ID
+     * @param mixed|null $value value
      *
      * @return self
      */
-    public function setEntityUniqueId($entity_unique_id)
+    public function setValue($value)
     {
-        if (is_null($entity_unique_id)) {
-            throw new \InvalidArgumentException('non-nullable entity_unique_id cannot be null');
+        if (is_null($value)) {
+            array_push($this->openAPINullablesSetToNull, 'value');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('value', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['entity_unique_id'] = $entity_unique_id;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets entity_title
+     * Gets navigation
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getEntityTitle()
+    public function getNavigation()
     {
-        return $this->container['entity_title'];
+        return $this->container['navigation'];
     }
 
     /**
-     * Sets entity_title
+     * Sets navigation
      *
-     * @param string|null $entity_title The standard interface title resolved for the current entity
+     * @param bool|null $navigation Whether or not this item is visible in the navigation.
      *
      * @return self
      */
-    public function setEntityTitle($entity_title)
+    public function setNavigation($navigation)
     {
-        if (is_null($entity_title)) {
-            throw new \InvalidArgumentException('non-nullable entity_title cannot be null');
+        if (is_null($navigation)) {
+            throw new \InvalidArgumentException('non-nullable navigation cannot be null');
         }
-        $this->container['entity_title'] = $entity_title;
+        $this->container['navigation'] = $navigation;
 
         return $this;
     }
 
     /**
-     * Gets entity_teaser
+     * Gets propagate
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getEntityTeaser()
+    public function getPropagate()
     {
-        return $this->container['entity_teaser'];
+        return $this->container['propagate'];
     }
 
     /**
-     * Sets entity_teaser
+     * Sets propagate
      *
-     * @param string|null $entity_teaser The standard interface teaser resolved for the current entity
+     * @param bool|null $propagate Determining whether the value is carried over from the parent page or not.
      *
      * @return self
      */
-    public function setEntityTeaser($entity_teaser)
+    public function setPropagate($propagate)
     {
-        if (is_null($entity_teaser)) {
-            throw new \InvalidArgumentException('non-nullable entity_teaser cannot be null');
+        if (is_null($propagate)) {
+            throw new \InvalidArgumentException('non-nullable propagate cannot be null');
         }
-        $this->container['entity_teaser'] = $entity_teaser;
-
-        return $this;
-    }
-
-    /**
-     * Gets entity_slug
-     *
-     * @return string|null
-     */
-    public function getEntitySlug()
-    {
-        return $this->container['entity_slug'];
-    }
-
-    /**
-     * Sets entity_slug
-     *
-     * @param string|null $entity_slug The slug for the given item, this can be either unique or not, depending on the configuration of the entity definition schema.
-     *
-     * @return self
-     */
-    public function setEntitySlug($entity_slug)
-    {
-        if (is_null($entity_slug)) {
-            throw new \InvalidArgumentException('non-nullable entity_slug cannot be null');
-        }
-        $this->container['entity_slug'] = $entity_slug;
-
-        return $this;
-    }
-
-    /**
-     * Gets entity_time_start
-     *
-     * @return float|null
-     */
-    public function getEntityTimeStart()
-    {
-        return $this->container['entity_time_start'];
-    }
-
-    /**
-     * Sets entity_time_start
-     *
-     * @param float|null $entity_time_start The shared entity interface time start attribute. If not defined, null or 0 is returned
-     *
-     * @return self
-     */
-    public function setEntityTimeStart($entity_time_start)
-    {
-        if (is_null($entity_time_start)) {
-            throw new \InvalidArgumentException('non-nullable entity_time_start cannot be null');
-        }
-        $this->container['entity_time_start'] = $entity_time_start;
-
-        return $this;
-    }
-
-    /**
-     * Gets entity_type
-     *
-     * @return string|null
-     */
-    public function getEntityType()
-    {
-        return $this->container['entity_type'];
-    }
-
-    /**
-     * Sets entity_type
-     *
-     * @param string|null $entity_type 
-     *
-     * @return self
-     */
-    public function setEntityType($entity_type)
-    {
-        if (is_null($entity_type)) {
-            throw new \InvalidArgumentException('non-nullable entity_type cannot be null');
-        }
-        $this->container['entity_type'] = $entity_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets entity_type_id
-     *
-     * @return float|null
-     */
-    public function getEntityTypeId()
-    {
-        return $this->container['entity_type_id'];
-    }
-
-    /**
-     * Sets entity_type_id
-     *
-     * @param float|null $entity_type_id The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema.
-     *
-     * @return self
-     */
-    public function setEntityTypeId($entity_type_id)
-    {
-        if (is_null($entity_type_id)) {
-            throw new \InvalidArgumentException('non-nullable entity_type_id cannot be null');
-        }
-        $this->container['entity_type_id'] = $entity_type_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets entity_image
-     *
-     * @return string|null
-     */
-    public function getEntityImage()
-    {
-        return $this->container['entity_image'];
-    }
-
-    /**
-     * Sets entity_image
-     *
-     * @param string|null $entity_image For image manipulation please see https://docs.flyo.cloud/doc/assets-images
-     *
-     * @return self
-     */
-    public function setEntityImage($entity_image)
-    {
-        if (is_null($entity_image)) {
-            throw new \InvalidArgumentException('non-nullable entity_image cannot be null');
-        }
-        $this->container['entity_image'] = $entity_image;
-
-        return $this;
-    }
-
-    /**
-     * Gets routes
-     *
-     * @return array<string,string>|null
-     */
-    public function getRoutes()
-    {
-        return $this->container['routes'];
-    }
-
-    /**
-     * Sets routes
-     *
-     * @param array<string,string>|null $routes routes
-     *
-     * @return self
-     */
-    public function setRoutes($routes)
-    {
-        if (is_null($routes)) {
-            throw new \InvalidArgumentException('non-nullable routes cannot be null');
-        }
-        $this->container['routes'] = $routes;
+        $this->container['propagate'] = $propagate;
 
         return $this;
     }

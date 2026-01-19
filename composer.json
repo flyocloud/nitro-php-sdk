@@ -6,10 +6,10 @@
         "nitro",
         "headless"
     ],
-    "homepage": "https://dev.flyo.cloud",
+    "homepage": "https://docs.flyo.cloud",
     "license": "mit",
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
@@ -22,10 +22,14 @@
         "phpstan/phpstan": "^1.12"
     },
     "autoload": {
-        "psr-4": { "Flyo\\" : "lib/" }
+        "psr-4": {
+            "Flyo\\": "lib/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Flyo\\Test\\" : "test/" }
+        "psr-4": {
+            "Flyo\\Test\\": "test/"
+        }
     },
     "scripts": {
         "test": "vendor/bin/phpunit",

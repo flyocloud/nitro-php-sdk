@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **updated_at** | **int** | A Unix timestamp indicating when the page was last updated. | [optional]
 **is_visible** | **int** | Determining whether the page is visible or not. | [optional]
 **meta_json** | [**\Flyo\Model\Meta**](Meta.md) |  | [optional]
-**properties** | [**array<string,\Flyo\Model\PageProperty>**](PageProperty.md) |  | [optional]
+**properties** | [**array<string,\Flyo\Model\PagePropertyValue>**](PagePropertyValue.md) |  | [optional]
 **uid** | **string** | A unique identifier for the page | [optional]
 **type** | **string** | Can be either a page with content (which is default behavior), email, file, url, tel | [optional]
 **target** | **string** | can be either _self (which is default) or _blank | [optional]

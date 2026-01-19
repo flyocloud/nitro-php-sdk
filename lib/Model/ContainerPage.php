@@ -243,6 +243,7 @@ class ContainerPage implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TYPE_FILE = 'file';
     public const TYPE_URL = 'url';
     public const TYPE_NITRODETAILLINK = 'nitrodetaillink';
+    public const TYPE_NITROPAGELINK = 'nitropagelink';
     public const TYPE_TEL = 'tel';
 
     /**
@@ -258,6 +259,7 @@ class ContainerPage implements ModelInterface, ArrayAccess, \JsonSerializable
             self::TYPE_FILE,
             self::TYPE_URL,
             self::TYPE_NITRODETAILLINK,
+            self::TYPE_NITROPAGELINK,
             self::TYPE_TEL,
         ];
     }

@@ -242,9 +242,9 @@ class ContainerPage implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TYPE_EMAIL = 'email';
     public const TYPE_FILE = 'file';
     public const TYPE_URL = 'url';
-    public const TYPE_NITRODETAILLINK = 'nitrodetaillink';
-    public const TYPE_NITROPAGELINK = 'nitropagelink';
     public const TYPE_TEL = 'tel';
+    public const TYPE_NITROPAGELINK = 'nitropagelink';
+    public const TYPE_NITRODETAILLINK = 'nitrodetaillink';
 
     /**
      * Gets allowable values of the enum
@@ -258,9 +258,9 @@ class ContainerPage implements ModelInterface, ArrayAccess, \JsonSerializable
             self::TYPE_EMAIL,
             self::TYPE_FILE,
             self::TYPE_URL,
-            self::TYPE_NITRODETAILLINK,
-            self::TYPE_NITROPAGELINK,
             self::TYPE_TEL,
+            self::TYPE_NITROPAGELINK,
+            self::TYPE_NITRODETAILLINK,
         ];
     }
 

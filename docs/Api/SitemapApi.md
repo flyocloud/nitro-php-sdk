@@ -17,7 +17,7 @@ sitemap($lang): \Flyo\Model\EntityinterfaceInner[]
 
 Get Sitemap
 
-This endpoint provides comprehensive data for generating the sitemap. It encompasses all the necessary information, including pages from containers, as well as all entities that have been mapped.
+This endpoint provides comprehensive data for generating the sitemap. It encompasses all the necessary information, including pages from containers, as well as all entities that have been mapped. Each item includes an `href` attribute containing the resolved URL path for the entity. In multi-lingual setups, the sitemap returns all language variants of every entity and page, regardless of the `lang` parameter. This ensures complete SEO coverage across all configured languages.
 
 ### Example
 

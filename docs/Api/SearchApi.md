@@ -17,7 +17,7 @@ search($query, $lang): \Flyo\Model\EntityinterfaceInner[]
 
 Get Search by query
 
-This endpoint offers a powerful capability to search through the websites sitemap, encompassing both pages and entities. With this endpoint, users can efficiently explore and retrieve information from your sitemap by creating a paginated search experience.
+This endpoint offers a powerful capability to search through the websites sitemap, encompassing both pages and entities. With this endpoint, users can efficiently explore and retrieve information from your sitemap by creating a paginated search experience. Each result includes an `href` attribute containing the resolved URL path for the entity. In multi-lingual setups, search results are automatically filtered to match the current language context specified via the `lang` parameter, ensuring only results relevant to the requested language are returned.
 
 ### Example
 

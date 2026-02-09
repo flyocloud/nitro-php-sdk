@@ -39,6 +39,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'string',
         'entity_type_id' => 'float',
         'entity_image' => 'string',
+        'href' => 'string',
         'routes' => 'array<string,string>'
     ];
 
@@ -58,6 +59,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => null,
         'entity_type_id' => null,
         'entity_image' => null,
+        'href' => null,
         'routes' => null
     ];
 
@@ -75,6 +77,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => false,
         'entity_type_id' => false,
         'entity_image' => false,
+        'href' => false,
         'routes' => false
     ];
 
@@ -172,6 +175,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'entity_type',
         'entity_type_id' => 'entity_type_id',
         'entity_image' => 'entity_image',
+        'href' => 'href',
         'routes' => 'routes'
     ];
 
@@ -189,6 +193,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'setEntityType',
         'entity_type_id' => 'setEntityTypeId',
         'entity_image' => 'setEntityImage',
+        'href' => 'setHref',
         'routes' => 'setRoutes'
     ];
 
@@ -206,6 +211,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'getEntityType',
         'entity_type_id' => 'getEntityTypeId',
         'entity_image' => 'getEntityImage',
+        'href' => 'getHref',
         'routes' => 'getRoutes'
     ];
 
@@ -274,6 +280,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('entity_type', $data ?? [], null);
         $this->setIfExists('entity_type_id', $data ?? [], null);
         $this->setIfExists('entity_image', $data ?? [], null);
+        $this->setIfExists('href', $data ?? [], null);
         $this->setIfExists('routes', $data ?? [], null);
     }
 
@@ -531,6 +538,33 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
             throw new \InvalidArgumentException('non-nullable entity_image cannot be null');
         }
         $this->container['entity_image'] = $entity_image;
+
+        return $this;
+    }
+
+    /**
+     * Gets href
+     *
+     * @return string|null
+     */
+    public function getHref()
+    {
+        return $this->container['href'];
+    }
+
+    /**
+     * Sets href
+     *
+     * @param string|null $href Returns the completed href tag. Internal links are appended with trailing slashes, such as `/about-me`, while email links are formatted with `mailto:hello@flyo.ch`.
+     *
+     * @return self
+     */
+    public function setHref($href)
+    {
+        if (is_null($href)) {
+            throw new \InvalidArgumentException('non-nullable href cannot be null');
+        }
+        $this->container['href'] = $href;
 
         return $this;
     }

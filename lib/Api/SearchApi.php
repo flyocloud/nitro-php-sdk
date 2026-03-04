@@ -106,6 +106,8 @@ class SearchApi
      * Get Search by query
      *
      * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
+     * @param  string|null $sort Optional sort field. If not provided, results are sorted by &#x60;score&#x60; (relevance) by default which is the recommended behavior for search. The &#x60;score&#x60; value reflects how well the result matches the query — higher scores indicate better matches. Use &#x60;-&#x60; as a prefix for descending order (for example &#x60;-title&#x60;). Ascending order uses the plain field name (for example &#x60;title&#x60;). A &#x60;+&#x60; prefix is not supported. The &#x60;time_start&#x60; field is derived from the shared entity time interface and is only meaningful for entities that implement it; entities without that interface return &#x60;time_start&#x60; as &#x60;0&#x60;, so use this sort carefully. (optional)
+     * @param  int|null $page The page number for paginated results. Defaults to 1 if not provided. (optional, default to 1)
      * @param  string|null $lang Specifies the language context for the current request. If not provided, the default primary language will be used. This parameter has no effect if the Nitro setup is not configured for multiple languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
@@ -113,9 +115,9 @@ class SearchApi
      * @throws \InvalidArgumentException
      * @return \Flyo\Model\EntityinterfaceInner[]
      */
-    public function search($query, $lang = null, string $contentType = self::contentTypes['search'][0])
+    public function search($query, $sort = null, $page = 1, $lang = null, string $contentType = self::contentTypes['search'][0])
     {
-        list($response) = $this->searchWithHttpInfo($query, $lang, $contentType);
+        list($response) = $this->searchWithHttpInfo($query, $sort, $page, $lang, $contentType);
         return $response;
     }
 
@@ -125,6 +127,8 @@ class SearchApi
      * Get Search by query
      *
      * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
+     * @param  string|null $sort Optional sort field. If not provided, results are sorted by &#x60;score&#x60; (relevance) by default which is the recommended behavior for search. The &#x60;score&#x60; value reflects how well the result matches the query — higher scores indicate better matches. Use &#x60;-&#x60; as a prefix for descending order (for example &#x60;-title&#x60;). Ascending order uses the plain field name (for example &#x60;title&#x60;). A &#x60;+&#x60; prefix is not supported. The &#x60;time_start&#x60; field is derived from the shared entity time interface and is only meaningful for entities that implement it; entities without that interface return &#x60;time_start&#x60; as &#x60;0&#x60;, so use this sort carefully. (optional)
+     * @param  int|null $page The page number for paginated results. Defaults to 1 if not provided. (optional, default to 1)
      * @param  string|null $lang Specifies the language context for the current request. If not provided, the default primary language will be used. This parameter has no effect if the Nitro setup is not configured for multiple languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
@@ -132,9 +136,9 @@ class SearchApi
      * @throws \InvalidArgumentException
      * @return array of \Flyo\Model\EntityinterfaceInner[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function searchWithHttpInfo($query, $lang = null, string $contentType = self::contentTypes['search'][0])
+    public function searchWithHttpInfo($query, $sort = null, $page = 1, $lang = null, string $contentType = self::contentTypes['search'][0])
     {
-        $request = $this->searchRequest($query, $lang, $contentType);
+        $request = $this->searchRequest($query, $sort, $page, $lang, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -211,15 +215,17 @@ class SearchApi
      * Get Search by query
      *
      * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
+     * @param  string|null $sort Optional sort field. If not provided, results are sorted by &#x60;score&#x60; (relevance) by default which is the recommended behavior for search. The &#x60;score&#x60; value reflects how well the result matches the query — higher scores indicate better matches. Use &#x60;-&#x60; as a prefix for descending order (for example &#x60;-title&#x60;). Ascending order uses the plain field name (for example &#x60;title&#x60;). A &#x60;+&#x60; prefix is not supported. The &#x60;time_start&#x60; field is derived from the shared entity time interface and is only meaningful for entities that implement it; entities without that interface return &#x60;time_start&#x60; as &#x60;0&#x60;, so use this sort carefully. (optional)
+     * @param  int|null $page The page number for paginated results. Defaults to 1 if not provided. (optional, default to 1)
      * @param  string|null $lang Specifies the language context for the current request. If not provided, the default primary language will be used. This parameter has no effect if the Nitro setup is not configured for multiple languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchAsync($query, $lang = null, string $contentType = self::contentTypes['search'][0])
+    public function searchAsync($query, $sort = null, $page = 1, $lang = null, string $contentType = self::contentTypes['search'][0])
     {
-        return $this->searchAsyncWithHttpInfo($query, $lang, $contentType)
+        return $this->searchAsyncWithHttpInfo($query, $sort, $page, $lang, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -233,16 +239,18 @@ class SearchApi
      * Get Search by query
      *
      * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
+     * @param  string|null $sort Optional sort field. If not provided, results are sorted by &#x60;score&#x60; (relevance) by default which is the recommended behavior for search. The &#x60;score&#x60; value reflects how well the result matches the query — higher scores indicate better matches. Use &#x60;-&#x60; as a prefix for descending order (for example &#x60;-title&#x60;). Ascending order uses the plain field name (for example &#x60;title&#x60;). A &#x60;+&#x60; prefix is not supported. The &#x60;time_start&#x60; field is derived from the shared entity time interface and is only meaningful for entities that implement it; entities without that interface return &#x60;time_start&#x60; as &#x60;0&#x60;, so use this sort carefully. (optional)
+     * @param  int|null $page The page number for paginated results. Defaults to 1 if not provided. (optional, default to 1)
      * @param  string|null $lang Specifies the language context for the current request. If not provided, the default primary language will be used. This parameter has no effect if the Nitro setup is not configured for multiple languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchAsyncWithHttpInfo($query, $lang = null, string $contentType = self::contentTypes['search'][0])
+    public function searchAsyncWithHttpInfo($query, $sort = null, $page = 1, $lang = null, string $contentType = self::contentTypes['search'][0])
     {
         $returnType = '\Flyo\Model\EntityinterfaceInner[]';
-        $request = $this->searchRequest($query, $lang, $contentType);
+        $request = $this->searchRequest($query, $sort, $page, $lang, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -284,13 +292,15 @@ class SearchApi
      * Create request for operation 'search'
      *
      * @param  string $query The query keyword that needs to be looked up. It is important to ensure that the query is properly URL encoded for accurate processing and retrieval. (required)
+     * @param  string|null $sort Optional sort field. If not provided, results are sorted by &#x60;score&#x60; (relevance) by default which is the recommended behavior for search. The &#x60;score&#x60; value reflects how well the result matches the query — higher scores indicate better matches. Use &#x60;-&#x60; as a prefix for descending order (for example &#x60;-title&#x60;). Ascending order uses the plain field name (for example &#x60;title&#x60;). A &#x60;+&#x60; prefix is not supported. The &#x60;time_start&#x60; field is derived from the shared entity time interface and is only meaningful for entities that implement it; entities without that interface return &#x60;time_start&#x60; as &#x60;0&#x60;, so use this sort carefully. (optional)
+     * @param  int|null $page The page number for paginated results. Defaults to 1 if not provided. (optional, default to 1)
      * @param  string|null $lang Specifies the language context for the current request. If not provided, the default primary language will be used. This parameter has no effect if the Nitro setup is not configured for multiple languages. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['search'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function searchRequest($query, $lang = null, string $contentType = self::contentTypes['search'][0])
+    public function searchRequest($query, $sort = null, $page = 1, $lang = null, string $contentType = self::contentTypes['search'][0])
     {
 
         // verify the required parameter 'query' is set
@@ -299,6 +309,8 @@ class SearchApi
                 'Missing the required parameter $query when calling search'
             );
         }
+
+
 
 
 
@@ -317,6 +329,24 @@ class SearchApi
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(

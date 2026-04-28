@@ -718,7 +718,7 @@ class EntityInterface implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets routes
      *
-     * @param array<string,string>|null $routes routes
+     * @param array<string,string>|null $routes Map of resolved route identifiers to URL paths. Includes system key `_empty` (boolean) indicating whether any resolved route is available (`false` means at least one route exists, `true` means no route could be resolved for the current context).
      *
      * @return self
      */

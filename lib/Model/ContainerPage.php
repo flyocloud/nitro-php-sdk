@@ -245,6 +245,7 @@ class ContainerPage implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TYPE_TEL = 'tel';
     public const TYPE_NITROPAGELINK = 'nitropagelink';
     public const TYPE_NITRODETAILLINK = 'nitrodetaillink';
+    public const TYPE_ITERATOR = 'iterator';
 
     /**
      * Gets allowable values of the enum
@@ -261,6 +262,7 @@ class ContainerPage implements ModelInterface, ArrayAccess, \JsonSerializable
             self::TYPE_TEL,
             self::TYPE_NITROPAGELINK,
             self::TYPE_NITRODETAILLINK,
+            self::TYPE_ITERATOR,
         ];
     }
 

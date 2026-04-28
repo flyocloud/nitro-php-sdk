@@ -47,6 +47,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'string',
         'target' => 'string',
         'container' => 'string',
+        'jsonld' => 'object',
         'breadcrumb' => '\Flyo\Model\Breadcrumb[]',
         'translation' => '\Flyo\Model\Translation[]'
     ];
@@ -75,6 +76,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => null,
         'target' => null,
         'container' => null,
+        'jsonld' => null,
         'breadcrumb' => null,
         'translation' => null
     ];
@@ -101,6 +103,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => false,
         'target' => false,
         'container' => false,
+        'jsonld' => false,
         'breadcrumb' => false,
         'translation' => false
     ];
@@ -207,6 +210,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'type',
         'target' => 'target',
         'container' => 'container',
+        'jsonld' => 'jsonld',
         'breadcrumb' => 'breadcrumb',
         'translation' => 'translation'
     ];
@@ -233,6 +237,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'setType',
         'target' => 'setTarget',
         'container' => 'setContainer',
+        'jsonld' => 'setJsonld',
         'breadcrumb' => 'setBreadcrumb',
         'translation' => 'setTranslation'
     ];
@@ -259,6 +264,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'getType',
         'target' => 'getTarget',
         'container' => 'getContainer',
+        'jsonld' => 'getJsonld',
         'breadcrumb' => 'getBreadcrumb',
         'translation' => 'getTranslation'
     ];
@@ -336,6 +342,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('target', $data ?? [], null);
         $this->setIfExists('container', $data ?? [], null);
+        $this->setIfExists('jsonld', $data ?? [], null);
         $this->setIfExists('breadcrumb', $data ?? [], null);
         $this->setIfExists('translation', $data ?? [], null);
     }
@@ -810,6 +817,33 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable container cannot be null');
         }
         $this->container['container'] = $container;
+
+        return $this;
+    }
+
+    /**
+     * Gets jsonld
+     *
+     * @return object|null
+     */
+    public function getJsonld()
+    {
+        return $this->container['jsonld'];
+    }
+
+    /**
+     * Sets jsonld
+     *
+     * @param object|null $jsonld A JSON-LD object with schema.org information about the page
+     *
+     * @return self
+     */
+    public function setJsonld($jsonld)
+    {
+        if (is_null($jsonld)) {
+            throw new \InvalidArgumentException('non-nullable jsonld cannot be null');
+        }
+        $this->container['jsonld'] = $jsonld;
 
         return $this;
     }

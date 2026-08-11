@@ -6,3 +6,9 @@ parameters:
   ignoreErrors:
     -
       identifier: binaryOp.invalid
+    # Models generated from a schema without properties (currently MetaImage)
+    # get an empty constructor, therefore $data is never read.
+    -
+      identifier: constructor.unusedParameter
+      path: lib/Model/*.php
+      reportUnmatched: false

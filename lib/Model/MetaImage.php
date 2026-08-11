@@ -6,15 +6,16 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Meta Class Doc Comment
+ * MetaImage Class Doc Comment
  *
  * @category Class
+ * @description Path to the meta image, or &#x60;false&#x60; (boolean) when no meta image is set.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
+class MetaImage implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -23,7 +24,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Meta';
+    protected static $openAPIModelName = 'Meta_image';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -31,9 +32,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
-        'image' => '\Flyo\Model\MetaImage',
-        'title' => 'string'
+        
     ];
 
     /**
@@ -44,9 +43,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
-        'image' => null,
-        'title' => null
+        
     ];
 
     /**
@@ -55,9 +52,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-        'image' => false,
-        'title' => false
+        
     ];
 
     /**
@@ -146,9 +141,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'image' => 'image',
-        'title' => 'title'
+        
     ];
 
     /**
@@ -157,9 +150,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'image' => 'setImage',
-        'title' => 'setTitle'
+        
     ];
 
     /**
@@ -168,9 +159,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'image' => 'getImage',
-        'title' => 'getTitle'
+        
     ];
 
     /**
@@ -230,9 +219,6 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('image', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
     }
 
     /**
@@ -276,87 +262,6 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description Meta Description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets image
-     *
-     * @return \Flyo\Model\MetaImage|null
-     */
-    public function getImage()
-    {
-        return $this->container['image'];
-    }
-
-    /**
-     * Sets image
-     *
-     * @param \Flyo\Model\MetaImage|null $image image
-     *
-     * @return self
-     */
-    public function setImage($image)
-    {
-        if (is_null($image)) {
-            throw new \InvalidArgumentException('non-nullable image cannot be null');
-        }
-        $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string|null
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string|null $title Meta page title
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
-        }
-        $this->container['title'] = $title;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

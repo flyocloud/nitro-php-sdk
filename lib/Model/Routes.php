@@ -6,15 +6,16 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Meta Class Doc Comment
+ * Routes Class Doc Comment
  *
  * @category Class
+ * @description Map of resolved route identifiers to URL paths, for example &#x60;routes.detail &#x3D; \&quot;/foo-bar\&quot;&#x60;. Includes the system key &#x60;_empty&#x60; (boolean): &#x60;false&#x60; means at least one route could be resolved, &#x60;true&#x60; means no route is available for the current context.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
+class Routes implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -23,7 +24,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Meta';
+    protected static $openAPIModelName = 'Routes';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -31,9 +32,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
-        'image' => '\Flyo\Model\MetaImage',
-        'title' => 'string'
+        '_empty' => 'bool'
     ];
 
     /**
@@ -44,9 +43,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
-        'image' => null,
-        'title' => null
+        '_empty' => null
     ];
 
     /**
@@ -55,9 +52,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false,
-        'image' => false,
-        'title' => false
+        '_empty' => false
     ];
 
     /**
@@ -146,9 +141,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'image' => 'image',
-        'title' => 'title'
+        '_empty' => '_empty'
     ];
 
     /**
@@ -157,9 +150,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'image' => 'setImage',
-        'title' => 'setTitle'
+        '_empty' => 'setEmpty'
     ];
 
     /**
@@ -168,9 +159,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'image' => 'getImage',
-        'title' => 'getTitle'
+        '_empty' => 'getEmpty'
     ];
 
     /**
@@ -230,9 +219,7 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('image', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('_empty', $data ?? [], null);
     }
 
     /**
@@ -278,82 +265,28 @@ class Meta implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets description
+     * Gets _empty
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getDescription()
+    public function getEmpty()
     {
-        return $this->container['description'];
+        return $this->container['_empty'];
     }
 
     /**
-     * Sets description
+     * Sets _empty
      *
-     * @param string|null $description Meta Description
+     * @param bool|null $_empty Whether no route could be resolved (`true` when the map has no routes).
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setEmpty($_empty)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($_empty)) {
+            throw new \InvalidArgumentException('non-nullable _empty cannot be null');
         }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets image
-     *
-     * @return \Flyo\Model\MetaImage|null
-     */
-    public function getImage()
-    {
-        return $this->container['image'];
-    }
-
-    /**
-     * Sets image
-     *
-     * @param \Flyo\Model\MetaImage|null $image image
-     *
-     * @return self
-     */
-    public function setImage($image)
-    {
-        if (is_null($image)) {
-            throw new \InvalidArgumentException('non-nullable image cannot be null');
-        }
-        $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string|null
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string|null $title Meta page title
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
-        }
-        $this->container['title'] = $title;
+        $this->container['_empty'] = $_empty;
 
         return $this;
     }

@@ -1,11 +1,9 @@
-# # Meta
+# # Routes
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **string** | Meta Description | [optional]
-**image** | [**\Flyo\Model\MetaImage**](MetaImage.md) |  | [optional]
-**title** | **string** | Meta page title | [optional]
+**_empty** | **bool** | Whether no route could be resolved (&#x60;true&#x60; when the map has no routes). | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

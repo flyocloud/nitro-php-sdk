@@ -1,11 +1,8 @@
-# # Meta
+# # MetaImage
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **string** | Meta Description | [optional]
-**image** | [**\Flyo\Model\MetaImage**](MetaImage.md) |  | [optional]
-**title** | **string** | Meta page title | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -691,7 +691,7 @@ class EntityInterface implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updated_at
      *
-     * @param float|null $updated_at A Unix timestamp indicating when the entity has been updated last time in Flyo.
+     * @param float|null $updated_at A Unix timestamp indicating when the entity has been updated last time in Flyo. For entries which represent a Nitro page, this is the last time the content delivered for that page actually changed — a rebuild which produces identical output does not move it. Use this value as the `lastmod` information when generating a sitemap.
      *
      * @return self
      */

@@ -318,7 +318,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets items
      *
-     * @param mixed[]|null $items The \"Items\" variable stores an array of items that have been obtained through the mapping process between content pools and fields. This mapping step allows for the seamless connection between various content sources and the corresponding data fields.
+     * @param mixed[]|null $items The \"Items\" variable stores an array of items that have been obtained through the mapping process between content pools and fields. This mapping step allows for the seamless connection between various content sources and the corresponding data fields. Each item is additionally enriched with a generated detail-page `link` (see the typed block schemas), unless the mapping declares its own `link` field.
      *
      * @return self
      */

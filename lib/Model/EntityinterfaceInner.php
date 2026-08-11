@@ -39,8 +39,9 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'string',
         'entity_type_id' => 'float',
         'entity_image' => 'string',
+        'updated_at' => 'float',
         'href' => 'string',
-        'routes' => 'array<string,string>'
+        'routes' => '\Flyo\Model\Routes'
     ];
 
     /**
@@ -59,6 +60,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => null,
         'entity_type_id' => null,
         'entity_image' => null,
+        'updated_at' => null,
         'href' => null,
         'routes' => null
     ];
@@ -77,6 +79,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => false,
         'entity_type_id' => false,
         'entity_image' => false,
+        'updated_at' => false,
         'href' => false,
         'routes' => false
     ];
@@ -175,6 +178,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'entity_type',
         'entity_type_id' => 'entity_type_id',
         'entity_image' => 'entity_image',
+        'updated_at' => 'updated_at',
         'href' => 'href',
         'routes' => 'routes'
     ];
@@ -193,6 +197,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'setEntityType',
         'entity_type_id' => 'setEntityTypeId',
         'entity_image' => 'setEntityImage',
+        'updated_at' => 'setUpdatedAt',
         'href' => 'setHref',
         'routes' => 'setRoutes'
     ];
@@ -211,6 +216,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_type' => 'getEntityType',
         'entity_type_id' => 'getEntityTypeId',
         'entity_image' => 'getEntityImage',
+        'updated_at' => 'getUpdatedAt',
         'href' => 'getHref',
         'routes' => 'getRoutes'
     ];
@@ -280,6 +286,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('entity_type', $data ?? [], null);
         $this->setIfExists('entity_type_id', $data ?? [], null);
         $this->setIfExists('entity_image', $data ?? [], null);
+        $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('href', $data ?? [], null);
         $this->setIfExists('routes', $data ?? [], null);
     }
@@ -543,6 +550,33 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
+     * Gets updated_at
+     *
+     * @return float|null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     *
+     * @param float|null $updated_at A Unix timestamp indicating when the entity has been updated last time in Flyo. For entries which represent a Nitro page, this is the last time the content delivered for that page actually changed — a rebuild which produces identical output does not move it. Use this value as the `lastmod` information when generating a sitemap.
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        }
+        $this->container['updated_at'] = $updated_at;
+
+        return $this;
+    }
+
+    /**
      * Gets href
      *
      * @return string|null
@@ -572,7 +606,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets routes
      *
-     * @return array<string,string>|null
+     * @return \Flyo\Model\Routes|null
      */
     public function getRoutes()
     {
@@ -582,7 +616,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets routes
      *
-     * @param array<string,string>|null $routes Map of resolved route identifiers to URL paths. Includes system key `_empty` (boolean) indicating whether any resolved route is available (`false` means at least one route exists, `true` means no route could be resolved for the current context).
+     * @param \Flyo\Model\Routes|null $routes routes
      *
      * @return self
      */

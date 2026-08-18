@@ -17,6 +17,6 @@ Name | Type | Description | Notes
 **entity_type** | **string** |  | [optional]
 **entity_type_id** | **float** | The Type-ID, alternatively referred to as the Entity-Definition-Schema ID, serves as a crucial identifier within the system. It uniquely distinguishes and categorizes the Entity-Definition-Schema. | [optional]
 **updated_at** | **float** | A Unix timestamp indicating when the entity has been updated last time in Flyo. For entries which represent a Nitro page, this is the last time the content delivered for that page actually changed — a rebuild which produces identical output does not move it. Use this value as the &#x60;lastmod&#x60; information when generating a sitemap. | [optional]
-**routes** | **array<string,string>** | Map of resolved route identifiers to URL paths. Includes system key &#x60;_empty&#x60; (boolean) indicating whether any resolved route is available (&#x60;false&#x60; means at least one route exists, &#x60;true&#x60; means no route could be resolved for the current context). | [optional]
+**routes** | **array<string,mixed>** | Map of resolved route identifiers to URL paths, for example &#x60;routes.detail &#x3D; \&quot;/foo-bar\&quot;&#x60;. Includes the system key &#x60;_empty&#x60; (boolean): &#x60;false&#x60; means at least one route could be resolved, &#x60;true&#x60; means no route is available for the current context. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

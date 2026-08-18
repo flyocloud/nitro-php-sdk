@@ -44,7 +44,7 @@ class EntityInterface implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity_type' => 'string',
         'entity_type_id' => 'float',
         'updated_at' => 'float',
-        'routes' => 'array<string,string>'
+        'routes' => 'array<string,mixed>'
     ];
 
     /**
@@ -708,7 +708,7 @@ class EntityInterface implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets routes
      *
-     * @return array<string,string>|null
+     * @return array<string,mixed>|null
      */
     public function getRoutes()
     {
@@ -718,7 +718,7 @@ class EntityInterface implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets routes
      *
-     * @param array<string,string>|null $routes Map of resolved route identifiers to URL paths. Includes system key `_empty` (boolean) indicating whether any resolved route is available (`false` means at least one route exists, `true` means no route could be resolved for the current context).
+     * @param array<string,mixed>|null $routes Map of resolved route identifiers to URL paths, for example `routes.detail = \"/foo-bar\"`. Includes the system key `_empty` (boolean): `false` means at least one route could be resolved, `true` means no route is available for the current context.
      *
      * @return self
      */

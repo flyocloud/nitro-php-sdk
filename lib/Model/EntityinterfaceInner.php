@@ -41,7 +41,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
         'entity_image' => 'string',
         'updated_at' => 'float',
         'href' => 'string',
-        'routes' => '\Flyo\Model\Routes'
+        'routes' => 'array<string,mixed>'
     ];
 
     /**
@@ -606,7 +606,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets routes
      *
-     * @return \Flyo\Model\Routes|null
+     * @return array<string,mixed>|null
      */
     public function getRoutes()
     {
@@ -616,7 +616,7 @@ class EntityinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets routes
      *
-     * @param \Flyo\Model\Routes|null $routes routes
+     * @param array<string,mixed>|null $routes Map of resolved route identifiers to URL paths, for example `routes.detail = \"/foo-bar\"`. Includes the system key `_empty` (boolean): `false` means at least one route could be resolved, `true` means no route is available for the current context.
      *
      * @return self
      */

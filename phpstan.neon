@@ -6,3 +6,5 @@ parameters:
   ignoreErrors:
     -
       identifier: binaryOp.invalid
+    -
+      identifier: constructor.unusedParameter

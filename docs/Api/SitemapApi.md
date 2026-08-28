@@ -12,12 +12,12 @@ All URIs are relative to https://api.flyo.cloud/nitro/v1, except if the operatio
 ## `sitemap()`
 
 ```php
-sitemap($lang): \Flyo\Model\EntityinterfaceInner[]
+sitemap($lang): \Flyo\Model\SitemapinterfaceInner[]
 ```
 
 Get Sitemap
 
-This endpoint provides comprehensive data for generating the sitemap. It encompasses all the necessary information, including pages from containers, as well as all entities that have been mapped. Each item includes an `href` attribute containing the resolved URL path for the entity and an `updated_at` Unix timestamp which should be used as the `lastmod` value of the sitemap entry. In multi-lingual setups, the sitemap returns all language variants of every entity and page, regardless of the `lang` parameter. This ensures complete SEO coverage across all configured languages.
+This endpoint provides the data needed to generate a sitemap. It encompasses pages from containers as well as all entities that have been mapped. Each item includes an `href` attribute containing the resolved URL path, an `updated_at` Unix timestamp which should be used as the `lastmod` value of the sitemap entry, and the `entity_unique_id` to correlate the entry with its entity. Entities and pages without a resolvable URL are omitted. The response is deliberately reduced to those three fields (see the Sitemap Item schema) and is streamed as a bare JSON array without pagination; presentation fields such as title, teaser and image, and the `routes` map, are only available on the entities and search endpoints. In multi-lingual setups, the sitemap returns all language variants of every entity and page, regardless of the `lang` parameter. This ensures complete SEO coverage across all configured languages.
 
 ### Example
 
@@ -56,7 +56,7 @@ try {
 
 ### Return type
 
-[**\Flyo\Model\EntityinterfaceInner[]**](../Model/EntityinterfaceInner.md)
+[**\Flyo\Model\SitemapinterfaceInner[]**](../Model/SitemapinterfaceInner.md)
 
 ### Authorization
 

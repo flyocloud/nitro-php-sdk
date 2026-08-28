@@ -18,7 +18,7 @@ entityBySlug($slug, $type_id, $lang): \Flyo\Model\Entity
 
 Find entity by slug and optional Entity-Type-ID
 
-The endpoint allows for the retrieval of entities based on their slug, with an optional Entity-Type-ID for more accurate results. The endpoint requires a `slug` parameter to be passed in the path, which is necessary for identifying the entity. However, since slugs are not unique across different entities, it is highly recommended to also provide the `typeId` parameter through the query to avoid incorrect or unintended results. This `typeId` serves as an Entity-Definition-Schema ID, ensuring a more precise and targeted entity retrieval by distinguishing the entities more clearly. The `slug` parameter is mandatory and should be a string (e.g., 'hello-world'), while the `typeId` parameter is optional and should be an integer (e.g., 123), representing the Entity-Definition-Schema ID.
+The endpoint allows for the retrieval of entities based on their slug, with an optional Entity-Type-ID for more accurate results. The endpoint requires a `slug` parameter to be passed in the path, which is necessary for identifying the entity. However, since slugs are not unique across different entities, it is highly recommended to also provide the `typeId` parameter through the query to avoid incorrect or unintended results. This `typeId` serves as an Entity-Definition-Schema ID, ensuring a more precise and targeted entity retrieval by distinguishing the entities more clearly. The `slug` parameter is mandatory and should be a string (e.g., 'hello-world'), while the `typeId` parameter is optional and should be an integer (e.g., 123), representing the Entity-Definition-Schema ID. The same endpoint also resolves **draft links**: when the given slug is a draft token, the response contains the snapshot of an entity which is still offline, with `is_draft` set to `true` — see the response schema. A draft token is not a slug the `typeId` filter applies to, so omit that parameter when resolving one.
 
 ### Example
 
@@ -84,7 +84,7 @@ entityByUniqueid($uniqueid, $lang): \Flyo\Model\Entity
 
 Find entity by uniqueid
 
-The endpoint provides comprehensive information about a specified entity. An entity represents a collection of information pertaining to a specific data type and is defined by a key-value pair. You can use various data types such as blogs, events, or any other relevant data. However, in order to access an entity, it must be properly configured within the nitro config.
+The endpoint provides comprehensive information about a specified entity. An entity represents a collection of information pertaining to a specific data type and is defined by a key-value pair. You can use various data types such as blogs, events, or any other relevant data. However, in order to access an entity, it must be properly configured within the nitro config. The same endpoint also resolves **draft links**: when the given identifier is a draft token, the response contains the snapshot of an entity which is still offline, with `is_draft` set to `true` — see the response schema.
 
 ### Example
 

@@ -464,7 +464,7 @@ class Configuration
         $report  = 'PHP SDK (Flyo) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    The version of the OpenAPI document: 2.30' . PHP_EOL;
+        $report .= '    The version of the OpenAPI document: 2.35' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

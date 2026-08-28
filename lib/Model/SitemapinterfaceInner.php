@@ -6,7 +6,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * Entity Class Doc Comment
+ * SitemapinterfaceInner Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -14,7 +14,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
+class SitemapinterfaceInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -23,7 +23,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'entity';
+    protected static $openAPIModelName = 'sitemapinterface_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -31,14 +31,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'entity' => '\Flyo\Model\EntityInterface',
-        'model' => 'object',
-        'language' => 'string',
-        'is_draft' => 'bool',
-        'draft_expires_at' => 'float',
-        'jsonld' => 'object',
-        'translation' => '\Flyo\Model\Translation[]',
-        'breadcrumb' => '\Flyo\Model\Breadcrumb[]'
+        'entity_unique_id' => 'string',
+        'updated_at' => 'float',
+        'href' => 'string',
+        'entity_type' => 'string',
+        'entity_slug' => 'string',
+        'routes' => 'array<string,mixed>'
     ];
 
     /**
@@ -49,14 +47,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'entity' => null,
-        'model' => null,
-        'language' => null,
-        'is_draft' => null,
-        'draft_expires_at' => null,
-        'jsonld' => null,
-        'translation' => null,
-        'breadcrumb' => null
+        'entity_unique_id' => null,
+        'updated_at' => null,
+        'href' => null,
+        'entity_type' => null,
+        'entity_slug' => null,
+        'routes' => null
     ];
 
     /**
@@ -65,14 +61,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'entity' => false,
-        'model' => false,
-        'language' => false,
-        'is_draft' => false,
-        'draft_expires_at' => true,
-        'jsonld' => false,
-        'translation' => false,
-        'breadcrumb' => false
+        'entity_unique_id' => false,
+        'updated_at' => false,
+        'href' => false,
+        'entity_type' => false,
+        'entity_slug' => false,
+        'routes' => false
     ];
 
     /**
@@ -161,14 +155,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'entity' => 'entity',
-        'model' => 'model',
-        'language' => 'language',
-        'is_draft' => 'is_draft',
-        'draft_expires_at' => 'draft_expires_at',
-        'jsonld' => 'jsonld',
-        'translation' => 'translation',
-        'breadcrumb' => 'breadcrumb'
+        'entity_unique_id' => 'entity_unique_id',
+        'updated_at' => 'updated_at',
+        'href' => 'href',
+        'entity_type' => 'entity_type',
+        'entity_slug' => 'entity_slug',
+        'routes' => 'routes'
     ];
 
     /**
@@ -177,14 +169,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'entity' => 'setEntity',
-        'model' => 'setModel',
-        'language' => 'setLanguage',
-        'is_draft' => 'setIsDraft',
-        'draft_expires_at' => 'setDraftExpiresAt',
-        'jsonld' => 'setJsonld',
-        'translation' => 'setTranslation',
-        'breadcrumb' => 'setBreadcrumb'
+        'entity_unique_id' => 'setEntityUniqueId',
+        'updated_at' => 'setUpdatedAt',
+        'href' => 'setHref',
+        'entity_type' => 'setEntityType',
+        'entity_slug' => 'setEntitySlug',
+        'routes' => 'setRoutes'
     ];
 
     /**
@@ -193,14 +183,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'entity' => 'getEntity',
-        'model' => 'getModel',
-        'language' => 'getLanguage',
-        'is_draft' => 'getIsDraft',
-        'draft_expires_at' => 'getDraftExpiresAt',
-        'jsonld' => 'getJsonld',
-        'translation' => 'getTranslation',
-        'breadcrumb' => 'getBreadcrumb'
+        'entity_unique_id' => 'getEntityUniqueId',
+        'updated_at' => 'getUpdatedAt',
+        'href' => 'getHref',
+        'entity_type' => 'getEntityType',
+        'entity_slug' => 'getEntitySlug',
+        'routes' => 'getRoutes'
     ];
 
     /**
@@ -260,14 +248,12 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('entity', $data ?? [], null);
-        $this->setIfExists('model', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('is_draft', $data ?? [], null);
-        $this->setIfExists('draft_expires_at', $data ?? [], null);
-        $this->setIfExists('jsonld', $data ?? [], null);
-        $this->setIfExists('translation', $data ?? [], null);
-        $this->setIfExists('breadcrumb', $data ?? [], null);
+        $this->setIfExists('entity_unique_id', $data ?? [], null);
+        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('href', $data ?? [], null);
+        $this->setIfExists('entity_type', $data ?? [], null);
+        $this->setIfExists('entity_slug', $data ?? [], null);
+        $this->setIfExists('routes', $data ?? [], null);
     }
 
     /**
@@ -313,224 +299,169 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets entity
-     *
-     * @return \Flyo\Model\EntityInterface|null
-     */
-    public function getEntity()
-    {
-        return $this->container['entity'];
-    }
-
-    /**
-     * Sets entity
-     *
-     * @param \Flyo\Model\EntityInterface|null $entity entity
-     *
-     * @return self
-     */
-    public function setEntity($entity)
-    {
-        if (is_null($entity)) {
-            throw new \InvalidArgumentException('non-nullable entity cannot be null');
-        }
-        $this->container['entity'] = $entity;
-
-        return $this;
-    }
-
-    /**
-     * Gets model
-     *
-     * @return object|null
-     */
-    public function getModel()
-    {
-        return $this->container['model'];
-    }
-
-    /**
-     * Sets model
-     *
-     * @param object|null $model All values which are mappend from inside flyo trough the mapping system are stored inside this object.
-     *
-     * @return self
-     */
-    public function setModel($model)
-    {
-        if (is_null($model)) {
-            throw new \InvalidArgumentException('non-nullable model cannot be null');
-        }
-        $this->container['model'] = $model;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
+     * Gets entity_unique_id
      *
      * @return string|null
      */
-    public function getLanguage()
+    public function getEntityUniqueId()
     {
-        return $this->container['language'];
+        return $this->container['entity_unique_id'];
     }
 
     /**
-     * Sets language
+     * Sets entity_unique_id
      *
-     * @param string|null $language Current language context for entity model data
+     * @param string|null $entity_unique_id Unique ID
      *
      * @return self
      */
-    public function setLanguage($language)
+    public function setEntityUniqueId($entity_unique_id)
     {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        if (is_null($entity_unique_id)) {
+            throw new \InvalidArgumentException('non-nullable entity_unique_id cannot be null');
         }
-        $this->container['language'] = $language;
+        $this->container['entity_unique_id'] = $entity_unique_id;
 
         return $this;
     }
 
     /**
-     * Gets is_draft
-     *
-     * @return bool|null
-     */
-    public function getIsDraft()
-    {
-        return $this->container['is_draft'];
-    }
-
-    /**
-     * Sets is_draft
-     *
-     * @param bool|null $is_draft Whether this response was served from a **draft link** rather than from published content. Always present, and `false` for every regular request. A draft link is a shareable, expiring snapshot of an entity which is still offline in Flyo: because offline content is never delivered to an integration, this is the only way such an entity can be looked at on the website at all. The snapshot is addressed by a cryptic token which takes the place of the entity's unique id and slug, so a draft is requested through the very same endpoints as any other entity — `/entities/uniqueid/{uniqueid}` and `/entities/slug/{slug}` — with the token as the parameter. Use this flag to render a visible hint that the visitor is not looking at the live page. Note that the token does not look like a normal slug or unique id, so a router which validates those parameters against a pattern has to let it through for drafts to work.
-     *
-     * @return self
-     */
-    public function setIsDraft($is_draft)
-    {
-        if (is_null($is_draft)) {
-            throw new \InvalidArgumentException('non-nullable is_draft cannot be null');
-        }
-        $this->container['is_draft'] = $is_draft;
-
-        return $this;
-    }
-
-    /**
-     * Gets draft_expires_at
+     * Gets updated_at
      *
      * @return float|null
      */
-    public function getDraftExpiresAt()
+    public function getUpdatedAt()
     {
-        return $this->container['draft_expires_at'];
+        return $this->container['updated_at'];
     }
 
     /**
-     * Sets draft_expires_at
+     * Sets updated_at
      *
-     * @param float|null $draft_expires_at The Unix timestamp at which the draft link stops working, or `null` when `is_draft` is `false`. Every draft link expires; after that moment the same URL answers with a 404 like any unknown entity. Useful to tell a reviewer how long the link they were sent remains valid.
+     * @param float|null $updated_at A Unix timestamp indicating when the entity has been updated last time in Flyo. For entries which represent a Nitro page, this is the last time the content delivered for that page actually changed — a rebuild which produces identical output does not move it. Use this value as the `lastmod` information when generating a sitemap.
      *
      * @return self
      */
-    public function setDraftExpiresAt($draft_expires_at)
+    public function setUpdatedAt($updated_at)
     {
-        if (is_null($draft_expires_at)) {
-            array_push($this->openAPINullablesSetToNull, 'draft_expires_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('draft_expires_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
         }
-        $this->container['draft_expires_at'] = $draft_expires_at;
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }
 
     /**
-     * Gets jsonld
+     * Gets href
      *
-     * @return object|null
+     * @return string|null
      */
-    public function getJsonld()
+    public function getHref()
     {
-        return $this->container['jsonld'];
+        return $this->container['href'];
     }
 
     /**
-     * Sets jsonld
+     * Sets href
      *
-     * @param object|null $jsonld A Json LD based object with schema.org informations about the entity
+     * @param string|null $href Returns the completed href tag. Internal links are appended with trailing slashes, such as `/about-me`, while email links are formatted with `mailto:hello@flyo.ch`.
      *
      * @return self
      */
-    public function setJsonld($jsonld)
+    public function setHref($href)
     {
-        if (is_null($jsonld)) {
-            throw new \InvalidArgumentException('non-nullable jsonld cannot be null');
+        if (is_null($href)) {
+            throw new \InvalidArgumentException('non-nullable href cannot be null');
         }
-        $this->container['jsonld'] = $jsonld;
+        $this->container['href'] = $href;
 
         return $this;
     }
 
     /**
-     * Gets translation
+     * Gets entity_type
      *
-     * @return \Flyo\Model\Translation[]|null
+     * @return string|null
+     * @deprecated
      */
-    public function getTranslation()
+    public function getEntityType()
     {
-        return $this->container['translation'];
+        return $this->container['entity_type'];
     }
 
     /**
-     * Sets translation
+     * Sets entity_type
      *
-     * @param \Flyo\Model\Translation[]|null $translation The translation contains information about further data in different languages. If the integration is not defined as multi lingual, the translations will be empty.
+     * @param string|null $entity_type Deprecated — read `href` instead, which is already resolved for both pages (`nitro-page`) and mapped entities. Only kept for consumers that branch on the type to decide how to build the URL themselves.
      *
      * @return self
+     * @deprecated
      */
-    public function setTranslation($translation)
+    public function setEntityType($entity_type)
     {
-        if (is_null($translation)) {
-            throw new \InvalidArgumentException('non-nullable translation cannot be null');
+        if (is_null($entity_type)) {
+            throw new \InvalidArgumentException('non-nullable entity_type cannot be null');
         }
-        $this->container['translation'] = $translation;
+        $this->container['entity_type'] = $entity_type;
 
         return $this;
     }
 
     /**
-     * Gets breadcrumb
+     * Gets entity_slug
      *
-     * @return \Flyo\Model\Breadcrumb[]|null
+     * @return string|null
+     * @deprecated
      */
-    public function getBreadcrumb()
+    public function getEntitySlug()
     {
-        return $this->container['breadcrumb'];
+        return $this->container['entity_slug'];
     }
 
     /**
-     * Sets breadcrumb
+     * Sets entity_slug
      *
-     * @param \Flyo\Model\Breadcrumb[]|null $breadcrumb The breadcrumb of the current site is represented by an array of pages, forming a navigational path. It provides a hierarchical representation of the user's current location within the website. The array is ordered from the innermost page, closest to the current page, to the outermost page, with the current page itself residing at the last position.
+     * @param string|null $entity_slug Deprecated — read `href` instead. Only kept for consumers that build a container page URL from its slug.
      *
      * @return self
+     * @deprecated
      */
-    public function setBreadcrumb($breadcrumb)
+    public function setEntitySlug($entity_slug)
     {
-        if (is_null($breadcrumb)) {
-            throw new \InvalidArgumentException('non-nullable breadcrumb cannot be null');
+        if (is_null($entity_slug)) {
+            throw new \InvalidArgumentException('non-nullable entity_slug cannot be null');
         }
-        $this->container['breadcrumb'] = $breadcrumb;
+        $this->container['entity_slug'] = $entity_slug;
+
+        return $this;
+    }
+
+    /**
+     * Gets routes
+     *
+     * @return array<string,mixed>|null
+     * @deprecated
+     */
+    public function getRoutes()
+    {
+        return $this->container['routes'];
+    }
+
+    /**
+     * Sets routes
+     *
+     * @param array<string,mixed>|null $routes Deprecated — read `href` instead, which holds the first resolved route. Only kept for consumers that pick a specific route identifier such as `routes.detail`. Includes the system key `_empty` (boolean): `false` means at least one route could be resolved.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setRoutes($routes)
+    {
+        if (is_null($routes)) {
+            throw new \InvalidArgumentException('non-nullable routes cannot be null');
+        }
+        $this->container['routes'] = $routes;
 
         return $this;
     }

@@ -110,7 +110,7 @@ class SitemapApi
      *
      * @throws \Flyo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\EntityinterfaceInner[]
+     * @return \Flyo\Model\SitemapinterfaceInner[]
      */
     public function sitemap($lang = null, string $contentType = self::contentTypes['sitemap'][0])
     {
@@ -128,7 +128,7 @@ class SitemapApi
      *
      * @throws \Flyo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\EntityinterfaceInner[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\SitemapinterfaceInner[], HTTP status code, HTTP response headers (array of strings)
      */
     public function sitemapWithHttpInfo($lang = null, string $contentType = self::contentTypes['sitemap'][0])
     {
@@ -160,7 +160,7 @@ class SitemapApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Flyo\Model\EntityinterfaceInner[]',
+                        '\Flyo\Model\SitemapinterfaceInner[]',
                         $request,
                         $response,
                     );
@@ -182,7 +182,7 @@ class SitemapApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Flyo\Model\EntityinterfaceInner[]',
+                '\Flyo\Model\SitemapinterfaceInner[]',
                 $request,
                 $response,
             );
@@ -191,7 +191,7 @@ class SitemapApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Flyo\Model\EntityinterfaceInner[]',
+                        '\Flyo\Model\SitemapinterfaceInner[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -237,7 +237,7 @@ class SitemapApi
      */
     public function sitemapAsyncWithHttpInfo($lang = null, string $contentType = self::contentTypes['sitemap'][0])
     {
-        $returnType = '\Flyo\Model\EntityinterfaceInner[]';
+        $returnType = '\Flyo\Model\SitemapinterfaceInner[]';
         $request = $this->sitemapRequest($lang, $contentType);
 
         return $this->client

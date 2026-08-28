@@ -1,10 +1,14 @@
 # Upgrade
 
-## From 2.3 to 2.4
+## From 2.3 to 3.0
 
 Generated against OpenAPI spec `2.35` (was `2.30`).
 
-### `sitemap()` returns its own model
+This is a major release: the sitemap endpoint returns a different model with fewer fields,
+which is a breaking change for anyone reading presentation data off sitemap items. Everything
+else in this release is additive.
+
+### `sitemap()` returns its own model (breaking)
 
 `SitemapApi::sitemap()` now returns `\Flyo\Model\SitemapinterfaceInner[]` instead of
 `\Flyo\Model\EntityinterfaceInner[]`. The sitemap response has been reduced to the fields
@@ -27,7 +31,7 @@ These getters no longer exist on sitemap items:
 $items = (new \Flyo\Api\SitemapApi())->sitemap();
 $items[0]->getEntityTitle();
 
-// 2.4
+// 3.0
 /** @var \Flyo\Model\SitemapinterfaceInner[] $items */
 $items = (new \Flyo\Api\SitemapApi())->sitemap();
 $items[0]->getHref();
@@ -46,7 +50,7 @@ actually changed (a rebuild producing identical output does not bump it).
 Prefer `getHref()` over `getEntityType()`, `getEntitySlug()` and `getRoutes()` — those three
 are marked deprecated and only remain for consumers that build URLs themselves.
 
-### Draft links on `Entity`
+### Draft links on `Entity` (new)
 
 `\Flyo\Model\Entity` gained `is_draft` (`bool`) and `draft_expires_at` (`float|null`). A draft
 link is an expiring snapshot of an entity that is still offline in Flyo, addressed by a token

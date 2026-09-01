@@ -38,7 +38,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'draft_expires_at' => 'float',
         'jsonld' => 'object',
         'translation' => '\Flyo\Model\Translation[]',
-        'breadcrumb' => '\Flyo\Model\Breadcrumb[]'
+        'breadcrumb' => '\Flyo\Model\Breadcrumb[]',
+        'canonical' => 'string'
     ];
 
     /**
@@ -56,7 +57,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'draft_expires_at' => null,
         'jsonld' => null,
         'translation' => null,
-        'breadcrumb' => null
+        'breadcrumb' => null,
+        'canonical' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'draft_expires_at' => true,
         'jsonld' => false,
         'translation' => false,
-        'breadcrumb' => false
+        'breadcrumb' => false,
+        'canonical' => false
     ];
 
     /**
@@ -168,7 +171,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'draft_expires_at' => 'draft_expires_at',
         'jsonld' => 'jsonld',
         'translation' => 'translation',
-        'breadcrumb' => 'breadcrumb'
+        'breadcrumb' => 'breadcrumb',
+        'canonical' => 'canonical'
     ];
 
     /**
@@ -184,7 +188,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'draft_expires_at' => 'setDraftExpiresAt',
         'jsonld' => 'setJsonld',
         'translation' => 'setTranslation',
-        'breadcrumb' => 'setBreadcrumb'
+        'breadcrumb' => 'setBreadcrumb',
+        'canonical' => 'setCanonical'
     ];
 
     /**
@@ -200,7 +205,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'draft_expires_at' => 'getDraftExpiresAt',
         'jsonld' => 'getJsonld',
         'translation' => 'getTranslation',
-        'breadcrumb' => 'getBreadcrumb'
+        'breadcrumb' => 'getBreadcrumb',
+        'canonical' => 'getCanonical'
     ];
 
     /**
@@ -268,6 +274,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('jsonld', $data ?? [], null);
         $this->setIfExists('translation', $data ?? [], null);
         $this->setIfExists('breadcrumb', $data ?? [], null);
+        $this->setIfExists('canonical', $data ?? [], null);
     }
 
     /**
@@ -531,6 +538,33 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable breadcrumb cannot be null');
         }
         $this->container['breadcrumb'] = $breadcrumb;
+
+        return $this;
+    }
+
+    /**
+     * Gets canonical
+     *
+     * @return string|null
+     */
+    public function getCanonical()
+    {
+        return $this->container['canonical'];
+    }
+
+    /**
+     * Sets canonical
+     *
+     * @param string|null $canonical The **canonical URL path** of this entity, ready to be rendered as `<link rel=\"canonical\">`. A collection can be configured with several routes - a detail route, a print view, an embed - but exactly one of them is flagged as the *canonical route* in the entity mapping, and that route is the address the entity itself lives at. Its resolved path is what this field carries, and it is the very same value the sitemap and the search results carry, so a search engine is never offered two competing addresses for the same content. The path is relative to the site root and already resolved for the requested language, exactly like every other path in this API - prefix it with your own domain. Empty when the collection has no route configured at all: such an entity has no public address and must not emit a canonical tag. For a **draft link** it resolves with the draft token in place of the unique id and slug, so it points at the draft itself and not at the not yet published entity.
+     *
+     * @return self
+     */
+    public function setCanonical($canonical)
+    {
+        if (is_null($canonical)) {
+            throw new \InvalidArgumentException('non-nullable canonical cannot be null');
+        }
+        $this->container['canonical'] = $canonical;
 
         return $this;
     }

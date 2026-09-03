@@ -39,7 +39,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'jsonld' => 'object',
         'translation' => '\Flyo\Model\Translation[]',
         'breadcrumb' => '\Flyo\Model\Breadcrumb[]',
-        'canonical' => 'string'
+        'canonical' => 'string',
+        'is_indexable' => 'bool'
     ];
 
     /**
@@ -58,7 +59,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'jsonld' => null,
         'translation' => null,
         'breadcrumb' => null,
-        'canonical' => null
+        'canonical' => null,
+        'is_indexable' => null
     ];
 
     /**
@@ -75,7 +77,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'jsonld' => false,
         'translation' => false,
         'breadcrumb' => false,
-        'canonical' => false
+        'canonical' => false,
+        'is_indexable' => false
     ];
 
     /**
@@ -172,7 +175,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'jsonld' => 'jsonld',
         'translation' => 'translation',
         'breadcrumb' => 'breadcrumb',
-        'canonical' => 'canonical'
+        'canonical' => 'canonical',
+        'is_indexable' => 'is_indexable'
     ];
 
     /**
@@ -189,7 +193,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'jsonld' => 'setJsonld',
         'translation' => 'setTranslation',
         'breadcrumb' => 'setBreadcrumb',
-        'canonical' => 'setCanonical'
+        'canonical' => 'setCanonical',
+        'is_indexable' => 'setIsIndexable'
     ];
 
     /**
@@ -206,7 +211,8 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'jsonld' => 'getJsonld',
         'translation' => 'getTranslation',
         'breadcrumb' => 'getBreadcrumb',
-        'canonical' => 'getCanonical'
+        'canonical' => 'getCanonical',
+        'is_indexable' => 'getIsIndexable'
     ];
 
     /**
@@ -275,6 +281,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('translation', $data ?? [], null);
         $this->setIfExists('breadcrumb', $data ?? [], null);
         $this->setIfExists('canonical', $data ?? [], null);
+        $this->setIfExists('is_indexable', $data ?? [], null);
     }
 
     /**
@@ -565,6 +572,33 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable canonical cannot be null');
         }
         $this->container['canonical'] = $canonical;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_indexable
+     *
+     * @return bool|null
+     */
+    public function getIsIndexable()
+    {
+        return $this->container['is_indexable'];
+    }
+
+    /**
+     * Sets is_indexable
+     *
+     * @param bool|null $is_indexable Whether this entity may be indexed by search engines. `false` when every page placing the entity's content pool is marked non-indexable and the pool is not an indexed pool: the entity is then absent from the sitemap and the search endpoint, and the consumer should render `<meta name=\"robots\" content=\"noindex\">` for the detail page. Not access control - the entity resolves by id and slug like any other. Always `false` for a draft link.
+     *
+     * @return self
+     */
+    public function setIsIndexable($is_indexable)
+    {
+        if (is_null($is_indexable)) {
+            throw new \InvalidArgumentException('non-nullable is_indexable cannot be null');
+        }
+        $this->container['is_indexable'] = $is_indexable;
 
         return $this;
     }

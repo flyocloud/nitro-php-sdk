@@ -41,6 +41,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'int',
         'updated_at' => 'int',
         'is_visible' => 'int',
+        'is_indexable' => 'int',
         'meta_json' => '\Flyo\Model\Meta',
         'properties' => 'array<string,\Flyo\Model\PagePropertyValue>',
         'uid' => 'string',
@@ -70,6 +71,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => null,
         'updated_at' => null,
         'is_visible' => null,
+        'is_indexable' => null,
         'meta_json' => null,
         'properties' => null,
         'uid' => null,
@@ -97,6 +99,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => false,
         'updated_at' => false,
         'is_visible' => false,
+        'is_indexable' => false,
         'meta_json' => false,
         'properties' => false,
         'uid' => false,
@@ -204,6 +207,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'created_at',
         'updated_at' => 'updated_at',
         'is_visible' => 'is_visible',
+        'is_indexable' => 'is_indexable',
         'meta_json' => 'meta_json',
         'properties' => 'properties',
         'uid' => 'uid',
@@ -231,6 +235,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'is_visible' => 'setIsVisible',
+        'is_indexable' => 'setIsIndexable',
         'meta_json' => 'setMetaJson',
         'properties' => 'setProperties',
         'uid' => 'setUid',
@@ -258,6 +263,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'is_visible' => 'getIsVisible',
+        'is_indexable' => 'getIsIndexable',
         'meta_json' => 'getMetaJson',
         'properties' => 'getProperties',
         'uid' => 'getUid',
@@ -336,6 +342,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('is_visible', $data ?? [], null);
+        $this->setIfExists('is_indexable', $data ?? [], null);
         $this->setIfExists('meta_json', $data ?? [], null);
         $this->setIfExists('properties', $data ?? [], null);
         $this->setIfExists('uid', $data ?? [], null);
@@ -655,6 +662,33 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable is_visible cannot be null');
         }
         $this->container['is_visible'] = $is_visible;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_indexable
+     *
+     * @return int|null
+     */
+    public function getIsIndexable()
+    {
+        return $this->container['is_indexable'];
+    }
+
+    /**
+     * Sets is_indexable
+     *
+     * @param int|null $is_indexable Whether the page may be indexed by search engines. `0` means the page is deliberately kept out of the sitemap and the search endpoint, and the consumer should render `<meta name=\"robots\" content=\"noindex\">` (or an `X-Robots-Tag` header) for it. It is **not** access control: the page is delivered like any other and stays reachable by URL. Independent of `is_visible`, which only concerns the navigation.
+     *
+     * @return self
+     */
+    public function setIsIndexable($is_indexable)
+    {
+        if (is_null($is_indexable)) {
+            throw new \InvalidArgumentException('non-nullable is_indexable cannot be null');
+        }
+        $this->container['is_indexable'] = $is_indexable;
 
         return $this;
     }

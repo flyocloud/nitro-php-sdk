@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **created_at** | **int** | A Unix timestamp indicating when the page was created. | [optional]
 **updated_at** | **int** | A Unix timestamp indicating when the page was last updated. | [optional]
 **is_visible** | **int** | Determining whether the page is visible or not. | [optional]
+**is_indexable** | **int** | Whether the page may be indexed by search engines. &#x60;0&#x60; means the page is deliberately kept out of the sitemap and the search endpoint, and the consumer should render &#x60;&lt;meta name&#x3D;\&quot;robots\&quot; content&#x3D;\&quot;noindex\&quot;&gt;&#x60; (or an &#x60;X-Robots-Tag&#x60; header) for it. It is **not** access control: the page is delivered like any other and stays reachable by URL. Independent of &#x60;is_visible&#x60;, which only concerns the navigation. | [optional]
 **meta_json** | [**\Flyo\Model\Meta**](Meta.md) |  | [optional]
 **properties** | [**array<string,\Flyo\Model\PagePropertyValue>**](PagePropertyValue.md) |  | [optional]
 **uid** | **string** | A unique identifier for the page | [optional]

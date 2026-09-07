@@ -32,6 +32,18 @@ jobs:
       - name: Run PHPUnit tests
         run: composer test
 
+      # Exercises the real binary end to end, and asserts the committed golden files are exactly
+      # what the current code produces. --check exits 6 on any drift. The coverage fixture
+      # deliberately contains an unmergeable allOf and a dangling $ref, so two warnings on stderr
+      # here are expected.
+      - name: Block generator CLI smoke test
+        run: |
+          php bin/flyo-generate-blocks \
+            test/fixtures/blocks/full/openapi.json \
+            'Fixture\Full' \
+            test/fixtures/blocks/full/expected \
+            --check --quiet
+
   ## PHPSTAN
   phpstan:
     runs-on: ubuntu-latest

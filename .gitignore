@@ -15,3 +15,8 @@ composer.phar
 .phpunit.result.cache
 .tmp
 .phpunit.cache
+
+# PHPStan cache for the block generator configs
+.tmp-generator
+.tmp-generated
+.tmp-generator

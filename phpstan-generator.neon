@@ -1,0 +1,20 @@
+# The block generator and its tests.
+#
+# Deliberately NOT an `includes:` of phpstan.neon: that config runs at level 2 and ignores two
+# error identifiers, both of which exist only to tolerate openapi-generator output. Hand-written
+# code should be held to a higher standard than generated code.
+parameters:
+  level: 8
+  tmpDir: .tmp-generator
+  paths:
+    - lib/Blocks
+    - test/Blocks
+    - bin/flyo-generate-blocks
+  excludePaths:
+    analyse:
+      # Deliberately dynamic: it loads a generated fixture class at runtime (by design -- the
+      # fixtures are excluded from the autoloader) and drives it through ObjectSerializer, whose
+      # declared return type is array|object|null. Static analysis has nothing useful to say about
+      # a test whose whole job is checking untyped runtime behaviour; the assertions are the check.
+      # The generated classes themselves are analysed at level 9 by phpstan-generated.neon.
+      - test/Blocks/AccessPatternTest.php

@@ -5,3 +5,9 @@ README.md
 composer.json
 phpunit.xml.dist
 .gitignore
+
+# Hand-written: the typed block generator and its CLI.
+bin/
+lib/Blocks/
+phpstan-generator.neon
+phpstan-generated.neon

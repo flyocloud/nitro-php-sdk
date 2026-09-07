@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+// A code generator that writes files wherever it is pointed is a file-write primitive, so keep it
+// off any web SAPI.
+if (PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg') {
+    fwrite(STDERR, "flyo-generate-blocks must be run from the command line.\n");
+    exit(1);
+}
+
+$autoload = null;
+
+foreach ([
+    // Composer >= 2 bin proxy sets this; the normal case when installed as a dependency.
+    $GLOBALS['_composer_autoload_path'] ?? null,
+    // This package is the root package (running from a checkout).
+    __DIR__ . '/../vendor/autoload.php',
+    // vendor/flyo/nitro-php/bin/... -> vendor/autoload.php, for a symlinked bin.
+    __DIR__ . '/../../../autoload.php',
+    // Path repository or a nested checkout.
+    __DIR__ . '/../../../../vendor/autoload.php',
+] as $candidate) {
+    if (is_string($candidate) && $candidate !== '' && is_file($candidate)) {
+        $autoload = $candidate;
+        break;
+    }
+}
+
+if ($autoload === null) {
+    fwrite(STDERR, "flyo-generate-blocks: composer autoloader not found. Run `composer install`.\n");
+    exit(2);
+}
+
+require $autoload;
+
+/** @var list<string> $arguments */
+$arguments = $argv ?? $_SERVER['argv'] ?? ['flyo-generate-blocks'];
+
+exit(\Flyo\Blocks\Generator\Cli::main($arguments));

@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Class name collisions",
+    "description": "Components that sanitise to the same PHP class name, plus a block whose component is empty and one whose component starts with a digit. The server does not validate `component` as a PHP-safe identifier, so all of these are reachable.",
+    "version": "edge"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "BlockHero Banner": {
+        "title": "Hero Banner",
+        "type": "object",
+        "description": "Component with a space.",
+        "properties": {
+          "identifier": { "enum": ["hero_banner_spaced"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["Hero Banner"], "type": "string" },
+          "content": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "config": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "items": { "type": "array", "items": { "type": "object", "properties": {} } },
+          "slots": { "type": "object", "properties": { "_empty": { "type": "boolean" } } }
+        },
+        "x-schema-type": "block"
+      },
+      "BlockHeroBanner": {
+        "title": "HeroBanner",
+        "type": "object",
+        "description": "Component already in studly case; collides with the spaced one.",
+        "properties": {
+          "identifier": { "enum": ["hero_banner"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["HeroBanner"], "type": "string" },
+          "content": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "config": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "items": { "type": "array", "items": { "type": "object", "properties": {} } },
+          "slots": { "type": "object", "properties": { "_empty": { "type": "boolean" } } }
+        },
+        "x-schema-type": "block"
+      },
+      "Block": {
+        "title": "Nameless",
+        "type": "object",
+        "description": "Empty component, so the server keyed the schema exactly \"Block\". Falls back to the identifier.",
+        "properties": {
+          "identifier": { "enum": ["nameless"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": [""], "type": "string" },
+          "content": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "config": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "items": { "type": "array", "items": { "type": "object", "properties": {} } },
+          "slots": { "type": "object", "properties": { "_empty": { "type": "boolean" } } }
+        },
+        "x-schema-type": "block"
+      },
+      "Block2col": {
+        "title": "Two Columns",
+        "type": "object",
+        "description": "Component starts with a digit, which no PHP identifier may.",
+        "properties": {
+          "identifier": { "enum": [11], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["2col"], "type": "string" },
+          "content": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "config": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "items": { "type": "array", "items": { "type": "object", "properties": {} } },
+          "slots": { "type": "object", "properties": { "_empty": { "type": "boolean" } } }
+        },
+        "x-schema-type": "block"
+      }
+    }
+  }
+}

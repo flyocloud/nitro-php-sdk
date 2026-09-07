@@ -1,5 +1,31 @@
 # Upgrade
 
+## From 3.2 to 3.3
+
+Purely additive. Nothing in `lib/Api` or `lib/Model` changed, no runtime behaviour changed, and
+no existing code needs touching.
+
+### New: `vendor/bin/flyo-generate-blocks`
+
+The package now ships a binary that generates one typed PHP class per Nitro block from your
+integration's OpenAPI document, so `$block->getContent()->image->source` is understood by your IDE
+and PHPStan instead of being a bare `\stdClass`. See the "Typed Blocks" section of the README.
+
+The generated classes extend `\Flyo\Model\Block` and are documentation-only: nothing instantiates
+them, and a block returned by `PagesApi` is still a plain `\Flyo\Model\Block` at runtime. Adopt
+them by changing an annotation at your framework boundary:
+
+```php
+// before
+/** @var \Flyo\Model\Block $block */
+
+// after
+/** @var \App\Blocks\BlockHero $block */
+```
+
+Typed block schemas come from the authenticated `/nitro/v1/openapi/schemas` endpoint; the public
+`/nitro/v1/openapi` does not carry them.
+
 ## From 2.3 to 3.0
 
 Generated against OpenAPI spec `2.35` (was `2.30`).

@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "No typed blocks",
+    "description": "A valid document whose schemas are all entities or unmarked, so the generator has nothing to do.",
+    "version": "edge"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "block": {
+        "type": "object",
+        "description": "The generic block model carries no x-schema-type marker.",
+        "properties": {
+          "identifier": { "type": "string" }
+        }
+      },
+      "Article": {
+        "type": "object",
+        "properties": { "title": { "type": "string" } },
+        "x-schema-type": "entity"
+      },
+      "Event": {
+        "type": "object",
+        "properties": { "starts_at": { "type": "string" } },
+        "x-schema-type": "entity"
+      }
+    }
+  }
+}

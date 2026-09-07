@@ -1,0 +1,220 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Flyo Nitro - Global Components",
+    "description": "OpenAPI component schemas for the global Nitro CMS content elements of \"TourismusRegion Baden\".",
+    "version": "edge"
+  },
+  "paths": {
+
+  },
+  "components": {
+    "schemas": {
+      "BlockHero": {
+        "title": "Hero",
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "enum": [
+              "hero"
+            ],
+            "type": "string",
+            "description": "The block type identifier.",
+            "example": "hero"
+          },
+          "uid": {
+            "type": "string",
+            "description": "Unique block instance identifier."
+          },
+          "component": {
+            "enum": [
+              "Hero"
+            ],
+            "type": "string",
+            "description": "Component annotation for the block.",
+            "example": "Hero"
+          },
+          "content": {
+            "title": "Hero Content",
+            "type": "object",
+            "properties": {
+              "title": {
+                "title": "Titel",
+                "type": "string",
+                "example": "Lorem ipsum dolor sit amet."
+              },
+              "text": {
+                "title": "Text",
+                "type": "string",
+                "example": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+              },
+              "image": {
+                "title": "Bild",
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "title": "Absolute Path",
+                    "type": "string",
+                    "description": "The Flyo CDN supports on-the-fly image resizing and format conversion. Append the `?w=` and `?h=` query parameters to the asset URL; leave one of them out to have it derived from the original aspect ratio. Use `?format=` to return the resized image as `webp`, `jpg`, `jpeg`, `png`, or `gif`, for example: `image.jpg?w=250&h=250&format=webp`. see https://docs.flyo.cloud/doc/assets-images",
+                    "example": "https://storage.flyo.cloud/my_super_image_123123.jpg"
+                  },
+                  "caption": {
+                    "title": "Caption",
+                    "type": "string",
+                    "description": "Describes the file or image",
+                    "example": "John Doe"
+                  },
+                  "copyright": {
+                    "title": "Copyright",
+                    "type": "string",
+                    "example": "shutterstock"
+                  },
+                  "name": {
+                    "title": "Name",
+                    "type": "string",
+                    "example": "my_super_image.jpg"
+                  },
+                  "id": {
+                    "title": "ID",
+                    "type": "number",
+                    "description": "The unique identifier of the file or image as incremental number.",
+                    "example": 154311
+                  },
+                  "mime_type": {
+                    "title": "MIME Type",
+                    "type": "string",
+                    "description": "The MIME type of the file or image.",
+                    "example": "image/jpeg"
+                  }
+                },
+                "example": {
+                  "source": "https://storage.flyo.cloud//44_6be653b8_testimage.jpg",
+                  "caption": "John Doe",
+                  "copyright": "All rights reserved",
+                  "name": "testimage.jpg",
+                  "id": 154311,
+                  "mime_type": "image/jpeg"
+                }
+              },
+              "link": {
+                "title": "Link",
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The type of the link. Possible values are: nitropagelink, url, email, tel, file",
+                    "example": "nitropagelink"
+                  },
+                  "target": {
+                    "type": "string",
+                    "description": "The target attribute of the link. Possible values are `_blank` (open in a new tab) or `_self` (same tab, the default).",
+                    "example": "_blank"
+                  },
+                  "raw": {
+                    "type": "string",
+                    "description": "The not modified raw input value of flyo.",
+                    "example": "newsletter"
+                  },
+                  "href": {
+                    "type": "string",
+                    "description": "The link in a href format. Which means links have a trailing slash. E-Mail links start with mailto: and phone links start with tel:",
+                    "example": "/newsletter"
+                  },
+                  "extras": {
+                    "type": "object",
+                    "description": "Additional information about the link. The set of keys varies depending on the type of link (e.g. file, url and nitropagelink each expose a different set of keys).",
+                    "example": {
+                      "filename": "foobar.jpg"
+                    },
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "_empty": {
+                "type": "boolean",
+                "description": "Whether the content is empty."
+              }
+            },
+            "description": "Grossflächiger Einstiegsbereich mit Titel, Text, Bild und Link."
+          },
+          "config": {
+            "title": "Hero Config",
+            "type": "object",
+            "properties": {
+              "_empty": {
+                "type": "boolean",
+                "description": "Whether the config is empty."
+              }
+            },
+            "description": "Block configuration fields."
+          },
+          "items": {
+            "title": "Hero Items",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "link": {
+                  "title": "Link",
+                  "type": "object",
+                  "properties": {
+                    "entity_unique_id": {
+                      "title": "Entity Unique ID",
+                      "type": "string",
+                      "description": "The unique identifier of the linked entity.",
+                      "example": "fhdjvjd"
+                    },
+                    "entity_slug": {
+                      "title": "Entity Slug",
+                      "type": "string",
+                      "description": "The slug of the linked entity in the current language.",
+                      "example": "my-detail-page"
+                    },
+                    "entity_type_id": {
+                      "title": "Entity Type ID",
+                      "oneOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ],
+                      "description": "The schema id of the linked entity, or `false` (boolean) when the entity has no schema.",
+                      "example": 12
+                    },
+                    "routes": {
+                      "title": "Routes",
+                      "type": "object",
+                      "description": "Map of resolved route identifiers to URL paths, for example `routes.detail = \"/foo-bar\"`. Includes the system key `_empty` (boolean): `false` means at least one route could be resolved, `true` means no route is available for the current context.",
+                      "example": {
+                        "detail": "/foo-bar",
+                        "_empty": false
+                      },
+                      "additionalProperties": true
+                    }
+                  },
+                  "description": "Generated detail-page link for the item. Absent only when the item mapping declares its own \"link\" field."
+                }
+              }
+            },
+            "description": "Iterated content pool items mapped to block fields."
+          },
+          "slots": {
+            "title": "Hero Slots",
+            "type": "object",
+            "properties": {
+              "_empty": {
+                "type": "boolean",
+                "description": "Whether slots are empty."
+              }
+            },
+            "description": "Named slot containers for nested blocks."
+          }
+        },
+        "description": "Block definition \"hero\" (component: Hero). Grossflächiger Einstiegsbereich mit Titel, Text, Bild und Link.",
+        "x-schema-type": "block"
+      }
+    }
+  }
+}

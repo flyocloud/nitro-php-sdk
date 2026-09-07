@@ -20,6 +20,9 @@
         "phpunit/phpunit": "^12",
         "phpstan/phpstan": "^1.12"
     },
+    "bin": [
+        "bin/flyo-generate-blocks"
+    ],
     "autoload": {
         "psr-4": {
             "Flyo\\": "lib/"
@@ -28,10 +31,20 @@
     "autoload-dev": {
         "psr-4": {
             "Flyo\\Test\\": "test/"
-        }
+        },
+        "exclude-from-classmap": [
+            "/test/fixtures/"
+        ]
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "phpstan": "vendor/bin/phpstan -v"
+        "phpstan": [
+            "@phpstan-lib",
+            "@phpstan-generator",
+            "@phpstan-generated"
+        ],
+        "phpstan-lib": "vendor/bin/phpstan -v",
+        "phpstan-generator": "vendor/bin/phpstan analyse -c phpstan-generator.neon -v",
+        "phpstan-generated": "vendor/bin/phpstan analyse -c phpstan-generated.neon -v"
     }
 }

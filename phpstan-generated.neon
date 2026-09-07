@@ -1,0 +1,18 @@
+# The generator's OUTPUT, analysed at the level a consumer would use.
+#
+# This is the config that proves the point of the whole package: each fixture's assertions.php
+# declares return types that only match if the generated `object{...}` shapes resolved exactly, so
+# a shape degrading to `mixed` or losing a nested level fails the build here rather than quietly
+# in someone's editor.
+#
+# The fixture files are excluded from the composer classmap (they are fixtures, not library code),
+# which is why the autoloader is bootstrapped explicitly for \Flyo\Model\Block.
+parameters:
+  level: 9
+  tmpDir: .tmp-generated
+  paths:
+    - test/fixtures/blocks/hero
+    - test/fixtures/blocks/full
+    - test/fixtures/blocks/collisions
+  bootstrapFiles:
+    - vendor/autoload.php

@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Type mapping coverage",
+    "description": "One block exercising every row of the generator's type mapping table, plus a second block referenced by the first and a slot-carrying block.",
+    "version": "edge"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "block": {
+        "type": "object",
+        "description": "The generic block model. Referenced by slot content; must map to \\Flyo\\Model\\Block.",
+        "properties": {
+          "identifier": { "type": "string" },
+          "uid": { "type": "string" }
+        }
+      },
+      "SomeEntity": {
+        "type": "object",
+        "description": "A typed entity schema. Must be skipped entirely.",
+        "properties": {
+          "name": { "type": "string" }
+        },
+        "x-schema-type": "entity"
+      },
+      "Unmarked": {
+        "type": "object",
+        "description": "No x-schema-type marker at all. Must be skipped.",
+        "properties": {
+          "name": { "type": "string" }
+        }
+      },
+      "BlockCoverage": {
+        "title": "Coverage",
+        "type": "object",
+        "description": "Block definition \"coverage\" (component: Coverage). Exercises the type mapper.",
+        "required": ["identifier", "uid", "component", "content"],
+        "properties": {
+          "identifier": {
+            "enum": ["coverage"],
+            "type": "string",
+            "description": "The block type identifier."
+          },
+          "uid": {
+            "type": "string",
+            "description": "Unique block instance identifier."
+          },
+          "component": {
+            "enum": ["Coverage"],
+            "type": "string",
+            "description": "Component annotation for the block."
+          },
+          "content": {
+            "title": "Coverage Content",
+            "type": "object",
+            "description": "Every leaf shape the server can emit.",
+            "required": ["required_string"],
+            "properties": {
+              "required_string": {
+                "title": "Required",
+                "type": "string"
+              },
+              "plain_string": { "type": "string" },
+              "an_integer": { "type": "integer" },
+              "bounded_integer": { "type": "integer", "minimum": 1, "maximum": 7 },
+              "a_number": { "type": "number" },
+              "a_boolean": { "type": "boolean" },
+              "nullable_string": { "type": "string", "nullable": true },
+              "formatted": { "type": "string", "format": "date-time" },
+              "single_enum": { "type": "string", "enum": ["only"] },
+              "multi_enum": { "type": "string", "enum": ["wide", "narrow", "full"] },
+              "enum_without_type": { "enum": ["a", "b"] },
+              "enum_with_quote": { "type": "string", "enum": ["it's", "plain"] },
+              "nested_object": {
+                "title": "Nested",
+                "type": "object",
+                "properties": {
+                  "deep": {
+                    "type": "object",
+                    "properties": {
+                      "deeper": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "open_map": {
+                "type": "object",
+                "description": "additionalProperties with no properties: keys vary by context.",
+                "additionalProperties": true
+              },
+              "string_map": {
+                "type": "object",
+                "additionalProperties": { "type": "string" }
+              },
+              "bare_object": { "type": "object" },
+              "object_list": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "weight": { "type": "number" }
+                  }
+                }
+              },
+              "scalar_list": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "open_map_list": {
+                "type": "array",
+                "items": { "type": "object", "additionalProperties": true }
+              },
+              "untyped_items_list": {
+                "type": "array",
+                "items": {}
+              },
+              "list_without_items": { "type": "array" },
+              "one_of_int_bool": {
+                "oneOf": [{ "type": "integer" }, { "type": "boolean" }]
+              },
+              "one_of_string_bool": {
+                "oneOf": [{ "type": "string" }, { "type": "boolean" }]
+              },
+              "any_of_scalars": {
+                "anyOf": [{ "type": "string" }, { "type": "integer" }, { "type": "number" }]
+              },
+              "all_of_merged": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": ["from_first"],
+                    "properties": { "from_first": { "type": "string" } }
+                  },
+                  {
+                    "type": "object",
+                    "properties": { "from_second": { "type": "integer" } }
+                  }
+                ]
+              },
+              "all_of_unmergeable": {
+                "allOf": [{ "type": "object", "properties": { "a": { "type": "string" } } }, { "type": "string" }]
+              },
+              "ref_to_other_block": { "$ref": "#/components/schemas/BlockOther" },
+              "ref_to_generic_block": { "$ref": "#/components/schemas/block" },
+              "ref_dangling": { "$ref": "#/components/schemas/DoesNotExist" },
+              "ref_to_unmarked": { "$ref": "#/components/schemas/Unmarked" },
+              "no_type_at_all": {
+                "title": "Mapped column with no output group",
+                "description": "The value can be anything."
+              },
+              "my-field": { "type": "string" },
+              "length (cm)": { "type": "number" },
+              "_empty": {
+                "type": "boolean",
+                "description": "Whether the content is empty."
+              }
+            }
+          },
+          "config": {
+            "title": "Coverage Config",
+            "type": "object",
+            "description": "Block configuration fields.",
+            "properties": {
+              "_empty": { "type": "boolean", "description": "Whether the config is empty." }
+            }
+          },
+          "items": {
+            "title": "Coverage Items",
+            "type": "array",
+            "description": "Iterated content pool items mapped to block fields.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "link": {
+                  "title": "Link",
+                  "type": "object",
+                  "properties": {
+                    "entity_unique_id": { "type": "string" },
+                    "entity_type_id": {
+                      "oneOf": [{ "type": "integer" }, { "type": "boolean" }]
+                    },
+                    "routes": { "type": "object", "additionalProperties": true }
+                  }
+                }
+              }
+            }
+          },
+          "slots": {
+            "title": "Coverage Slots",
+            "type": "object",
+            "description": "Named slot containers for nested blocks.",
+            "properties": {
+              "main": {
+                "type": "object",
+                "properties": {
+                  "identifier": { "type": "string", "example": "main" },
+                  "content": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/block" }
+                  }
+                }
+              },
+              "aside": {
+                "type": "object",
+                "properties": {
+                  "identifier": { "type": "string", "example": "aside" },
+                  "content": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/block" }
+                  }
+                }
+              },
+              "_empty": { "type": "boolean", "description": "Whether slots are empty." }
+            }
+          }
+        },
+        "x-schema-type": "block"
+      },
+      "BlockOther": {
+        "title": "Other",
+        "type": "object",
+        "description": "A second block, referenced by BlockCoverage.",
+        "properties": {
+          "identifier": { "enum": ["other"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["Other"], "type": "string" },
+          "content": {
+            "title": "Other Content",
+            "type": "object",
+            "properties": {
+              "headline": { "type": "string" },
+              "_empty": { "type": "boolean" }
+            }
+          },
+          "config": {
+            "type": "object",
+            "properties": { "_empty": { "type": "boolean" } }
+          },
+          "items": {
+            "type": "array",
+            "items": { "type": "object", "properties": {} }
+          },
+          "slots": {
+            "type": "object",
+            "properties": { "_empty": { "type": "boolean" } }
+          }
+        },
+        "x-schema-type": "block"
+      },
+      "BlockTextWithAVeryLongHint": {
+        "title": "Text",
+        "type": "object",
+        "description": "Block definition \"text\" (component: Text). A hint that closes a comment */ and pretends to be a tag @return int and spans\nseveral\nlines, plus enough words after it that the renderer has to wrap and then truncate the whole thing rather than emit it verbatim into the docblock.",
+        "properties": {
+          "identifier": { "enum": ["text"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["Text"], "type": "string" },
+          "content": {
+            "title": "Text Content",
+            "type": "object",
+            "properties": {
+              "body": { "type": "object", "properties": { "html": { "type": "string" }, "json": { "type": "object", "additionalProperties": true } } },
+              "_empty": { "type": "boolean" }
+            }
+          },
+          "config": { "type": "object", "properties": { "_empty": { "type": "boolean" } } },
+          "items": { "type": "array", "items": { "type": "object", "properties": {} } },
+          "slots": { "type": "object", "properties": { "_empty": { "type": "boolean" } } }
+        },
+        "x-schema-type": "block"
+      }
+    }
+  }
+}

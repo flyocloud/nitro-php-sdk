@@ -299,6 +299,18 @@ class OptionsTest extends TestCase
     }
 
     /**
+     * The composer.json spelling is the one most projects end up using, and the one where the
+     * escaping goes wrong, so --help has to show it.
+     */
+    public function testHelpTextShowsTheComposerScriptSpelling(): void
+    {
+        $help = Options::help();
+
+        $this->assertStringContainsString('composer.json', $help);
+        $this->assertStringContainsString('App/Blocks', $help);
+    }
+
+    /**
      * @param list<string> $args
      * @param array<string, string> $env
      */

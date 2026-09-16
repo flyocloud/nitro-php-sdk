@@ -100,10 +100,9 @@ the classes are written but never autoloaded. The common setups:
 The rule behind the table: take the prefix and its directory from `autoload.psr-4`, then append the
 same trailing segment to both. The target directory is created if it does not exist.
 
-Typed block schemas only exist on the **authenticated** endpoints — `/nitro/v1/openapi/schemas`
-and `/nitro/v1/openapi/full`. The public `/nitro/v1/openapi` has none. Pass the token through
-`FLYO_TOKEN` (or `FLYO_API_KEY`) rather than `--token`: an argument is visible to anyone who can
-run `ps`.
+Typed block schemas only exist on the **authenticated** `/nitro/v1/openapi/schemas` endpoint. The
+public `/nitro/v1/openapi` has none. Pass the token through `FLYO_TOKEN` (or `FLYO_API_KEY`) rather
+than `--token`: an argument is visible to anyone who can run `ps`.
 
 ### Using them
 

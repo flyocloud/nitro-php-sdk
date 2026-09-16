@@ -13,6 +13,7 @@ docs/Model/ConfigResponseContainersValue.md
 docs/Model/ConfigResponseNitro.md
 docs/Model/ContainerPage.md
 docs/Model/Entity.md
+docs/Model/EntityByUniqueid404Response.md
 docs/Model/EntityInterface.md
 docs/Model/EntityMetric.md
 docs/Model/EntityinterfaceInner.md
@@ -42,6 +43,7 @@ lib/Model/ConfigResponseContainersValue.php
 lib/Model/ConfigResponseNitro.php
 lib/Model/ContainerPage.php
 lib/Model/Entity.php
+lib/Model/EntityByUniqueid404Response.php
 lib/Model/EntityInterface.php
 lib/Model/EntityMetric.php
 lib/Model/EntityinterfaceInner.php

@@ -115,7 +115,7 @@ class EntitiesApi
      *
      * @throws \Flyo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\Entity
+     * @return \Flyo\Model\Entity|\Flyo\Model\EntityByUniqueid404Response
      */
     public function entityBySlug($slug, $type_id = null, $lang = null, string $contentType = self::contentTypes['entityBySlug'][0])
     {
@@ -135,7 +135,7 @@ class EntitiesApi
      *
      * @throws \Flyo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\Entity, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\Entity|\Flyo\Model\EntityByUniqueid404Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function entityBySlugWithHttpInfo($slug, $type_id = null, $lang = null, string $contentType = self::contentTypes['entityBySlug'][0])
     {
@@ -171,6 +171,12 @@ class EntitiesApi
                         $request,
                         $response,
                     );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Flyo\Model\EntityByUniqueid404Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -199,6 +205,14 @@ class EntitiesApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Flyo\Model\Entity',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Flyo\Model\EntityByUniqueid404Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -417,7 +431,7 @@ class EntitiesApi
      *
      * @throws \Flyo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Flyo\Model\Entity
+     * @return \Flyo\Model\Entity|\Flyo\Model\EntityByUniqueid404Response
      */
     public function entityByUniqueid($uniqueid, $lang = null, string $contentType = self::contentTypes['entityByUniqueid'][0])
     {
@@ -436,7 +450,7 @@ class EntitiesApi
      *
      * @throws \Flyo\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Flyo\Model\Entity, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Flyo\Model\Entity|\Flyo\Model\EntityByUniqueid404Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function entityByUniqueidWithHttpInfo($uniqueid, $lang = null, string $contentType = self::contentTypes['entityByUniqueid'][0])
     {
@@ -472,6 +486,12 @@ class EntitiesApi
                         $request,
                         $response,
                     );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Flyo\Model\EntityByUniqueid404Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -500,6 +520,14 @@ class EntitiesApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Flyo\Model\Entity',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Flyo\Model\EntityByUniqueid404Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

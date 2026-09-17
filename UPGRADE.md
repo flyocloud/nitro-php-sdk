@@ -1,5 +1,39 @@
 # Upgrade
 
+## From 3.3 to 3.4
+
+Generated against OpenAPI spec `2.45` (was `2.44`).
+
+### The 404 body of the entity endpoints is now `EntityNotFoundResponse`
+
+`EntitiesApi::entityByUniqueid()` and `EntitiesApi::entityBySlug()` both answer a 404 with the same
+body, so the schema was renamed from `entityByUniqueid_404_response` to `entityNotFoundResponse`.
+The model is unchanged field for field — `name`, `message`, `status`, `entity_unique_id`, `href` —
+only the class name moved:
+
+```php
+// 3.3
+/** @var \Flyo\Model\Entity|\Flyo\Model\EntityByUniqueid404Response $result */
+
+// 3.4
+/** @var \Flyo\Model\Entity|\Flyo\Model\EntityNotFoundResponse $result */
+$result = (new \Flyo\Api\EntitiesApi())->entityByUniqueid($uniqueidOrDraftToken);
+
+if ($result instanceof \Flyo\Model\EntityNotFoundResponse) {
+    $href = $result->getHref(); // where it lives now, or null
+}
+```
+
+`\Flyo\Model\EntityByUniqueid404Response` still exists and is now a deprecated subclass of
+`EntityNotFoundResponse`, so nothing fails to autoload and anything you built against the old
+class still passes where the new one is expected. It will be removed in a future major release.
+
+One thing to fix while upgrading: the endpoints now *return* an `EntityNotFoundResponse`, which is
+the parent class, so `instanceof \Flyo\Model\EntityByUniqueid404Response` checks and parameter
+types hinting the old class no longer match the returned object. Replace those with
+`EntityNotFoundResponse`. Reading the response — getters, array access, `json_encode()` — is
+unaffected.
+
 ## From 3.2 to 3.3
 
 Purely additive. Nothing in `lib/Api` or `lib/Model` changed, no runtime behaviour changed, and

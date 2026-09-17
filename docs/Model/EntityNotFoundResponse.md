@@ -1,8 +1,4 @@
-# # EntityByUniqueid404Response
-
-> **Deprecated.** Use [EntityNotFoundResponse](EntityNotFoundResponse.md) instead. This class now
-> only extends `EntityNotFoundResponse` so existing type hints keep working, and will be removed in
-> a future major release.
+# # EntityNotFoundResponse
 
 ## Properties
 

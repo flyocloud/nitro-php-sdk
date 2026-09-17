@@ -13,9 +13,9 @@ docs/Model/ConfigResponseContainersValue.md
 docs/Model/ConfigResponseNitro.md
 docs/Model/ContainerPage.md
 docs/Model/Entity.md
-docs/Model/EntityByUniqueid404Response.md
 docs/Model/EntityInterface.md
 docs/Model/EntityMetric.md
+docs/Model/EntityNotFoundResponse.md
 docs/Model/EntityinterfaceInner.md
 docs/Model/Meta.md
 docs/Model/MetaImage.md
@@ -43,9 +43,9 @@ lib/Model/ConfigResponseContainersValue.php
 lib/Model/ConfigResponseNitro.php
 lib/Model/ContainerPage.php
 lib/Model/Entity.php
-lib/Model/EntityByUniqueid404Response.php
 lib/Model/EntityInterface.php
 lib/Model/EntityMetric.php
+lib/Model/EntityNotFoundResponse.php
 lib/Model/EntityinterfaceInner.php
 lib/Model/Meta.php
 lib/Model/MetaImage.php

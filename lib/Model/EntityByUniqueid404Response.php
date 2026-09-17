@@ -10,7 +10,6 @@ namespace Flyo\Model;
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
  *
  * @deprecated since 3.4, use {@see EntityNotFoundResponse} instead. The schema was renamed
  *             from `entityByUniqueid_404_response` to `entityNotFoundResponse` because both

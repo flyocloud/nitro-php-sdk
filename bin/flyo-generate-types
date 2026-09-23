@@ -3,13 +3,10 @@
 
 declare(strict_types=1);
 
-// Deprecated since 3.6: use bin/flyo-generate-types. Kept, unchanged in its output, until the next
-// major release.
-
 // A code generator that writes files wherever it is pointed is a file-write primitive, so keep it
 // off any web SAPI.
 if (PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg') {
-    fwrite(STDERR, "flyo-generate-blocks must be run from the command line.\n");
+    fwrite(STDERR, "flyo-generate-types must be run from the command line.\n");
     exit(1);
 }
 
@@ -32,13 +29,13 @@ foreach ([
 }
 
 if ($autoload === null) {
-    fwrite(STDERR, "flyo-generate-blocks: composer autoloader not found. Run `composer install`.\n");
+    fwrite(STDERR, "flyo-generate-types: composer autoloader not found. Run `composer install`.\n");
     exit(2);
 }
 
 require $autoload;
 
 /** @var list<string> $arguments */
-$arguments = $argv ?? $_SERVER['argv'] ?? ['flyo-generate-blocks'];
+$arguments = $argv ?? $_SERVER['argv'] ?? ['flyo-generate-types'];
 
-exit(\Flyo\Blocks\Generator\Cli::main($arguments));
+exit(\Flyo\Generator\Cli::main($arguments));

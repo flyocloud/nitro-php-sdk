@@ -6,8 +6,9 @@ composer.json
 phpunit.xml.dist
 .gitignore
 
-# Hand-written: the typed block generator and its CLI.
+# Hand-written: the typed schema generator and its CLIs.
 bin/
+lib/Generator/
 lib/Blocks/
 phpstan-generator.neon
 phpstan-generated.neon

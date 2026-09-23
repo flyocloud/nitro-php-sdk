@@ -6,13 +6,16 @@
 # in someone's editor.
 #
 # The fixture files are excluded from the composer classmap (they are fixtures, not library code),
-# which is why the autoloader is bootstrapped explicitly for \Flyo\Model\Block.
+# which is why the autoloader is bootstrapped explicitly for the SDK models they extend.
 parameters:
   level: 9
   tmpDir: .tmp-generated
   paths:
+    # Output of the deprecated flyo-generate-blocks, which must stay byte-identical.
     - test/fixtures/blocks/hero
     - test/fixtures/blocks/full
     - test/fixtures/blocks/collisions
+    # Output of flyo-generate-types, one sub-namespace per kind.
+    - test/fixtures/types/site
   bootstrapFiles:
     - vendor/autoload.php

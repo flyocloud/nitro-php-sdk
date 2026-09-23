@@ -23,7 +23,8 @@ the block classes, all of them are documentation-only; see the "Typed Schemas" s
 README for how each one is used.
 
 Pass `--lowercase` for lower-case kind directories and sub-namespaces (`blocks`, `containers`,
-`entities`), as Yii 2 expects them: `app\flyo\blocks\BlockHero` in `flyo/blocks/BlockHero.php`.
+`entities`), as Yii 2 expects them: `app\flyo\blocks\BlockHero` in `flyo/blocks/BlockHero.php`,
+with `app/flyo` as namespace and `flyo` as target.
 
 A schema carrying an `x-schema-type` this version cannot generate yet is skipped with a warning,
 so a kind added to the API later never disappears silently.

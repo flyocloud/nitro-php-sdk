@@ -78,7 +78,7 @@ class CliTest extends TestCase
 
     /**
      * Yii 2 and similar frameworks map lower-case directories to lower-case namespaces, e.g.
-     * app\flyo\blocks in app/flyo/blocks. The class names keep their case.
+     * app\flyo\blocks in flyo/blocks, since `app` is the project root. Class names keep their case.
      */
     public function testLowercaseNamesTheKindDirectoriesAndSubNamespacesInLowerCase(): void
     {

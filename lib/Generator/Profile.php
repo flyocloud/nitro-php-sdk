@@ -189,7 +189,7 @@ final class Profile
         Each directory is a sub-namespace of <namespace>, e.g. App\\Flyo\\Blocks. The classes carry
         no logic: they narrow inherited getters of the SDK models so an IDE and PHPStan know the
         shape of the data. Pass --lowercase for lower-case directories and sub-namespaces, e.g.
-        app\\flyo\\blocks in app/flyo/blocks for Yii 2.
+        for Yii 2: app/flyo flyo --lowercase puts app\\flyo\\blocks in flyo/blocks.
 
         Arguments:
           <source>              OpenAPI URL, a local .json path, or - for stdin

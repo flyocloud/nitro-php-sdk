@@ -106,14 +106,16 @@ the classes are written but never autoloaded. The common setups:
 | Laravel | `"App\\": "app/"` | `App/Flyo` | `app/Flyo` |
 | Symfony | `"App\\": "src/"` | `App/Flyo` | `src/Flyo` |
 | Own package or plain PSR-4 | `"Acme\\Site\\": "src/"` | `Acme/Site/Flyo` | `src/Flyo` |
+| Yii 2 (basic template, add `--lowercase`) | `@app` alias, `app\` = project root | `app/flyo` | `flyo` |
 
 The rule behind the table: take the prefix and its directory from `autoload.psr-4`, then append the
 same trailing segment to both. The target directory is created if it does not exist.
 
 #### Lower-case directories (Yii 2)
 
-Some frameworks map lower-case directories to lower-case namespaces, like Yii 2's
-`app\flyo\blocks\BlockHero` in `app/flyo/blocks/BlockHero.php`. Pass `--lowercase` and the kind
+Some frameworks map lower-case directories to lower-case namespaces. In Yii 2's basic template the
+root namespace `app` is the project root itself, so there is no `app/` directory:
+`app\flyo\blocks\BlockHero` lives in `flyo/blocks/BlockHero.php`. Pass `--lowercase` and the kind
 directories and sub-namespaces become `blocks`, `containers` and `entities`; the class names keep
 their case:
 
@@ -121,9 +123,14 @@ their case:
 vendor/bin/flyo-generate-types <source> app/flyo flyo --lowercase
 ```
 
-For Yii 2's basic template, where `@app` is the project root, that writes `flyo/blocks/*.php` in
-the namespace `app\flyo\blocks`. Use the same flag for every run, `--check` included: switching
-it changes every file.
+```
+flyo/
+├── blocks/        BlockHero.php        namespace app\flyo\blocks
+├── containers/    ContainerMain.php    namespace app\flyo\containers
+└── entities/      EntityArticle.php    namespace app\flyo\entities
+```
+
+Use the same flag for every run, `--check` included: switching it changes every file.
 
 Typed schemas only exist on the **authenticated** `/nitro/v1/openapi/schemas` endpoint. The public
 `/nitro/v1/openapi` has none. Pass the token through `FLYO_TOKEN` (or `FLYO_API_KEY`) rather than

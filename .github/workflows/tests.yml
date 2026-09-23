@@ -33,10 +33,20 @@ jobs:
         run: composer test
 
       # Exercises the real binary end to end, and asserts the committed golden files are exactly
-      # what the current code produces. --check exits 6 on any drift. The coverage fixture
+      # what the current code produces. --check exits 6 on any drift. The fixture deliberately
+      # carries a schema type the generator does not know, so one warning on stderr is expected.
+      - name: Type generator CLI smoke test
+        run: |
+          php bin/flyo-generate-types \
+            test/fixtures/types/site/openapi.json \
+            'Fixture\Site' \
+            test/fixtures/types/site/expected \
+            --check --quiet
+
+      # The deprecated binary must keep producing byte-identical files. The coverage fixture
       # deliberately contains an unmergeable allOf and a dangling $ref, so two warnings on stderr
-      # here are expected.
-      - name: Block generator CLI smoke test
+      # here are expected, next to the deprecation warning.
+      - name: Deprecated block generator CLI smoke test
         run: |
           php bin/flyo-generate-blocks \
             test/fixtures/blocks/full/openapi.json \

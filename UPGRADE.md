@@ -1,5 +1,67 @@
 # Upgrade
 
+## From 3.5 to 3.6
+
+Nothing in `lib/Api` or `lib/Model` changed and no runtime behaviour changed. The block generator
+grew into a generator for every typed schema, under a new name.
+
+### New: `vendor/bin/flyo-generate-types`
+
+Takes the same arguments and options as `flyo-generate-blocks`, but generates every kind of typed
+schema the document declares, each into a sub-namespace and directory of its own:
+
+| kind | directory | extends | narrows |
+|------|-----------|---------|---------|
+| blocks | `<target>/Blocks` | `\Flyo\Model\Block` | `getContent()`, `getConfig()`, `getItems()` |
+| containers | `<target>/Containers` | `\Flyo\Model\ConfigResponseContainersValue` | `getItems()` |
+| container items | `<target>/Containers` | `\Flyo\Model\ContainerPage` | `getProperties()`, `getChildren()` |
+| entities | `<target>/Entities` | `\Flyo\Model\Entity` | `getModel()` |
+
+So `<namespace>` is now a root: with `App/Flyo` and `app/Flyo`, blocks land in
+`App\Flyo\Blocks`, containers in `App\Flyo\Containers` and entities in `App\Flyo\Entities`. Like
+the block classes, all of them are documentation-only; see the "Typed Schemas" section of the
+README for how each one is used.
+
+A schema carrying an `x-schema-type` this version cannot generate yet is skipped with a warning,
+so a kind added to the API later never disappears silently.
+
+### Deprecated: `vendor/bin/flyo-generate-blocks`
+
+It keeps working until the next major release and keeps generating byte-identical files, so a
+committed target and its `--check` keep passing after the upgrade. The only difference is a
+deprecation warning on stderr, printed on every run, `--quiet` included, like every warning.
+
+To migrate, switch the script to the new command with a root namespace. The class names are the
+same, only their namespace gains the kind:
+
+```diff
+  "scripts": {
+-     "flyo:types": "vendor/bin/flyo-generate-blocks <source> App/Blocks app/Blocks"
++     "flyo:types": "vendor/bin/flyo-generate-types <source> App/Flyo app/Flyo"
+  }
+```
+
+```php
+// 3.5
+/** @var \App\Blocks\BlockHero $block */
+
+// 3.6
+/** @var \App\Flyo\Blocks\BlockHero $block */
+```
+
+Then delete the old target directory. If you would rather keep the directory, pointing the new
+command at it works too: blocks generated there by the old command carry the `@generated` marker
+and are cleaned up, and the new command warns when the namespace you pass already ends in
+`Blocks`, because the blocks would then land in `...\Blocks\Blocks`.
+
+### Moved: the generator classes
+
+The generator itself moved from `Flyo\Blocks\Generator` to `Flyo\Generator`. Those classes are
+the internals of the two binaries and were never documented. Of the old namespace, only
+`\Flyo\Blocks\Generator\Cli::main()` remains, deprecated, as the entry point of
+`flyo-generate-blocks`. If you called any other class of it directly, call
+`\Flyo\Generator\Cli::main()` or the binary instead.
+
 ## From 3.3 to 3.4
 
 Generated against OpenAPI spec `2.45` (was `2.44`).

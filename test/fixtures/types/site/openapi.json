@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Typed schemas of every kind",
+    "description": "An invented site with one block, two entity types and two navigation containers sharing one item schema, plus a schema type the generator does not know.",
+    "version": "edge"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "block": {
+        "type": "object",
+        "description": "The generic block model. Carries no x-schema-type and is never generated.",
+        "properties": {
+          "identifier": { "type": "string" },
+          "uid": { "type": "string" }
+        }
+      },
+      "entity": {
+        "type": "object",
+        "description": "The generic entity response. Its `required` list decides whether getModel() is nullable.",
+        "properties": {
+          "entity": { "type": "object" },
+          "model": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/EntityArticle" },
+              { "$ref": "#/components/schemas/EntityEvent" }
+            ]
+          },
+          "language": { "type": "string" }
+        }
+      },
+      "BlockTeaser": {
+        "title": "Teaser",
+        "type": "object",
+        "description": "Block definition \"teaser\" (component: Teaser).",
+        "required": ["identifier", "uid", "component", "content", "config", "items", "slots"],
+        "properties": {
+          "identifier": { "enum": ["teaser"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["Teaser"], "type": "string" },
+          "content": {
+            "type": "object",
+            "description": "Block content fields.",
+            "required": ["title"],
+            "properties": {
+              "title": { "type": "string", "nullable": false },
+              "image": {
+                "type": "object",
+                "properties": {
+                  "source": { "type": "string" },
+                  "caption": { "type": "string" }
+                }
+              },
+              "_empty": { "type": "boolean" }
+            }
+          },
+          "config": {
+            "type": "object",
+            "description": "Block configuration fields.",
+            "properties": {
+              "dark": { "type": "boolean" },
+              "_empty": { "type": "boolean" }
+            }
+          },
+          "items": {
+            "type": "array",
+            "description": "Iterated content pool items mapped to block fields.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": { "title": "Title" },
+                "link": {
+                  "type": "object",
+                  "properties": {
+                    "entity_slug": { "type": "string" },
+                    "routes": { "type": "object", "additionalProperties": true }
+                  }
+                }
+              }
+            }
+          },
+          "slots": {
+            "type": "object",
+            "properties": {
+              "aside": {
+                "type": "object",
+                "properties": {
+                  "identifier": { "type": "string" },
+                  "content": { "type": "array", "items": { "$ref": "#/components/schemas/block" } }
+                }
+              },
+              "_empty": { "type": "boolean" }
+            }
+          }
+        },
+        "x-schema-type": "block"
+      },
+      "EntityArticle": {
+        "title": "Articles",
+        "type": "object",
+        "description": "Entity model for \"Articles\" (Schema ID: 1).",
+        "properties": {
+          "headline": { "type": "string" },
+          "published_at": { "type": "integer" },
+          "image": {
+            "type": "object",
+            "properties": {
+              "source": { "type": "string" },
+              "caption": { "type": "string" },
+              "id": { "type": "number" }
+            }
+          },
+          "content": {
+            "type": "object",
+            "properties": {
+              "html": { "type": "string" },
+              "json": { "type": "object" }
+            }
+          },
+          "category": {
+            "type": "object",
+            "properties": {
+              "value": { "enum": ["news", "report"], "type": "string" },
+              "options": { "type": "object" },
+              "label": { "type": "string" }
+            }
+          },
+          "tags": {
+            "type": "object",
+            "description": "Mapped relation fields are returned keyed by the name of the relation field they belong to.",
+            "properties": {
+              "topics": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": { "type": "string" },
+                    "slug": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "number" },
+                "unique_id": { "type": "string" }
+              }
+            }
+          }
+        },
+        "x-schema-type": "entity"
+      },
+      "EntityEvent": {
+        "title": "Events",
+        "type": "object",
+        "description": "Entity model for \"Events\" (Schema ID: 2).",
+        "properties": {
+          "starts_at": { "type": "integer" },
+          "tickets": { "type": "string" },
+          "sold_out": { "type": "boolean" },
+          "venue": {
+            "type": "object",
+            "properties": {
+              "zip": { "type": "number" },
+              "city": { "type": "string" },
+              "cords_lat": { "type": "number" }
+            }
+          }
+        },
+        "x-schema-type": "entity"
+      },
+      "ContainerMain": {
+        "title": "Main navigation",
+        "type": "object",
+        "description": "Navigation container \"Main navigation\", as delivered under `containers.main`.",
+        "required": ["uid", "identifier", "label", "items"],
+        "properties": {
+          "uid": { "type": "string" },
+          "identifier": { "enum": ["main"], "type": "string" },
+          "label": { "type": "string" },
+          "items": {
+            "type": "array",
+            "description": "The pages of this container, as a tree.",
+            "items": { "$ref": "#/components/schemas/ContainerItem" }
+          }
+        },
+        "x-schema-type": "container"
+      },
+      "ContainerFooter": {
+        "title": "Footer",
+        "type": "object",
+        "description": "Navigation container \"Footer\", as delivered under `containers.footer`.",
+        "required": ["uid", "identifier", "label", "items"],
+        "properties": {
+          "uid": { "type": "string" },
+          "identifier": { "enum": ["footer"], "type": "string" },
+          "label": { "type": "string" },
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ContainerItem" }
+          }
+        },
+        "x-schema-type": "container"
+      },
+      "ContainerItem": {
+        "title": "Container Item",
+        "type": "object",
+        "description": "One entry of a navigation container. Carries no x-schema-type: it is generated because the containers reference it.",
+        "required": ["type", "target", "label", "href", "slug", "properties", "children"],
+        "properties": {
+          "type": { "enum": ["page", "url"], "type": "string" },
+          "target": { "type": "string" },
+          "label": { "type": "string" },
+          "href": { "type": "string" },
+          "slug": { "type": "string" },
+          "properties": {
+            "type": "object",
+            "description": "The page properties this site made available to the navigation.",
+            "properties": {
+              "icon": { "type": "string" },
+              "highlight": { "type": "boolean" },
+              "teaser-image": {
+                "type": "object",
+                "properties": {
+                  "source": { "type": "string" },
+                  "caption": { "type": "string" }
+                }
+              }
+            }
+          },
+          "children": {
+            "type": "array",
+            "description": "The entries below this one, empty when there are none.",
+            "items": { "$ref": "#/components/schemas/ContainerItem" }
+          }
+        }
+      },
+      "Containers": {
+        "type": "object",
+        "description": "The containers object of the config endpoint. Carries no x-schema-type and is never generated.",
+        "properties": {
+          "main": { "$ref": "#/components/schemas/ContainerMain" },
+          "footer": { "$ref": "#/components/schemas/ContainerFooter" }
+        }
+      },
+      "GadgetClock": {
+        "type": "object",
+        "description": "A schema type this version of the generator does not know. Must be skipped with a warning.",
+        "properties": {
+          "time": { "type": "string" }
+        },
+        "x-schema-type": "gadget"
+      }
+    }
+  }
+}

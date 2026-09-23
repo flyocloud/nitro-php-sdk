@@ -27,6 +27,7 @@ final class Options
         'check',
         'no-clean',
         'allow-empty',
+        'lowercase',
         'quiet',
         'verbose',
         'help',
@@ -92,6 +93,17 @@ final class Options
         $usage = $profile->usage();
 
         [$values, $flags, $operands] = self::tokenize($argv, $usage);
+
+        if (isset($flags['lowercase'])) {
+            if ($profile->flat) {
+                throw GeneratorException::usage(
+                    sprintf('--lowercase has no effect: %s writes no kind directories.', $profile->program),
+                    [$usage],
+                );
+            }
+
+            $profile = $profile->withLowercaseDirectories();
+        }
 
         // --help and --version short-circuit before anything is required.
         if (isset($flags['help'])) {

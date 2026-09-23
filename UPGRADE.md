@@ -22,6 +22,9 @@ So `<namespace>` is now a root: with `App/Flyo` and `app/Flyo`, blocks land in
 the block classes, all of them are documentation-only; see the "Typed Schemas" section of the
 README for how each one is used.
 
+Pass `--lowercase` for lower-case kind directories and sub-namespaces (`blocks`, `containers`,
+`entities`), as Yii 2 expects them: `app\flyo\blocks\BlockHero` in `flyo/blocks/BlockHero.php`.
+
 A schema carrying an `x-schema-type` this version cannot generate yet is skipped with a warning,
 so a kind added to the API later never disappears silently.
 

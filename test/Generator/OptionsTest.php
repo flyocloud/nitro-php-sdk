@@ -348,6 +348,29 @@ class OptionsTest extends TestCase
         $this->assertSame([], $options->warnings);
     }
 
+    public function testLowercaseSwitchesTheProfileToLowerCaseDirectories(): void
+    {
+        $this->assertFalse(self::parse(['a.json', 'app\\flyo', 'src'])->profile->lowercase);
+        $this->assertTrue(self::parse(['a.json', 'app\\flyo', 'src', '--lowercase'])->profile->lowercase);
+    }
+
+    public function testLowercaseIsRejectedByTheDeprecatedCommand(): void
+    {
+        try {
+            Options::parse(['flyo-generate-blocks', 'a.json', 'App\\Blocks', 'src', '--lowercase'], [], Profile::blocks());
+            $this->fail('expected a usage error');
+        } catch (GeneratorException $e) {
+            $this->assertStringContainsString('--lowercase has no effect', $e->getMessage());
+        }
+    }
+
+    public function testTheKindDirectoryWarningFollowsTheCase(): void
+    {
+        $options = self::parse(['a.json', 'app\\blocks', 'app/blocks', '--lowercase']);
+
+        $this->assertStringContainsString('app\\blocks\\blocks', implode("\n", $options->warnings));
+    }
+
     public function testUsageErrorsNameTheProgramOfTheProfile(): void
     {
         try {

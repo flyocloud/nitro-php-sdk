@@ -112,7 +112,8 @@ final class Cli
         }
 
         $warnings = new Warnings();
-        $plan = (new Planner())->plan($document, $this->profile, $options->namespace, $warnings);
+        // The parsed profile, which carries per-run layout choices such as --lowercase.
+        $plan = (new Planner())->plan($document, $options->profile, $options->namespace, $warnings);
 
         if ($plan->isEmpty()) {
             return $this->noTypes($document, $options);

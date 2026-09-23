@@ -19,6 +19,9 @@ final class Profile
      * @param list<Kind> $kinds in the order they are reported
      * @param bool $flat write every class straight into the target instead of a directory per kind
      * @param bool $reportUnsupported warn about `x-schema-type` markers no kind generates from
+     * @param bool $lowercase name the kind directories and sub-namespaces `blocks`, `entities`, ...
+     *  instead of `Blocks`, `Entities`, ..., for frameworks whose namespaces follow lower-case
+     *  directories, such as Yii 2's `app\flyo\blocks`
      */
     private function __construct(
         public readonly string $program,
@@ -28,6 +31,7 @@ final class Profile
         public readonly ?string $deprecation,
         public readonly string $exampleNamespace,
         public readonly string $exampleTarget,
+        public readonly bool $lowercase = false,
     ) {
     }
 
@@ -62,14 +66,39 @@ final class Profile
         );
     }
 
+    /**
+     * The same profile, with every kind directory and sub-namespace in lower case.
+     */
+    public function withLowercaseDirectories(): self
+    {
+        return new self(
+            $this->program,
+            $this->kinds,
+            $this->flat,
+            $this->reportUnsupported,
+            $this->deprecation,
+            $this->exampleNamespace,
+            $this->exampleTarget,
+            lowercase: true,
+        );
+    }
+
     public function namespaceFor(Kind $kind, string $namespace): string
     {
-        return $this->flat ? $namespace : $namespace . '\\' . $kind->directory();
+        return $this->flat ? $namespace : $namespace . '\\' . $this->directoryOf($kind);
     }
 
     public function pathFor(Kind $kind, string $className): string
     {
-        return ($this->flat ? '' : $kind->directory() . '/') . $className . '.php';
+        return ($this->flat ? '' : $this->directoryOf($kind) . '/') . $className . '.php';
+    }
+
+    /**
+     * The directory, and sub-namespace segment, a kind's classes go to under this profile.
+     */
+    public function directoryOf(Kind $kind): string
+    {
+        return $this->lowercase ? strtolower($kind->directory()) : $kind->directory();
     }
 
     /**
@@ -86,7 +115,7 @@ final class Profile
             return [''];
         }
 
-        return ['', ...array_map(static fn (Kind $kind): string => $kind->directory(), $this->kinds)];
+        return ['', ...array_map(fn (Kind $kind): string => $this->directoryOf($kind), $this->kinds)];
     }
 
     /**
@@ -115,11 +144,12 @@ final class Profile
             if (strcasecmp($last, $kind->directory()) === 0) {
                 return [sprintf(
                     'namespace "%s" ends in "%s", but %s adds a sub-namespace per kind itself, so '
-                        . 'blocks land in %s\\Blocks. Did you mean the root, e.g. "%s"?',
+                        . 'blocks land in %s\\%s. Did you mean the root, e.g. "%s"?',
                     $namespace,
                     $last,
                     $this->program,
                     $namespace,
+                    $this->directoryOf($this->kinds[0]),
                     $this->exampleNamespace,
                 )];
             }
@@ -158,14 +188,15 @@ final class Profile
 
         Each directory is a sub-namespace of <namespace>, e.g. App\\Flyo\\Blocks. The classes carry
         no logic: they narrow inherited getters of the SDK models so an IDE and PHPStan know the
-        shape of the data.
+        shape of the data. Pass --lowercase for lower-case directories and sub-namespaces, e.g.
+        app\\flyo\\blocks in app/flyo/blocks for Yii 2.
 
         Arguments:
           <source>              OpenAPI URL, a local .json path, or - for stdin
           <namespace>           PSR-4 root namespace for the generated classes, e.g. 'App\\Flyo'
           <target>              directory that namespace maps to, e.g. app/Flyo
 
-        {$this->optionsHelp('schemas')}
+        {$this->optionsHelp('schemas', true)}
 
         Typed schemas only exist on the authenticated endpoint; the public /nitro/v1/openapi has
         none. Use:
@@ -232,8 +263,13 @@ final class Profile
         TXT;
     }
 
-    private function optionsHelp(string $subject): string
+    private function optionsHelp(string $subject, bool $kindDirectories = false): string
     {
+        $lowercase = $kindDirectories
+            ? "\n      --lowercase       name the kind directories and sub-namespaces blocks,\n"
+                . '                        containers, entities instead of Blocks, Containers, Entities'
+            : '';
+
         return <<<TXT
         Options:
           -u, --url, --source   same as <source>
@@ -243,7 +279,7 @@ final class Profile
                                 \$FLYO_API_KEY. Prefer the environment variable: an argument is
                                 visible to anyone who can run ps.
               --no-clean        keep previously generated files that are no longer produced
-              --allow-empty     exit 0 when the document declares no typed {$subject}
+              --allow-empty     exit 0 when the document declares no typed {$subject}{$lowercase}
           -d, --dry-run         report what would change, write nothing
               --check           like --dry-run, but exit 6 if anything is out of date
           -q, --quiet           suppress all output except warnings and errors

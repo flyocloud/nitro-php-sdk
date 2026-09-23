@@ -76,6 +76,48 @@ class CliTest extends TestCase
         $this->assertStringContainsString('1 block, 2 containers, 2 entities -> ', $out);
     }
 
+    /**
+     * Yii 2 and similar frameworks map lower-case directories to lower-case namespaces, e.g.
+     * app\flyo\blocks in app/flyo/blocks. The class names keep their case.
+     */
+    public function testLowercaseNamesTheKindDirectoriesAndSubNamespacesInLowerCase(): void
+    {
+        [$status, $out] = $this->invoke([self::fixture(self::SITE), 'app/flyo', $this->dir, '--lowercase']);
+
+        $this->assertSame(ExitCode::OK, $status);
+
+        foreach ([
+            'blocks/BlockTeaser.php' => 'app\flyo\blocks',
+            'containers/ContainerItem.php' => 'app\flyo\containers',
+            'entities/EntityArticle.php' => 'app\flyo\entities',
+        ] as $file => $namespace) {
+            $this->assertStringContainsString('wrote: ' . $file, $out);
+            $this->assertStringContainsString(
+                'namespace ' . $namespace . ';',
+                (string) file_get_contents($this->dir . '/' . $file)
+            );
+        }
+
+        $this->assertStringContainsString(
+            '@return array<int, \app\flyo\containers\ContainerItem>',
+            (string) file_get_contents($this->dir . '/containers/ContainerMain.php')
+        );
+        $this->assertDirectoryDoesNotExist($this->dir . '/Blocks');
+    }
+
+    public function testLowercaseCleansTheLowerCaseDirectoriesAndPassesCheck(): void
+    {
+        $this->invoke([self::fixture(self::SITE), 'app/flyo', $this->dir, '--lowercase', '-q']);
+
+        [$status] = $this->invoke([self::fixture(self::SITE), 'app/flyo', $this->dir, '--lowercase', '--check']);
+        $this->assertSame(ExitCode::OK, $status);
+
+        [$status, $out] = $this->invoke([self::fixture('blocks/hero'), 'app/flyo', $this->dir, '--lowercase']);
+        $this->assertSame(ExitCode::OK, $status);
+        $this->assertStringContainsString('removed: entities/EntityArticle.php', $out);
+        $this->assertFileDoesNotExist($this->dir . '/entities/EntityArticle.php');
+    }
+
     public function testTheMarkerNamesTheNewCommand(): void
     {
         $this->invoke([self::fixture(self::SITE), 'App\Flyo', $this->dir]);

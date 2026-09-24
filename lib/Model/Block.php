@@ -290,6 +290,27 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['items'] === null) {
+            $invalidProperties[] = "'items' can't be null";
+        }
+        if ($this->container['content'] === null) {
+            $invalidProperties[] = "'content' can't be null";
+        }
+        if ($this->container['config'] === null) {
+            $invalidProperties[] = "'config' can't be null";
+        }
+        if ($this->container['identifier'] === null) {
+            $invalidProperties[] = "'identifier' can't be null";
+        }
+        if ($this->container['uid'] === null) {
+            $invalidProperties[] = "'uid' can't be null";
+        }
+        if ($this->container['component'] === null) {
+            $invalidProperties[] = "'component' can't be null";
+        }
+        if ($this->container['slots'] === null) {
+            $invalidProperties[] = "'slots' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -308,7 +329,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets items
      *
-     * @return mixed[]|null
+     * @return mixed[]
      */
     public function getItems()
     {
@@ -318,7 +339,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets items
      *
-     * @param mixed[]|null $items The \"Items\" variable stores an array of items that have been obtained through the mapping process between content pools and fields. This mapping step allows for the seamless connection between various content sources and the corresponding data fields. Each item is additionally enriched with a generated detail-page `link` (see the typed block schemas), unless the mapping declares its own `link` field.
+     * @param mixed[] $items The \"Items\" variable stores an array of items that have been obtained through the mapping process between content pools and fields. This mapping step allows for the seamless connection between various content sources and the corresponding data fields. Each item is additionally enriched with a generated detail-page `link` (see the typed block schemas), unless the mapping declares its own `link` field.
      *
      * @return self
      */
@@ -335,7 +356,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets content
      *
-     * @return object|null
+     * @return object
      */
     public function getContent()
     {
@@ -345,7 +366,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets content
      *
-     * @param object|null $content Content serves as the primary source for generating invaluable blocks of information.
+     * @param object $content Content serves as the primary source for generating invaluable blocks of information.
      *
      * @return self
      */
@@ -362,7 +383,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets config
      *
-     * @return object|null
+     * @return object
      */
     public function getConfig()
     {
@@ -372,7 +393,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets config
      *
-     * @param object|null $config The Configuration section contains essential information that greatly facilitates the transformation of the output into various visually appealing styles and formats. This section is instrumental in customizing the appearance and presentation of the output.
+     * @param object $config The Configuration section contains essential information that greatly facilitates the transformation of the output into various visually appealing styles and formats. This section is instrumental in customizing the appearance and presentation of the output.
      *
      * @return self
      */
@@ -389,7 +410,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets identifier
      *
-     * @return string|null
+     * @return string
      */
     public function getIdentifier()
     {
@@ -399,7 +420,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets identifier
      *
-     * @param string|null $identifier The unique identifier for the current block type
+     * @param string $identifier The unique identifier for the current block type
      *
      * @return self
      */
@@ -416,7 +437,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets uid
      *
-     * @return string|null
+     * @return string
      */
     public function getUid()
     {
@@ -426,7 +447,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets uid
      *
-     * @param string|null $uid An unique identifier across all blocks
+     * @param string $uid An unique identifier across all blocks
      *
      * @return self
      */
@@ -443,7 +464,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets component
      *
-     * @return string|null
+     * @return string
      */
     public function getComponent()
     {
@@ -453,7 +474,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets component
      *
-     * @param string|null $component An unique identifier for a component annotation for the current block type
+     * @param string $component An unique identifier for a component annotation for the current block type
      *
      * @return self
      */
@@ -470,7 +491,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets slots
      *
-     * @return array<string,\Flyo\Model\BlockSlotValue>|null
+     * @return array<string,\Flyo\Model\BlockSlotValue>
      */
     public function getSlots()
     {
@@ -480,7 +501,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets slots
      *
-     * @param array<string,\Flyo\Model\BlockSlotValue>|null $slots slots
+     * @param array<string,\Flyo\Model\BlockSlotValue> $slots slots
      *
      * @return self
      */

@@ -72,6 +72,8 @@
               "multi_enum": { "type": "string", "enum": ["wide", "narrow", "full"] },
               "enum_without_type": { "enum": ["a", "b"] },
               "enum_with_quote": { "type": "string", "enum": ["it's", "plain"] },
+              "nullable_enum": { "type": "string", "nullable": true, "enum": ["red", "green", null] },
+              "empty_list": { "type": "array", "maxItems": 0, "items": {} },
               "nested_object": {
                 "title": "Nested",
                 "type": "object",

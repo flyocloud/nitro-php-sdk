@@ -220,6 +220,10 @@ final class TypeMapper
     /**
      * An `enum` rendered as a union of literal strings, or null when that is not safe.
      *
+     * A `null` member is how OpenAPI 3.0 lets a nullable enum actually hold null (`nullable: true`
+     * alone does not), as a select field's `value` does. It becomes a trailing `null` rather than
+     * disqualifying the whole enum.
+     *
      * @param array<string, mixed> $schema
      */
     private function literalUnion(array $schema): ?string
@@ -230,7 +234,13 @@ final class TypeMapper
         }
 
         $literals = [];
+        $hasNull = false;
         foreach ($enum as $value) {
+            if ($value === null) {
+                $hasNull = true;
+                continue;
+            }
+
             // A block id may be a number even though the property is typed string.
             if (!is_scalar($value)) {
                 return null;
@@ -247,6 +257,10 @@ final class TypeMapper
             if (!in_array($literal, $literals, true)) {
                 $literals[] = $literal;
             }
+        }
+
+        if ($hasNull) {
+            $literals[] = 'null';
         }
 
         return implode('|', $literals);
@@ -316,6 +330,12 @@ final class TypeMapper
      */
     private function arrayType(array $schema, array $path, int $depth, array $refs): string
     {
+        // A list that can never hold anything: a select field's `options` is an empty list instead
+        // of an object when nothing is selected.
+        if (($schema['maxItems'] ?? null) === 0) {
+            return 'array{}';
+        }
+
         $items = $schema['items'] ?? null;
 
         if (!is_array($items) || $items === []) {

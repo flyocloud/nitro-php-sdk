@@ -28,7 +28,7 @@ class EntityArticle extends \Flyo\Model\Entity
      *     content: object{html: string|null, json: \stdClass|null}|null,
      *     category: object{
      *         value: 'news'|'report'|null,
-     *         options: \stdClass|null,
+     *         options: \stdClass|array{},
      *         label: string|null
      *     }|null,
      *     tags: object{
@@ -51,7 +51,7 @@ class EntityArticle extends \Flyo\Model\Entity
          *     content: object{html: string|null, json: \stdClass|null}|null,
          *     category: object{
          *         value: 'news'|'report'|null,
-         *         options: \stdClass|null,
+         *         options: \stdClass|array{},
          *         label: string|null
          *     }|null,
          *     tags: object{

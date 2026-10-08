@@ -120,10 +120,16 @@
           },
           "category": {
             "type": "object",
+            "required": ["value", "options", "label"],
             "properties": {
-              "value": { "enum": ["news", "report"], "type": "string" },
-              "options": { "type": "object" },
-              "label": { "type": "string" }
+              "value": { "enum": ["news", "report", null], "type": "string", "nullable": true },
+              "options": {
+                "oneOf": [
+                  { "type": "object", "additionalProperties": { "type": "string" } },
+                  { "maxItems": 0, "type": "array", "items": {} }
+                ]
+              },
+              "label": { "type": "string", "nullable": true }
             }
           },
           "tags": {

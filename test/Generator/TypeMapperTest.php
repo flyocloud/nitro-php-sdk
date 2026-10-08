@@ -49,6 +49,20 @@ class TypeMapperTest extends TestCase
                 ['type' => 'string', 'enum' => ["a\nb"]],
                 'string',
             ],
+            // OpenAPI 3.0 needs `null` listed for a nullable enum to accept it.
+            'nullable enum keeps its literals' => [
+                ['type' => 'string', 'nullable' => true, 'enum' => ['red', 'green', null]],
+                "'red'|'green'|null",
+            ],
+            'null member is listed last' => [
+                ['type' => 'string', 'enum' => [null, 'red', 'green']],
+                "'red'|'green'|null",
+            ],
+            'enum of only null' => [['type' => 'string', 'enum' => [null]], 'null'],
+            'enum with an object member falls back to string' => [
+                ['type' => 'string', 'enum' => ['red', ['nested' => true]]],
+                'string',
+            ],
             'object with properties' => [
                 ['type' => 'object', 'properties' => ['a' => ['type' => 'string']]],
                 'object{a: string|null}',
@@ -90,6 +104,24 @@ class TypeMapperTest extends TestCase
             ],
             'list without items' => [['type' => 'array'], 'array<int, mixed>'],
             'list with empty items' => [['type' => 'array', 'items' => []], 'array<int, mixed>'],
+            'list that is always empty' => [
+                ['type' => 'array', 'maxItems' => 0, 'items' => []],
+                'array{}',
+            ],
+            'list with a positive maxItems is still a list' => [
+                ['type' => 'array', 'maxItems' => 3, 'items' => ['type' => 'string']],
+                'array<int, string>',
+            ],
+            // A select field's `options`: a map of value => label, or `[]` when nothing is selected.
+            'map or empty list' => [
+                [
+                    'oneOf' => [
+                        ['type' => 'object', 'additionalProperties' => ['type' => 'string']],
+                        ['type' => 'array', 'maxItems' => 0, 'items' => []],
+                    ],
+                ],
+                '\stdClass|array{}',
+            ],
             'list of generic blocks' => [
                 ['type' => 'array', 'items' => ['$ref' => '#/components/schemas/block']],
                 'array<int, \Flyo\Model\Block>',
@@ -189,6 +221,18 @@ class TypeMapperTest extends TestCase
         $this->assertSame(
             'string|null',
             self::mapper()->propertyType(['type' => ['string', 'null']], ['a'], false)
+        );
+    }
+
+    public function testANullableEnumIsNotSuffixedWithNullTwice(): void
+    {
+        $this->assertSame(
+            "'red'|'green'|null",
+            self::mapper()->propertyType(
+                ['type' => 'string', 'nullable' => true, 'enum' => ['red', 'green', null]],
+                ['a'],
+                false,
+            )
         );
     }
 

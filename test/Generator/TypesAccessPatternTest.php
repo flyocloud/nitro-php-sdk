@@ -55,8 +55,25 @@ class TypesAccessPatternTest extends TestCase
         $this->assertInstanceOf(\stdClass::class, $model->image);
         $this->assertSame(154311, $model->image->id);
         $this->assertSame('news', $model->category->value);
+        $this->assertInstanceOf(\stdClass::class, $model->category->options);
         $this->assertSame('first-topic', $model->tags->topics[0]->slug);
         $this->assertSame('evt1', $model->events[0]->unique_id);
+    }
+
+    /**
+     * With nothing selected, an option's `options` decodes to an empty array instead of an
+     * object: the `array{}` half of its `\stdClass|array{}` type.
+     */
+    public function testAnUnselectedOptionHasAnEmptyListOfOptions(): void
+    {
+        $payload = self::entityPayload();
+        $payload->model->category = self::decode('{ "value": null, "options": [], "label": null }');
+
+        $model = ObjectSerializer::deserialize($payload, self::ENTITY, [])->getModel();
+
+        $this->assertNull($model->category->value);
+        $this->assertSame([], $model->category->options);
+        $this->assertNull($model->category->label);
     }
 
     public function testTheRestOfTheEntityKeepsTheSdkModels(): void

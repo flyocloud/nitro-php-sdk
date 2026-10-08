@@ -1,5 +1,31 @@
 # Upgrade
 
+## From 3.6 to 3.7
+
+### Generated types: select fields keep their values
+
+A select field's `value` is typed with the values an editor can pick again. The API lists `null`
+among a nullable select's allowed values, and the generator used to drop the whole list because of
+it, falling back to `string`. Its `options`, an empty list instead of an object when nothing is
+selected, is now typed as exactly that:
+
+```diff
+  size: object{
+-     value: string|null,
+-     options: \stdClass|array<int, mixed>,
++     value: 'small'|'medium'|'large'|null,
++     options: \stdClass|array{},
+      label: string|null
+  }|null,
+```
+
+A `match` over `value` can be exhaustive now, and PHPStan reports a comparison against a value the
+field does not have.
+
+This changes the generated file of every block, entity and container that has a select field, so
+`--check` reports them as out of date until you regenerate once. That includes the deprecated
+`flyo-generate-blocks`: keeping its output byte-identical would have meant keeping the bug.
+
 ## From 3.5 to 3.6
 
 Nothing in `lib/Api` or `lib/Model` changed and no runtime behaviour changed. The block generator

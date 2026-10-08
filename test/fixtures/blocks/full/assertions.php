@@ -76,6 +76,24 @@ function enumIsAnActualUnion(BlockCoverage $block): bool
     return $block->getContent()->multi_enum === 'wide';
 }
 
+/** A `null` member does not cost the enum its literals, so a match over it can be exhaustive. */
+function nullableEnum(BlockCoverage $block): string
+{
+    return match ($block->getContent()->nullable_enum) {
+        'red' => 'Red',
+        'green' => 'Green',
+        null => '',
+    };
+}
+
+/** `maxItems: 0` is a list that can only ever be empty, so its count is known to be zero. */
+function emptyList(BlockCoverage $block): string
+{
+    return match (count($block->getContent()->empty_list ?? [])) {
+        0 => 'empty',
+    };
+}
+
 function deeplyNested(BlockCoverage $block): ?string
 {
     return $block->getContent()->nested_object?->deep?->deeper;
@@ -189,7 +207,7 @@ function itemTypeId(BlockCoverage $block): bool|int|null
 
 function slots(BlockCoverage $block): int
 {
-    $slots = $block->getSlots() ?? [];
+    $slots = $block->getSlots();
     $slot = $slots['main'] ?? null;
 
     return $slot === null ? 0 : count($slot->getContent() ?? []);

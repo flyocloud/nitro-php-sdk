@@ -80,6 +80,23 @@ function articleCategory(EntityArticle $entity): string
     };
 }
 
+/**
+ * An option's `options` is a map of value => label, or an empty list when nothing is selected, so
+ * as a list it is known to hold nothing.
+ */
+function articleCategoryHasOptions(EntityArticle $entity): bool
+{
+    $options = $entity->getModel()?->category?->options;
+
+    if (is_array($options)) {
+        return match (count($options)) {
+            0 => false,
+        };
+    }
+
+    return $options !== null;
+}
+
 /** @return list<string> */
 function articleTopicSlugs(EntityArticle $entity): array
 {

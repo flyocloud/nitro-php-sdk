@@ -189,7 +189,7 @@ function itemTypeId(BlockCoverage $block): bool|int|null
 
 function slots(BlockCoverage $block): int
 {
-    $slots = $block->getSlots() ?? [];
+    $slots = $block->getSlots();
     $slot = $slots['main'] ?? null;
 
     return $slot === null ? 0 : count($slot->getContent() ?? []);

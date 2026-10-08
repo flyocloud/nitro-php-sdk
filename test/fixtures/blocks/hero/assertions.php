@@ -97,7 +97,7 @@ function inheritedGetters(BlockHero $block): string
 /** Slots are already real models on the parent, so this is the parent's exact type. */
 function slotChildren(BlockHero $block): int
 {
-    $slots = $block->getSlots() ?? [];
+    $slots = $block->getSlots();
     $slot = $slots['main'] ?? null;
 
     return $slot === null ? 0 : count($slot->getContent() ?? []);

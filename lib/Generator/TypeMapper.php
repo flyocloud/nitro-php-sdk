@@ -218,48 +218,72 @@ final class TypeMapper
     }
 
     /**
-     * An `enum` rendered as a union of literal strings, or null when that is not safe.
+     * The members of an `enum` as the strings its literal union spells them, in document order and
+     * without duplicates, or null when the enum is absent, empty or not safe to render.
      *
-     * A `null` member is how OpenAPI 3.0 lets a nullable enum actually hold null (`nullable: true`
-     * alone does not), as a select field's `value` does. It becomes a trailing `null` rather than
-     * disqualifying the whole enum.
+     * A `null` member stays null. It is how OpenAPI 3.0 lets a nullable enum actually hold null
+     * (`nullable: true` alone does not), as a select field's `value` does.
+     *
+     * {@see EnumConstants} names its constants after these same strings, so a constant always has
+     * a type the field's own type accepts.
      *
      * @param array<string, mixed> $schema
+     * @return list<string|null>|null
      */
-    private function literalUnion(array $schema): ?string
+    public static function enumMembers(array $schema): ?array
     {
         $enum = $schema['enum'] ?? null;
         if (!is_array($enum) || $enum === []) {
             return null;
         }
 
-        $literals = [];
-        $hasNull = false;
+        $members = [];
         foreach ($enum as $value) {
-            if ($value === null) {
-                $hasNull = true;
-                continue;
+            if ($value !== null) {
+                // A block id may be a number even though the property is typed string.
+                if (!is_scalar($value)) {
+                    return null;
+                }
+
+                $value = is_bool($value) ? ($value ? '1' : '') : (string) $value;
+
+                // A newline or a comment terminator would break out of the docblock; not worth
+                // escaping for.
+                if (preg_match('/[\r\n]|\*\//', $value) === 1) {
+                    return null;
+                }
             }
 
-            // A block id may be a number even though the property is typed string.
-            if (!is_scalar($value)) {
-                return null;
-            }
-
-            $string = is_bool($value) ? ($value ? '1' : '') : (string) $value;
-
-            // A newline would break out of the docblock; not worth escaping for.
-            if (preg_match('/[\r\n]/', $string) === 1) {
-                return null;
-            }
-
-            $literal = "'" . str_replace(['\\', "'"], ['\\\\', "\\'"], $string) . "'";
-            if (!in_array($literal, $literals, true)) {
-                $literals[] = $literal;
+            if (!in_array($value, $members, true)) {
+                $members[] = $value;
             }
         }
 
-        if ($hasNull) {
+        return $members;
+    }
+
+    /**
+     * An `enum` rendered as a union of literal strings, or null when that is not safe.
+     *
+     * A `null` member becomes a trailing `null` rather than disqualifying the whole enum.
+     *
+     * @param array<string, mixed> $schema
+     */
+    private function literalUnion(array $schema): ?string
+    {
+        $members = self::enumMembers($schema);
+        if ($members === null) {
+            return null;
+        }
+
+        $literals = [];
+        foreach ($members as $member) {
+            if ($member !== null) {
+                $literals[] = "'" . str_replace(['\\', "'"], ['\\\\', "\\'"], $member) . "'";
+            }
+        }
+
+        if (in_array(null, $members, true)) {
             $literals[] = 'null';
         }
 

@@ -8,7 +8,8 @@ namespace Flyo\Generator;
  * Blocks: one class per `x-schema-type: block` schema, narrowing \Flyo\Model\Block.
  *
  * The deprecated `flyo-generate-blocks` renders these same classes, so any change to their output
- * shows up as drift in every consumer's `--check` and has to be deliberate.
+ * shows up as drift in every consumer's `--check` and has to be deliberate. That is why it plans
+ * them without the {@see EnumConstants}, which came later.
  */
 final class BlockKind implements Kind
 {
@@ -30,6 +31,21 @@ final class BlockKind implements Kind
 
     /** Never a real slot: the server adds it as a bookkeeping flag. */
     private const SLOT_FLAG = '_empty';
+
+    /**
+     * The block schema properties whose fields get {@see EnumConstants}: the two an editor fills
+     * in. `CONTENT_SIZE_SMALL` names an option of `content.size`, `CONFIG_SIZE_SMALL` one of
+     * `config.size`.
+     */
+    private const ENUM_OBJECTS = ['content', 'config'];
+
+    /**
+     * @param bool $enumConstants name the options of every content and config field that has a
+     *  fixed set of them; off for the deprecated flyo-generate-blocks, whose output stays as it was
+     */
+    public function __construct(private readonly bool $enumConstants = true)
+    {
+    }
 
     public function schemaType(): string
     {
@@ -67,7 +83,14 @@ final class BlockKind implements Kind
         // Pass 2: plan.
         $classes = [];
         foreach ($schemas as $schemaKey => $schema) {
-            $classes[] = $this->classDef($schemaKey, $schema, $classNames[$schemaKey], $namespace, $types);
+            $classes[] = $this->classDef(
+                $schemaKey,
+                $schema,
+                $classNames[$schemaKey],
+                $namespace,
+                $types,
+                $warnings,
+            );
         }
 
         return $classes;
@@ -82,6 +105,7 @@ final class BlockKind implements Kind
         string $className,
         string $namespace,
         TypeMapper $types,
+        Warnings $warnings,
     ): ClassDef {
         $required = Schema::requiredKeys($schema);
 
@@ -115,6 +139,12 @@ final class BlockKind implements Kind
         if ($slots !== []) {
             $constants[] = new ConstantDef('SLOTS', $slots);
         }
+        if ($this->enumConstants) {
+            $constants = [
+                ...$constants,
+                ...EnumConstants::plan($schemaKey, self::enumObjects($schema), $warnings),
+            ];
+        }
 
         return new ClassDef(
             $className,
@@ -129,6 +159,25 @@ final class BlockKind implements Kind
             $constants,
             $methods,
         );
+    }
+
+    /**
+     * @param array<string, mixed> $schema
+     * @return array<string, array<string, mixed>>
+     */
+    private static function enumObjects(array $schema): array
+    {
+        $objects = [];
+
+        foreach (self::ENUM_OBJECTS as $property) {
+            $object = Schema::property($schema, $property);
+
+            if ($object !== null) {
+                $objects[$property] = $object;
+            }
+        }
+
+        return $objects;
     }
 
     /**

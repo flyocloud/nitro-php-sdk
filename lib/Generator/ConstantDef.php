@@ -14,10 +14,13 @@ final class ConstantDef
 {
     /**
      * @param string|list<string> $value
+     * @param string|null $group constants that share a group are rendered without a blank line
+     *  between them, like the options of one field
      */
     public function __construct(
         public readonly string $name,
         public readonly string|array $value,
+        public readonly ?string $group = null,
     ) {
     }
 }

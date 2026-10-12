@@ -110,11 +110,14 @@ final class Renderer
     private function constants(ClassDef $class): array
     {
         $lines = [];
+        $group = null;
 
         foreach ($class->constants as $constant) {
-            if ($lines !== []) {
+            if ($lines !== [] && ($constant->group === null || $constant->group !== $group)) {
                 $lines[] = '';
             }
+
+            $group = $constant->group;
 
             if (is_array($constant->value)) {
                 $values = array_map(static fn (string $value): string => self::literal($value), $constant->value);

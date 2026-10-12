@@ -197,6 +197,51 @@ class DegenerateSchemaTest extends TestCase
         $this->assertStringContainsString("'2024': string|null", $source['Blocks/BlockNumeric.php']);
     }
 
+    /**
+     * Options are author-supplied free text, and each one lands in a string literal of its own.
+     */
+    public function testHostileOptionsBecomeValidConstants(): void
+    {
+        $source = self::render([
+            'BlockHostile' => [
+                'type' => 'object',
+                'x-schema-type' => 'block',
+                'properties' => [
+                    'component' => ['enum' => ['Hostile'], 'type' => 'string'],
+                    'content' => [
+                        'type' => 'object',
+                        'properties' => [
+                            '2024' => [
+                                'type' => 'string',
+                                'enum' => ["it's", 'back\\slash', 'a ?> b', '$d', "e\tf", 'ü'],
+                            ],
+                            // The type is a docblock, so this enum is typed `string` instead.
+                            'closing' => ['type' => 'string', 'enum' => ['*/ echo 1; /*', 'plain']],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $rendered = $source['Blocks/BlockHostile.php'];
+
+        self::assertValidPhp($rendered);
+
+        foreach ([
+            "CONTENT_2024_IT_S = 'it\\'s';",
+            "CONTENT_2024_BACK_SLASH = 'back\\\\slash';",
+            "CONTENT_2024_A_B = 'a ?> b';",
+            "CONTENT_2024_D = '\$d';",
+            "CONTENT_2024_E_F = 'e\tf';",
+            "CONTENT_2024_Ü = 'ü';",
+        ] as $constant) {
+            $this->assertStringContainsString('    public const ' . $constant . "\n", $rendered);
+        }
+
+        $this->assertStringContainsString('closing: string|null', $rendered);
+        $this->assertStringNotContainsString('CONTENT_CLOSING_', $rendered);
+    }
+
     // -- entities ----------------------------------------------------------------------------
 
     public function testAnEntityWithNoPropertiesIsAnOpaqueObject(): void

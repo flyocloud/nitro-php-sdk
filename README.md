@@ -160,7 +160,33 @@ match ($block->getIdentifier()) {
 };
 ```
 
-Each block class also carries `IDENTIFIER`, `COMPONENT` and `SLOTS` constants.
+Each block class also carries `IDENTIFIER`, `COMPONENT` and `SLOTS` constants, plus one constant
+per option of every content and config field that has a fixed set of them, named
+`CONTENT_<FIELD>_<OPTION>` and `CONFIG_<FIELD>_<OPTION>`:
+
+```php
+use App\Flyo\Blocks\BlockHero;
+
+/** @var BlockHero $block */
+$modifier = match ($block->getContent()->size->value) {
+    BlockHero::CONTENT_SIZE_SMALL => 'hero--small',       // 'small'
+    BlockHero::CONTENT_SIZE_MEDIUM => 'hero--medium',     // 'medium'
+    BlockHero::CONTENT_SIZE_LARGE => 'hero--large',       // 'large'
+    null => '',
+};
+
+if ($block->getConfig()->theme === BlockHero::CONFIG_THEME_DARK) {
+    // ...
+}
+```
+
+A select field's constants are named after the field, not after its `value`. Names are upper snake
+case: the field `background-color` with the option `darkBlue` gives
+`CONTENT_BACKGROUND_COLOR_DARK_BLUE`, whose value is `'darkBlue'`, the option exactly as Flyo lists
+it. PHPStan knows each constant's literal value, so it reports a `match` that misses an option. If
+two options would get the same name, neither gets a constant and the generator prints a warning, so
+a name never quietly starts to mean a different option. Only `flyo-generate-types` generates these
+constants; the deprecated `flyo-generate-blocks` does not.
 
 **Entities** narrow `getModel()`, the part of an entity response whose shape depends on its type:
 

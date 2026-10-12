@@ -176,6 +176,38 @@ class NamingTest extends TestCase
         $this->assertSame($expected, Naming::prefixedKeyName($prefix, $key));
     }
 
+    /**
+     * @return array<string, array{string, string}>
+     */
+    public static function constantSegments(): array
+    {
+        return [
+            'lowercase' => ['small', 'SMALL'],
+            'snake case' => ['background_color', 'BACKGROUND_COLOR'],
+            'kebab case' => ['background-color', 'BACKGROUND_COLOR'],
+            'camel case' => ['backgroundColor', 'BACKGROUND_COLOR'],
+            'spaced' => ['Extra Large', 'EXTRA_LARGE'],
+            'runs of separators' => ['a -- b__c', 'A_B_C'],
+            'leading and trailing separators' => ['_empty_', 'EMPTY'],
+            // A segment never starts a constant name, so a leading digit needs no prefix.
+            'only digits' => ['2', '2'],
+            'leading digit' => ['2col', '2COL'],
+            'already upper case' => ['XL', 'XL'],
+            'acronym is not split' => ['HTMLBlock', 'HTMLBLOCK'],
+            'apostrophe' => ["it's", 'IT_S'],
+            'umlaut' => ['grün', 'GRÜN'],
+            'accented camel case' => ['étéChaud', 'ÉTÉ_CHAUD'],
+            'empty' => ['', ''],
+            'punctuation only' => ['---', ''],
+        ];
+    }
+
+    #[DataProvider('constantSegments')]
+    public function testConstantSegment(string $raw, string $expected): void
+    {
+        $this->assertSame($expected, Naming::constantSegment($raw));
+    }
+
     public function testResolveNamesTheKindAndHowToFixItInTheCollisionWarning(): void
     {
         $warnings = new Warnings();

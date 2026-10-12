@@ -184,6 +184,49 @@ class GoldenTest extends TestCase
     }
 
     /**
+     * The enum constants came after flyo-generate-blocks was deprecated, and its output stays as it
+     * was. Apart from them, a block with options is the same class under both commands.
+     */
+    public function testOnlyTheTypesCommandGeneratesEnumConstants(): void
+    {
+        $raw = self::loadDocument('types/enums');
+
+        $legacy = self::renderAll($raw, 'App\Blocks', 'blocks')['BlockCard.php'];
+        $types = self::renderAll($raw, 'App', 'types')['Blocks/BlockCard.php'];
+
+        $this->assertStringNotContainsString('public const CONTENT_', $legacy);
+        $this->assertStringNotContainsString('public const CONFIG_', $legacy);
+        $this->assertStringContainsString("    public const CONTENT_SIZE_SMALL = 'small';\n", $types);
+        $this->assertStringContainsString("    public const CONFIG_SIZE_SMALL = 'small';\n", $types);
+
+        $withoutEnumConstants = preg_replace('/\n(    public const CON(TENT|FIG)_\w+ = .+;\n)+/', '', $types);
+
+        $this->assertSame(
+            str_replace('vendor/bin/flyo-generate-blocks', 'vendor/bin/flyo-generate-types', $legacy),
+            $withoutEnumConstants
+        );
+    }
+
+    /**
+     * The options of one field are rendered as one block of constants, a blank line between fields.
+     */
+    public function testEnumConstantsAreGroupedByField(): void
+    {
+        $types = self::renderAll(self::loadDocument('types/enums'), 'App', 'types')['Blocks/BlockCard.php'];
+
+        $this->assertStringContainsString(
+            "    public const COMPONENT = 'Card';\n"
+                . "\n"
+                . "    public const CONTENT_SIZE_SMALL = 'small';\n"
+                . "    public const CONTENT_SIZE_MEDIUM = 'medium';\n"
+                . "    public const CONTENT_SIZE_LARGE = 'large';\n"
+                . "\n"
+                . "    public const CONTENT_ALIGN_LEFT = 'left';\n",
+            $types
+        );
+    }
+
+    /**
      * A schema type added server-side after this release must be named, not skipped silently.
      */
     public function testUnsupportedSchemaTypesAreReported(): void

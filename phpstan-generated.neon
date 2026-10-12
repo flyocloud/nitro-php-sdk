@@ -17,5 +17,6 @@ parameters:
     - test/fixtures/blocks/collisions
     # Output of flyo-generate-types, one sub-namespace per kind.
     - test/fixtures/types/site
+    - test/fixtures/types/enums
   bootstrapFiles:
     - vendor/autoload.php

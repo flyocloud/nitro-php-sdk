@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Flyo Nitro - Enum constants",
+    "description": "A block whose content and config fields have fixed options, for the enum constants.",
+    "version": "edge"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "BlockCard": {
+        "title": "Card",
+        "type": "object",
+        "description": "Block definition \"card\" (component: Card).",
+        "required": ["identifier", "uid", "component", "content", "config", "items", "slots"],
+        "properties": {
+          "identifier": { "enum": ["card"], "type": "string" },
+          "uid": { "type": "string" },
+          "component": { "enum": ["Card"], "type": "string" },
+          "content": {
+            "type": "object",
+            "description": "Block content fields.",
+            "required": ["size"],
+            "properties": {
+              "title": { "type": "string" },
+              "size": {
+                "type": "object",
+                "required": ["value", "options", "label"],
+                "properties": {
+                  "value": { "enum": ["small", "medium", "large", null], "type": "string", "nullable": true },
+                  "options": {
+                    "oneOf": [
+                      { "type": "object", "additionalProperties": { "type": "string" } },
+                      { "maxItems": 0, "type": "array", "items": {} }
+                    ]
+                  },
+                  "label": { "type": "string", "nullable": true }
+                }
+              },
+              "align": { "enum": ["left", "center", "right"], "type": "string" },
+              "background-color": {
+                "type": "object",
+                "required": ["value", "options", "label"],
+                "properties": {
+                  "value": { "enum": ["darkBlue", "light-gray", null], "type": "string", "nullable": true },
+                  "options": {
+                    "oneOf": [
+                      { "type": "object", "additionalProperties": { "type": "string" } },
+                      { "maxItems": 0, "type": "array", "items": {} }
+                    ]
+                  },
+                  "label": { "type": "string", "nullable": true }
+                }
+              },
+              "columns": { "enum": ["1", "2", "3"], "type": "string" },
+              "priority": { "enum": [1, 2, 3], "type": "integer" },
+              "_empty": { "type": "boolean" }
+            }
+          },
+          "config": {
+            "type": "object",
+            "description": "Block configuration fields.",
+            "required": ["size"],
+            "properties": {
+              "size": {
+                "type": "object",
+                "required": ["value", "options", "label"],
+                "properties": {
+                  "value": { "enum": ["small", "large", null], "type": "string", "nullable": true },
+                  "options": {
+                    "oneOf": [
+                      { "type": "object", "additionalProperties": { "type": "string" } },
+                      { "maxItems": 0, "type": "array", "items": {} }
+                    ]
+                  },
+                  "label": { "type": "string", "nullable": true }
+                }
+              },
+              "_empty": { "type": "boolean" }
+            }
+          },
+          "items": {
+            "type": "array",
+            "description": "Iterated content pool items mapped to block fields.",
+            "items": { "type": "object", "properties": { "title": { "type": "string" } } }
+          },
+          "slots": {
+            "type": "object",
+            "properties": { "_empty": { "type": "boolean" } }
+          }
+        },
+        "x-schema-type": "block"
+      }
+    }
+  }
+}

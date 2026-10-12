@@ -49,6 +49,11 @@ class TypeMapperTest extends TestCase
                 ['type' => 'string', 'enum' => ["a\nb"]],
                 'string',
             ],
+            // `*/` would close the docblock the type is written into.
+            'enum with a comment terminator falls back to string' => [
+                ['type' => 'string', 'enum' => ['a */ b', 'c']],
+                'string',
+            ],
             // OpenAPI 3.0 needs `null` listed for a nullable enum to accept it.
             'nullable enum keeps its literals' => [
                 ['type' => 'string', 'nullable' => true, 'enum' => ['red', 'green', null]],
@@ -234,6 +239,22 @@ class TypeMapperTest extends TestCase
                 false,
             )
         );
+    }
+
+    /**
+     * The strings the literal union is made of, which the enum constants are named after too.
+     */
+    public function testEnumMembersAreTheStringsOfTheLiteralUnion(): void
+    {
+        $this->assertSame(
+            ['1', 'a', null, ''],
+            TypeMapper::enumMembers(['enum' => [1, 'a', null, '1', false, 'a']])
+        );
+        $this->assertSame([null], TypeMapper::enumMembers(['enum' => [null]]));
+        $this->assertNull(TypeMapper::enumMembers(['type' => 'string']));
+        $this->assertNull(TypeMapper::enumMembers(['enum' => []]));
+        $this->assertNull(TypeMapper::enumMembers(['enum' => ['a', ['nested' => true]]]));
+        $this->assertNull(TypeMapper::enumMembers(['enum' => ["a\nb"]]));
     }
 
     public function testRequiredIsHonouredInsideAShape(): void

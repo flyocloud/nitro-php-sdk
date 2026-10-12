@@ -1,5 +1,43 @@
 # Upgrade
 
+## From 3.7 to 3.8
+
+### Generated types: constants for field options
+
+`flyo-generate-types` gives every block class one constant per option of each content and config
+field that has a fixed set of them, select fields included. A constant is named
+`<CONTENT|CONFIG>_<FIELD>_<OPTION>` and holds the option exactly as Flyo lists it:
+
+```diff
+  class BlockHero extends \Flyo\Model\Block
+  {
+      public const IDENTIFIER = 'hero';
+
+      public const COMPONENT = 'Hero';
++
++     public const CONTENT_SIZE_SMALL = 'small';
++     public const CONTENT_SIZE_MEDIUM = 'medium';
++     public const CONTENT_SIZE_LARGE = 'large';
++
++     public const CONFIG_THEME_LIGHT = 'light';
++     public const CONFIG_THEME_DARK = 'dark';
+```
+
+If two options would get the same name (`Small` and `small`), neither gets a constant and the
+generator prints a warning. Numbering them instead would let a name silently move to another option
+once one is added in Flyo.
+
+This changes the generated file of every block with such a field, so `--check` reports them as out
+of date until you regenerate once. The deprecated `flyo-generate-blocks` does not generate the
+constants, and its output stays as it was.
+
+### Generated types: an option containing `*/`
+
+An option whose value contains `*/` closed the docblock the field's type is written into, so the
+generated file did not parse. Such a field is now typed `string`, like a field with an option that
+spans lines, and gets no constants. This applies to both commands, but only changes files that were
+broken before.
+
 ## From 3.6 to 3.7
 
 ### Generated types: select fields keep their values

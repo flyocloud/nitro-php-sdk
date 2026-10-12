@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Flyo\Generator;
 
 /**
- * Derives generated class names from typed schemas.
+ * Derives generated class and constant names from typed schemas.
  *
- * The class name is the only identifier this generator invents, since nested shapes are described
- * inline rather than as named types. Every name keeps its kind's prefix (`BlockHero`,
- * `EntityArticle`, `ContainerMain`), exactly as the server keys the schema: that keeps a class
- * lined up with its schema, and it means no author-supplied name can ever produce a reserved word
- * such as `List` or `Default` as a class name.
+ * Class names and the names of {@see EnumConstants} are the only identifiers this generator
+ * invents, since nested shapes are described inline rather than as named types. Every class name
+ * keeps its kind's prefix (`BlockHero`, `EntityArticle`, `ContainerMain`), exactly as the server
+ * keys the schema: that keeps a class lined up with its schema, and it means no author-supplied
+ * name can ever produce a reserved word such as `List` or `Default` as a class name.
  */
 final class Naming
 {
@@ -43,6 +43,22 @@ final class Naming
         }
 
         return $out;
+    }
+
+    /**
+     * One upper-case segment of a constant name: `background-color` and `backgroundColor` both
+     * become `BACKGROUND_COLOR`.
+     *
+     * Splits like {@see studly()}, and between a lower- and an upper-case letter as well. Returns
+     * `''` when there is no letter or digit to name anything after. A leading digit is fine, since
+     * a segment never starts a constant name.
+     */
+    public static function constantSegment(string $raw): string
+    {
+        $raw = preg_replace('/(\p{Ll})(\p{Lu})/u', '$1 $2', $raw) ?? '';
+        $parts = preg_split('/[^\p{L}\p{N}]+/u', $raw, -1, PREG_SPLIT_NO_EMPTY);
+
+        return mb_strtoupper(implode('_', $parts ?: []));
     }
 
     /**

@@ -1,5 +1,30 @@
 # Upgrade
 
+## From 3.x to 4.0
+
+The models are generated from version 3.5 of the OpenAPI document, which gives the inline schemas
+proper names. Some model classes were renamed or removed, so every reference to them has to be
+updated. Their properties and getters are unchanged.
+
+| Removed class | Use instead |
+| --- | --- |
+| `\Flyo\Model\ConfigResponseNitro` | `\Flyo\Model\Nitro` |
+| `\Flyo\Model\ConfigResponseContainersValue` | `\Flyo\Model\Container` |
+| `\Flyo\Model\PagePropertyValue` | `\Flyo\Model\PageProperty` |
+| `\Flyo\Model\EntityByUniqueid404Response` | `\Flyo\Model\EntityNotFoundResponse` |
+
+```diff
+- use Flyo\Model\ConfigResponseContainersValue;
++ use Flyo\Model\Container;
+
+- function render(ConfigResponseContainersValue $nav): string
++ function render(Container $nav): string
+```
+
+Search your code for the old names (type hints, `instanceof`, `@var`/`@return` docblocks and
+`ObjectSerializer::deserialize()` calls) and replace them. `EntityByUniqueid404Response` was already
+deprecated in 3.x; see below.
+
 ## From 3.7 to 3.8
 
 ### Generated types: constants for field options

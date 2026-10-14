@@ -1,4 +1,4 @@
-# # ConfigResponseNitro
+# # Nitro
 
 ## Properties
 

@@ -31,9 +31,9 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'nitro' => '\Flyo\Model\ConfigResponseNitro',
+        'nitro' => '\Flyo\Model\Nitro',
         'pages' => 'string[]',
-        'containers' => 'array<string,\Flyo\Model\ConfigResponseContainersValue>',
+        'containers' => 'array<string,\Flyo\Model\Container>',
         'globals' => 'object'
     ];
 
@@ -287,7 +287,7 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets nitro
      *
-     * @return \Flyo\Model\ConfigResponseNitro|null
+     * @return \Flyo\Model\Nitro|null
      */
     public function getNitro()
     {
@@ -297,7 +297,7 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets nitro
      *
-     * @param \Flyo\Model\ConfigResponseNitro|null $nitro nitro
+     * @param \Flyo\Model\Nitro|null $nitro nitro
      *
      * @return self
      */
@@ -341,7 +341,7 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets containers
      *
-     * @return array<string,\Flyo\Model\ConfigResponseContainersValue>|null
+     * @return array<string,\Flyo\Model\Container>|null
      */
     public function getContainers()
     {
@@ -351,7 +351,7 @@ class ConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets containers
      *
-     * @param array<string,\Flyo\Model\ConfigResponseContainersValue>|null $containers This endpoint manages containers, which are essential for constructing navigation menus. Each navigation menu is housed within a distinct container. These containers are identified by two key attributes: a label and an identifier. The label describes the menu's purpose or position (e.g., \"Footer Nav\" or \"Main Nav\"), while the identifier is a slug-formatted text for easy reference (e.g., \"footer\"). Within each container, there is an \"items\" object. This object contains the actual page items that make up the menu's structure.
+     * @param array<string,\Flyo\Model\Container>|null $containers This endpoint manages containers, which are essential for constructing navigation menus. Each navigation menu is housed within a distinct container. These containers are identified by two key attributes: a label and an identifier. The label describes the menu's purpose or position (e.g., \"Footer Nav\" or \"Main Nav\"), while the identifier is a slug-formatted text for easy reference (e.g., \"footer\"). Within each container, there is an \"items\" object. This object contains the actual page items that make up the menu's structure.
      *
      * @return self
      */

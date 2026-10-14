@@ -6,15 +6,16 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponseContainersValue Class Doc Comment
+ * Nitro Class Doc Comment
  *
  * @category Class
+ * @description The Nitro section of the API provides essential details about the currently configured Nitro system.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class Nitro implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -23,7 +24,7 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response_containers_value';
+    protected static $openAPIModelName = 'Nitro';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -31,10 +32,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'items' => '\Flyo\Model\ContainerPage[]',
-        'uid' => 'string',
-        'identifier' => 'string',
-        'label' => 'string'
+        'domain' => 'string',
+        'slug' => 'string',
+        'version' => 'int',
+        'updated_at' => 'int',
+        'language' => 'string',
+        'primary_language' => 'string'
     ];
 
     /**
@@ -45,10 +48,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'items' => null,
-        'uid' => null,
-        'identifier' => null,
-        'label' => null
+        'domain' => null,
+        'slug' => null,
+        'version' => null,
+        'updated_at' => null,
+        'language' => null,
+        'primary_language' => null
     ];
 
     /**
@@ -57,10 +62,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'items' => false,
-        'uid' => false,
-        'identifier' => false,
-        'label' => false
+        'domain' => false,
+        'slug' => false,
+        'version' => false,
+        'updated_at' => false,
+        'language' => false,
+        'primary_language' => false
     ];
 
     /**
@@ -149,10 +156,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'items' => 'items',
-        'uid' => 'uid',
-        'identifier' => 'identifier',
-        'label' => 'label'
+        'domain' => 'domain',
+        'slug' => 'slug',
+        'version' => 'version',
+        'updated_at' => 'updated_at',
+        'language' => 'language',
+        'primary_language' => 'primary_language'
     ];
 
     /**
@@ -161,10 +170,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'items' => 'setItems',
-        'uid' => 'setUid',
-        'identifier' => 'setIdentifier',
-        'label' => 'setLabel'
+        'domain' => 'setDomain',
+        'slug' => 'setSlug',
+        'version' => 'setVersion',
+        'updated_at' => 'setUpdatedAt',
+        'language' => 'setLanguage',
+        'primary_language' => 'setPrimaryLanguage'
     ];
 
     /**
@@ -173,10 +184,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'items' => 'getItems',
-        'uid' => 'getUid',
-        'identifier' => 'getIdentifier',
-        'label' => 'getLabel'
+        'domain' => 'getDomain',
+        'slug' => 'getSlug',
+        'version' => 'getVersion',
+        'updated_at' => 'getUpdatedAt',
+        'language' => 'getLanguage',
+        'primary_language' => 'getPrimaryLanguage'
     ];
 
     /**
@@ -236,10 +249,12 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('items', $data ?? [], null);
-        $this->setIfExists('uid', $data ?? [], null);
-        $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('label', $data ?? [], null);
+        $this->setIfExists('domain', $data ?? [], null);
+        $this->setIfExists('slug', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('primary_language', $data ?? [], null);
     }
 
     /**
@@ -285,109 +300,163 @@ class ConfigResponseContainersValue implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets items
+     * Gets domain
      *
-     * @return \Flyo\Model\ContainerPage[]|null
+     * @return string|null
      */
-    public function getItems()
+    public function getDomain()
     {
-        return $this->container['items'];
+        return $this->container['domain'];
     }
 
     /**
-     * Sets items
+     * Sets domain
      *
-     * @param \Flyo\Model\ContainerPage[]|null $items Represents a comprehensive collection of pages within the specified container. These pages are organized in a nested tree structure, where each page can have child pages associated with it. These child pages are conveniently stored within the children property of their respective parent page.
+     * @param string|null $domain domain
      *
      * @return self
      */
-    public function setItems($items)
+    public function setDomain($domain)
     {
-        if (is_null($items)) {
-            throw new \InvalidArgumentException('non-nullable items cannot be null');
+        if (is_null($domain)) {
+            throw new \InvalidArgumentException('non-nullable domain cannot be null');
         }
-        $this->container['items'] = $items;
+        $this->container['domain'] = $domain;
 
         return $this;
     }
 
     /**
-     * Gets uid
+     * Gets slug
      *
      * @return string|null
      */
-    public function getUid()
+    public function getSlug()
     {
-        return $this->container['uid'];
+        return $this->container['slug'];
     }
 
     /**
-     * Sets uid
+     * Sets slug
      *
-     * @param string|null $uid A unique identifier, known as a container ID, is assigned to each container during its creation and remains unchanged throughout its lifespan. This container ID serves as a permanent and unalterable reference for the container.
+     * @param string|null $slug slug
      *
      * @return self
      */
-    public function setUid($uid)
+    public function setSlug($slug)
     {
-        if (is_null($uid)) {
-            throw new \InvalidArgumentException('non-nullable uid cannot be null');
+        if (is_null($slug)) {
+            throw new \InvalidArgumentException('non-nullable slug cannot be null');
         }
-        $this->container['uid'] = $uid;
+        $this->container['slug'] = $slug;
 
         return $this;
     }
 
     /**
-     * Gets identifier
+     * Gets version
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getIdentifier()
+    public function getVersion()
     {
-        return $this->container['identifier'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets identifier
+     * Sets version
      *
-     * @param string|null $identifier The identifier is a unique string consisting solely of lowercase letters, and it is intended to remain constant throughout its usage. However, in the event that there are no associated pages linked to the identifier, it can be modified within the nitro configuration.
+     * @param int|null $version Whenever Flyo generates new data, the version number will be appropriately incremented. If this value is employed for caching, it will undergo less frequent purging in comparison to the `updated_at` value, thus extending its longevity. (last longer)
      *
      * @return self
      */
-    public function setIdentifier($identifier)
+    public function setVersion($version)
     {
-        if (is_null($identifier)) {
-            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
-        $this->container['identifier'] = $identifier;
+        $this->container['version'] = $version;
 
         return $this;
     }
 
     /**
-     * Gets label
+     * Gets updated_at
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getLabel()
+    public function getUpdatedAt()
     {
-        return $this->container['label'];
+        return $this->container['updated_at'];
     }
 
     /**
-     * Sets label
+     * Sets updated_at
      *
-     * @param string|null $label You can customize and assign a unique label to the container of your choice. This label can be easily modified through the nitro configuration settings. This flexibility allows you to personalize and adapt the container's identification based on your specific needs.
+     * @param int|null $updated_at A Unix timestamp indicating when the Nitro was last updated. This timestamp does not correlate with the version number. If this value is utilized for caching purposes, it will experience more frequent purges compared to the version number, leading to shorter caching intervals. (last shorter)
      *
      * @return self
      */
-    public function setLabel($label)
+    public function setUpdatedAt($updated_at)
     {
-        if (is_null($label)) {
-            throw new \InvalidArgumentException('non-nullable label cannot be null');
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
         }
-        $this->container['label'] = $label;
+        $this->container['updated_at'] = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     *
+     * @return string|null
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string|null $language Current language context for the config.
+     *
+     * @return self
+     */
+    public function setLanguage($language)
+    {
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Gets primary_language
+     *
+     * @return string|null
+     */
+    public function getPrimaryLanguage()
+    {
+        return $this->container['primary_language'];
+    }
+
+    /**
+     * Sets primary_language
+     *
+     * @param string|null $primary_language The primary language of the nitro integration
+     *
+     * @return self
+     */
+    public function setPrimaryLanguage($primary_language)
+    {
+        if (is_null($primary_language)) {
+            throw new \InvalidArgumentException('non-nullable primary_language cannot be null');
+        }
+        $this->container['primary_language'] = $primary_language;
 
         return $this;
     }

@@ -43,7 +43,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_visible' => 'int',
         'is_indexable' => 'int',
         'meta_json' => '\Flyo\Model\Meta',
-        'properties' => 'array<string,\Flyo\Model\PagePropertyValue>',
+        'properties' => 'array<string,\Flyo\Model\PageProperty>',
         'uid' => 'string',
         'type' => 'string',
         'target' => 'string',
@@ -723,7 +723,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets properties
      *
-     * @return array<string,\Flyo\Model\PagePropertyValue>|null
+     * @return array<string,\Flyo\Model\PageProperty>|null
      */
     public function getProperties()
     {
@@ -733,7 +733,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets properties
      *
-     * @param array<string,\Flyo\Model\PagePropertyValue>|null $properties properties
+     * @param array<string,\Flyo\Model\PageProperty>|null $properties properties
      *
      * @return self
      */

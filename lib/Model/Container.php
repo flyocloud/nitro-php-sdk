@@ -6,7 +6,7 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * PagePropertyValue Class Doc Comment
+ * Container Class Doc Comment
  *
  * @category Class
  * @package  Flyo
@@ -14,7 +14,7 @@ use \Flyo\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializable
+class Container implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -23,7 +23,7 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'pageProperty_value';
+    protected static $openAPIModelName = 'Container';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -31,9 +31,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'value' => 'mixed',
-        'navigation' => 'bool',
-        'propagate' => 'bool'
+        'items' => '\Flyo\Model\ContainerPage[]',
+        'uid' => 'string',
+        'identifier' => 'string',
+        'label' => 'string'
     ];
 
     /**
@@ -44,9 +45,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'value' => null,
-        'navigation' => null,
-        'propagate' => null
+        'items' => null,
+        'uid' => null,
+        'identifier' => null,
+        'label' => null
     ];
 
     /**
@@ -55,9 +57,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'value' => true,
-        'navigation' => false,
-        'propagate' => false
+        'items' => false,
+        'uid' => false,
+        'identifier' => false,
+        'label' => false
     ];
 
     /**
@@ -146,9 +149,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'value' => 'value',
-        'navigation' => 'navigation',
-        'propagate' => 'propagate'
+        'items' => 'items',
+        'uid' => 'uid',
+        'identifier' => 'identifier',
+        'label' => 'label'
     ];
 
     /**
@@ -157,9 +161,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'value' => 'setValue',
-        'navigation' => 'setNavigation',
-        'propagate' => 'setPropagate'
+        'items' => 'setItems',
+        'uid' => 'setUid',
+        'identifier' => 'setIdentifier',
+        'label' => 'setLabel'
     ];
 
     /**
@@ -168,9 +173,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'value' => 'getValue',
-        'navigation' => 'getNavigation',
-        'propagate' => 'getPropagate'
+        'items' => 'getItems',
+        'uid' => 'getUid',
+        'identifier' => 'getIdentifier',
+        'label' => 'getLabel'
     ];
 
     /**
@@ -230,9 +236,10 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('value', $data ?? [], null);
-        $this->setIfExists('navigation', $data ?? [], null);
-        $this->setIfExists('propagate', $data ?? [], null);
+        $this->setIfExists('items', $data ?? [], null);
+        $this->setIfExists('uid', $data ?? [], null);
+        $this->setIfExists('identifier', $data ?? [], null);
+        $this->setIfExists('label', $data ?? [], null);
     }
 
     /**
@@ -278,89 +285,109 @@ class PagePropertyValue implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets value
+     * Gets items
      *
-     * @return mixed|null
+     * @return \Flyo\Model\ContainerPage[]|null
      */
-    public function getValue()
+    public function getItems()
     {
-        return $this->container['value'];
+        return $this->container['items'];
     }
 
     /**
-     * Sets value
+     * Sets items
      *
-     * @param mixed|null $value value
+     * @param \Flyo\Model\ContainerPage[]|null $items Represents a comprehensive collection of pages within the specified container. These pages are organized in a nested tree structure, where each page can have child pages associated with it. These child pages are conveniently stored within the children property of their respective parent page.
      *
      * @return self
      */
-    public function setValue($value)
+    public function setItems($items)
     {
-        if (is_null($value)) {
-            array_push($this->openAPINullablesSetToNull, 'value');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('value', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($items)) {
+            throw new \InvalidArgumentException('non-nullable items cannot be null');
         }
-        $this->container['value'] = $value;
+        $this->container['items'] = $items;
 
         return $this;
     }
 
     /**
-     * Gets navigation
+     * Gets uid
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getNavigation()
+    public function getUid()
     {
-        return $this->container['navigation'];
+        return $this->container['uid'];
     }
 
     /**
-     * Sets navigation
+     * Sets uid
      *
-     * @param bool|null $navigation Whether or not this item is visible in the navigation.
+     * @param string|null $uid A unique identifier, known as a container ID, is assigned to each container during its creation and remains unchanged throughout its lifespan. This container ID serves as a permanent and unalterable reference for the container.
      *
      * @return self
      */
-    public function setNavigation($navigation)
+    public function setUid($uid)
     {
-        if (is_null($navigation)) {
-            throw new \InvalidArgumentException('non-nullable navigation cannot be null');
+        if (is_null($uid)) {
+            throw new \InvalidArgumentException('non-nullable uid cannot be null');
         }
-        $this->container['navigation'] = $navigation;
+        $this->container['uid'] = $uid;
 
         return $this;
     }
 
     /**
-     * Gets propagate
+     * Gets identifier
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getPropagate()
+    public function getIdentifier()
     {
-        return $this->container['propagate'];
+        return $this->container['identifier'];
     }
 
     /**
-     * Sets propagate
+     * Sets identifier
      *
-     * @param bool|null $propagate Determining whether the value is carried over from the parent page or not.
+     * @param string|null $identifier The identifier is a unique string consisting solely of lowercase letters, and it is intended to remain constant throughout its usage. However, in the event that there are no associated pages linked to the identifier, it can be modified within the nitro configuration.
      *
      * @return self
      */
-    public function setPropagate($propagate)
+    public function setIdentifier($identifier)
     {
-        if (is_null($propagate)) {
-            throw new \InvalidArgumentException('non-nullable propagate cannot be null');
+        if (is_null($identifier)) {
+            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
         }
-        $this->container['propagate'] = $propagate;
+        $this->container['identifier'] = $identifier;
+
+        return $this;
+    }
+
+    /**
+     * Gets label
+     *
+     * @return string|null
+     */
+    public function getLabel()
+    {
+        return $this->container['label'];
+    }
+
+    /**
+     * Sets label
+     *
+     * @param string|null $label You can customize and assign a unique label to the container of your choice. This label can be easily modified through the nitro configuration settings. This flexibility allows you to personalize and adapt the container's identification based on your specific needs.
+     *
+     * @return self
+     */
+    public function setLabel($label)
+    {
+        if (is_null($label)) {
+            throw new \InvalidArgumentException('non-nullable label cannot be null');
+        }
+        $this->container['label'] = $label;
 
         return $this;
     }

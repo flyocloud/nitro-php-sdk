@@ -12,8 +12,7 @@ docs/Model/BlockCollectionLinks.md
 docs/Model/BlockSlotValue.md
 docs/Model/Breadcrumb.md
 docs/Model/ConfigResponse.md
-docs/Model/ConfigResponseContainersValue.md
-docs/Model/ConfigResponseNitro.md
+docs/Model/Container.md
 docs/Model/ContainerPage.md
 docs/Model/Entity.md
 docs/Model/EntityInterface.md
@@ -22,8 +21,9 @@ docs/Model/EntityNotFoundResponse.md
 docs/Model/EntityinterfaceInner.md
 docs/Model/Meta.md
 docs/Model/MetaImage.md
+docs/Model/Nitro.md
 docs/Model/Page.md
-docs/Model/PagePropertyValue.md
+docs/Model/PageProperty.md
 docs/Model/SitemapinterfaceInner.md
 docs/Model/Translation.md
 docs/Model/TranslationLanguage.md
@@ -45,8 +45,7 @@ lib/Model/BlockCollectionLinks.php
 lib/Model/BlockSlotValue.php
 lib/Model/Breadcrumb.php
 lib/Model/ConfigResponse.php
-lib/Model/ConfigResponseContainersValue.php
-lib/Model/ConfigResponseNitro.php
+lib/Model/Container.php
 lib/Model/ContainerPage.php
 lib/Model/Entity.php
 lib/Model/EntityInterface.php
@@ -56,8 +55,9 @@ lib/Model/EntityinterfaceInner.php
 lib/Model/Meta.php
 lib/Model/MetaImage.php
 lib/Model/ModelInterface.php
+lib/Model/Nitro.php
 lib/Model/Page.php
-lib/Model/PagePropertyValue.php
+lib/Model/PageProperty.php
 lib/Model/SitemapinterfaceInner.php
 lib/Model/Translation.php
 lib/Model/TranslationLanguage.php

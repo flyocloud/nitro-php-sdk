@@ -6,16 +6,15 @@ use \ArrayAccess;
 use \Flyo\ObjectSerializer;
 
 /**
- * ConfigResponseNitro Class Doc Comment
+ * PageProperty Class Doc Comment
  *
  * @category Class
- * @description The Nitro section of the API provides essential details about the currently configured Nitro system.
  * @package  Flyo
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializable
+class PageProperty implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -24,7 +23,7 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Config_Response_nitro';
+    protected static $openAPIModelName = 'Page_Property';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -32,12 +31,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'domain' => 'string',
-        'slug' => 'string',
-        'version' => 'int',
-        'updated_at' => 'int',
-        'language' => 'string',
-        'primary_language' => 'string'
+        'value' => 'mixed',
+        'navigation' => 'bool',
+        'propagate' => 'bool'
     ];
 
     /**
@@ -48,12 +44,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'domain' => null,
-        'slug' => null,
-        'version' => null,
-        'updated_at' => null,
-        'language' => null,
-        'primary_language' => null
+        'value' => null,
+        'navigation' => null,
+        'propagate' => null
     ];
 
     /**
@@ -62,12 +55,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'domain' => false,
-        'slug' => false,
-        'version' => false,
-        'updated_at' => false,
-        'language' => false,
-        'primary_language' => false
+        'value' => true,
+        'navigation' => false,
+        'propagate' => false
     ];
 
     /**
@@ -156,12 +146,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'domain' => 'domain',
-        'slug' => 'slug',
-        'version' => 'version',
-        'updated_at' => 'updated_at',
-        'language' => 'language',
-        'primary_language' => 'primary_language'
+        'value' => 'value',
+        'navigation' => 'navigation',
+        'propagate' => 'propagate'
     ];
 
     /**
@@ -170,12 +157,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'domain' => 'setDomain',
-        'slug' => 'setSlug',
-        'version' => 'setVersion',
-        'updated_at' => 'setUpdatedAt',
-        'language' => 'setLanguage',
-        'primary_language' => 'setPrimaryLanguage'
+        'value' => 'setValue',
+        'navigation' => 'setNavigation',
+        'propagate' => 'setPropagate'
     ];
 
     /**
@@ -184,12 +168,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'domain' => 'getDomain',
-        'slug' => 'getSlug',
-        'version' => 'getVersion',
-        'updated_at' => 'getUpdatedAt',
-        'language' => 'getLanguage',
-        'primary_language' => 'getPrimaryLanguage'
+        'value' => 'getValue',
+        'navigation' => 'getNavigation',
+        'propagate' => 'getPropagate'
     ];
 
     /**
@@ -249,12 +230,9 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('slug', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
-        $this->setIfExists('primary_language', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('navigation', $data ?? [], null);
+        $this->setIfExists('propagate', $data ?? [], null);
     }
 
     /**
@@ -300,163 +278,89 @@ class ConfigResponseNitro implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets domain
+     * Gets value
      *
-     * @return string|null
+     * @return mixed|null
      */
-    public function getDomain()
+    public function getValue()
     {
-        return $this->container['domain'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets domain
+     * Sets value
      *
-     * @param string|null $domain domain
+     * @param mixed|null $value value
      *
      * @return self
      */
-    public function setDomain($domain)
+    public function setValue($value)
     {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
+        if (is_null($value)) {
+            array_push($this->openAPINullablesSetToNull, 'value');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('value', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['domain'] = $domain;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets slug
+     * Gets navigation
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getSlug()
+    public function getNavigation()
     {
-        return $this->container['slug'];
+        return $this->container['navigation'];
     }
 
     /**
-     * Sets slug
+     * Sets navigation
      *
-     * @param string|null $slug slug
+     * @param bool|null $navigation Whether or not this item is visible in the navigation.
      *
      * @return self
      */
-    public function setSlug($slug)
+    public function setNavigation($navigation)
     {
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+        if (is_null($navigation)) {
+            throw new \InvalidArgumentException('non-nullable navigation cannot be null');
         }
-        $this->container['slug'] = $slug;
+        $this->container['navigation'] = $navigation;
 
         return $this;
     }
 
     /**
-     * Gets version
+     * Gets propagate
      *
-     * @return int|null
+     * @return bool|null
      */
-    public function getVersion()
+    public function getPropagate()
     {
-        return $this->container['version'];
+        return $this->container['propagate'];
     }
 
     /**
-     * Sets version
+     * Sets propagate
      *
-     * @param int|null $version Whenever Flyo generates new data, the version number will be appropriately incremented. If this value is employed for caching, it will undergo less frequent purging in comparison to the `updated_at` value, thus extending its longevity. (last longer)
+     * @param bool|null $propagate Determining whether the value is carried over from the parent page or not.
      *
      * @return self
      */
-    public function setVersion($version)
+    public function setPropagate($propagate)
     {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        if (is_null($propagate)) {
+            throw new \InvalidArgumentException('non-nullable propagate cannot be null');
         }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return int|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param int|null $updated_at A Unix timestamp indicating when the Nitro was last updated. This timestamp does not correlate with the version number. If this value is utilized for caching purposes, it will experience more frequent purges compared to the version number, leading to shorter caching intervals. (last shorter)
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
-     *
-     * @return string|null
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string|null $language Current language context for the config.
-     *
-     * @return self
-     */
-    public function setLanguage($language)
-    {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
-        }
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-
-    /**
-     * Gets primary_language
-     *
-     * @return string|null
-     */
-    public function getPrimaryLanguage()
-    {
-        return $this->container['primary_language'];
-    }
-
-    /**
-     * Sets primary_language
-     *
-     * @param string|null $primary_language The primary language of the nitro integration
-     *
-     * @return self
-     */
-    public function setPrimaryLanguage($primary_language)
-    {
-        if (is_null($primary_language)) {
-            throw new \InvalidArgumentException('non-nullable primary_language cannot be null');
-        }
-        $this->container['primary_language'] = $primary_language;
+        $this->container['propagate'] = $propagate;
 
         return $this;
     }

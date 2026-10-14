@@ -34,9 +34,10 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity' => '\Flyo\Model\EntityInterface',
         'model' => 'object',
         'language' => 'string',
+        'primary_language' => 'string',
         'is_draft' => 'bool',
         'draft_expires_at' => 'float',
-        'jsonld' => 'object',
+        'jsonld' => 'array<string,mixed>',
         'translation' => '\Flyo\Model\Translation[]',
         'breadcrumb' => '\Flyo\Model\Breadcrumb[]',
         'canonical' => 'string',
@@ -54,6 +55,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity' => null,
         'model' => null,
         'language' => null,
+        'primary_language' => null,
         'is_draft' => null,
         'draft_expires_at' => null,
         'jsonld' => null,
@@ -72,6 +74,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity' => false,
         'model' => false,
         'language' => false,
+        'primary_language' => false,
         'is_draft' => false,
         'draft_expires_at' => true,
         'jsonld' => false,
@@ -170,6 +173,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity' => 'entity',
         'model' => 'model',
         'language' => 'language',
+        'primary_language' => 'primary_language',
         'is_draft' => 'is_draft',
         'draft_expires_at' => 'draft_expires_at',
         'jsonld' => 'jsonld',
@@ -188,6 +192,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity' => 'setEntity',
         'model' => 'setModel',
         'language' => 'setLanguage',
+        'primary_language' => 'setPrimaryLanguage',
         'is_draft' => 'setIsDraft',
         'draft_expires_at' => 'setDraftExpiresAt',
         'jsonld' => 'setJsonld',
@@ -206,6 +211,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         'entity' => 'getEntity',
         'model' => 'getModel',
         'language' => 'getLanguage',
+        'primary_language' => 'getPrimaryLanguage',
         'is_draft' => 'getIsDraft',
         'draft_expires_at' => 'getDraftExpiresAt',
         'jsonld' => 'getJsonld',
@@ -275,6 +281,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('entity', $data ?? [], null);
         $this->setIfExists('model', $data ?? [], null);
         $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('primary_language', $data ?? [], null);
         $this->setIfExists('is_draft', $data ?? [], null);
         $this->setIfExists('draft_expires_at', $data ?? [], null);
         $this->setIfExists('jsonld', $data ?? [], null);
@@ -311,6 +318,39 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['entity'] === null) {
+            $invalidProperties[] = "'entity' can't be null";
+        }
+        if ($this->container['model'] === null) {
+            $invalidProperties[] = "'model' can't be null";
+        }
+        if ($this->container['language'] === null) {
+            $invalidProperties[] = "'language' can't be null";
+        }
+        if ($this->container['primary_language'] === null) {
+            $invalidProperties[] = "'primary_language' can't be null";
+        }
+        if ($this->container['is_draft'] === null) {
+            $invalidProperties[] = "'is_draft' can't be null";
+        }
+        if ($this->container['draft_expires_at'] === null && !$this->isNullableSetToNull('draft_expires_at')) {
+            $invalidProperties[] = "'draft_expires_at' can't be null";
+        }
+        if ($this->container['jsonld'] === null) {
+            $invalidProperties[] = "'jsonld' can't be null";
+        }
+        if ($this->container['translation'] === null) {
+            $invalidProperties[] = "'translation' can't be null";
+        }
+        if ($this->container['breadcrumb'] === null) {
+            $invalidProperties[] = "'breadcrumb' can't be null";
+        }
+        if ($this->container['canonical'] === null) {
+            $invalidProperties[] = "'canonical' can't be null";
+        }
+        if ($this->container['is_indexable'] === null) {
+            $invalidProperties[] = "'is_indexable' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -329,7 +369,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets entity
      *
-     * @return \Flyo\Model\EntityInterface|null
+     * @return \Flyo\Model\EntityInterface
      */
     public function getEntity()
     {
@@ -339,7 +379,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets entity
      *
-     * @param \Flyo\Model\EntityInterface|null $entity entity
+     * @param \Flyo\Model\EntityInterface $entity entity
      *
      * @return self
      */
@@ -356,7 +396,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets model
      *
-     * @return object|null
+     * @return object
      */
     public function getModel()
     {
@@ -366,7 +406,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets model
      *
-     * @param object|null $model All values which are mappend from inside flyo trough the mapping system are stored inside this object.
+     * @param object $model All values which are mappend from inside flyo trough the mapping system are stored inside this object.
      *
      * @return self
      */
@@ -383,7 +423,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets language
      *
-     * @return string|null
+     * @return string
      */
     public function getLanguage()
     {
@@ -393,7 +433,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets language
      *
-     * @param string|null $language Current language context for entity model data
+     * @param string $language Current language context for entity model data
      *
      * @return self
      */
@@ -408,9 +448,36 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets primary_language
+     *
+     * @return string
+     */
+    public function getPrimaryLanguage()
+    {
+        return $this->container['primary_language'];
+    }
+
+    /**
+     * Sets primary_language
+     *
+     * @param string $primary_language The primary language of the nitro integration
+     *
+     * @return self
+     */
+    public function setPrimaryLanguage($primary_language)
+    {
+        if (is_null($primary_language)) {
+            throw new \InvalidArgumentException('non-nullable primary_language cannot be null');
+        }
+        $this->container['primary_language'] = $primary_language;
+
+        return $this;
+    }
+
+    /**
      * Gets is_draft
      *
-     * @return bool|null
+     * @return bool
      */
     public function getIsDraft()
     {
@@ -420,7 +487,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_draft
      *
-     * @param bool|null $is_draft Whether this response was served from a **draft link** rather than from published content. Always present, and `false` for every regular request. A draft link is a shareable, expiring snapshot of an entity which is still offline in Flyo: because offline content is never delivered to an integration, this is the only way such an entity can be looked at on the website at all. The snapshot is addressed by a cryptic token which takes the place of the entity's unique id and slug, so a draft is requested through the very same endpoints as any other entity — `/entities/uniqueid/{uniqueid}` and `/entities/slug/{slug}` — with the token as the parameter. Use this flag to render a visible hint that the visitor is not looking at the live page. Note that the token does not look like a normal slug or unique id, so a router which validates those parameters against a pattern has to let it through for drafts to work.
+     * @param bool $is_draft Whether this response was served from a **draft link** rather than from published content. Always present, and `false` for every regular request. A draft link is a shareable, expiring snapshot of an entity which is still offline in Flyo: because offline content is never delivered to an integration, this is the only way such an entity can be looked at on the website at all. The snapshot is addressed by a cryptic token which takes the place of the entity's unique id and slug, so a draft is requested through the very same endpoints as any other entity — `/entities/uniqueid/{uniqueid}` and `/entities/slug/{slug}` — with the token as the parameter. Use this flag to render a visible hint that the visitor is not looking at the live page. Note that the token does not look like a normal slug or unique id, so a router which validates those parameters against a pattern has to let it through for drafts to work.
      *
      * @return self
      */
@@ -471,7 +538,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets jsonld
      *
-     * @return object|null
+     * @return array<string,mixed>
      */
     public function getJsonld()
     {
@@ -481,7 +548,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets jsonld
      *
-     * @param object|null $jsonld A Json LD based object with schema.org informations about the entity
+     * @param array<string,mixed> $jsonld A Json LD based object with schema.org informations about the entity
      *
      * @return self
      */
@@ -498,7 +565,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets translation
      *
-     * @return \Flyo\Model\Translation[]|null
+     * @return \Flyo\Model\Translation[]
      */
     public function getTranslation()
     {
@@ -508,7 +575,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets translation
      *
-     * @param \Flyo\Model\Translation[]|null $translation The translation contains information about further data in different languages. If the integration is not defined as multi lingual, the translations will be empty.
+     * @param \Flyo\Model\Translation[] $translation The translation contains information about further data in different languages. If the integration is not defined as multi lingual, the translations will be empty.
      *
      * @return self
      */
@@ -525,7 +592,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets breadcrumb
      *
-     * @return \Flyo\Model\Breadcrumb[]|null
+     * @return \Flyo\Model\Breadcrumb[]
      */
     public function getBreadcrumb()
     {
@@ -535,7 +602,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets breadcrumb
      *
-     * @param \Flyo\Model\Breadcrumb[]|null $breadcrumb The breadcrumb of the current site is represented by an array of pages, forming a navigational path. It provides a hierarchical representation of the user's current location within the website. The array is ordered from the innermost page, closest to the current page, to the outermost page, with the current page itself residing at the last position.
+     * @param \Flyo\Model\Breadcrumb[] $breadcrumb The breadcrumb of the current site is represented by an array of pages, forming a navigational path. It provides a hierarchical representation of the user's current location within the website. The array is ordered from the innermost page, closest to the current page, to the outermost page, with the current page itself residing at the last position.
      *
      * @return self
      */
@@ -552,7 +619,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets canonical
      *
-     * @return string|null
+     * @return string
      */
     public function getCanonical()
     {
@@ -562,7 +629,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets canonical
      *
-     * @param string|null $canonical The **canonical URL path** of this entity, ready to be rendered as `<link rel=\"canonical\">`. A collection can be configured with several routes - a detail route, a print view, an embed - but exactly one of them is flagged as the *canonical route* in the entity mapping, and that route is the address the entity itself lives at. Its resolved path is what this field carries, and it is the very same value the sitemap and the search results carry, so a search engine is never offered two competing addresses for the same content. The path is relative to the site root and already resolved for the requested language, exactly like every other path in this API - prefix it with your own domain. Empty when the collection has no route configured at all: such an entity has no public address and must not emit a canonical tag. For a **draft link** it resolves with the draft token in place of the unique id and slug, so it points at the draft itself and not at the not yet published entity.
+     * @param string $canonical The **canonical URL path** of this entity, ready to be rendered as `<link rel=\"canonical\">`. A collection can be configured with several routes - a detail route, a print view, an embed - but exactly one of them is flagged as the *canonical route* in the entity mapping, and that route is the address the entity itself lives at. Its resolved path is what this field carries, and it is the very same value the sitemap and the search results carry, so a search engine is never offered two competing addresses for the same content. The path is relative to the site root and already resolved for the requested language, exactly like every other path in this API - prefix it with your own domain. Empty when the collection has no route configured at all: such an entity has no public address and must not emit a canonical tag. For a **draft link** it resolves with the draft token in place of the unique id and slug, so it points at the draft itself and not at the not yet published entity.
      *
      * @return self
      */
@@ -579,7 +646,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets is_indexable
      *
-     * @return bool|null
+     * @return bool
      */
     public function getIsIndexable()
     {
@@ -589,7 +656,7 @@ class Entity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_indexable
      *
-     * @param bool|null $is_indexable Whether this entity may be indexed by search engines. `false` when every page placing the entity's content pool is marked non-indexable and the pool is not an indexed pool: the entity is then absent from the sitemap and the search endpoint, and the consumer should render `<meta name=\"robots\" content=\"noindex\">` for the detail page. Not access control - the entity resolves by id and slug like any other. Always `false` for a draft link.
+     * @param bool $is_indexable Whether this entity may be indexed by search engines. `false` when every page placing the entity's content pool is marked non-indexable and the pool is not an indexed pool: the entity is then absent from the sitemap and the search endpoint, and the consumer should render `<meta name=\"robots\" content=\"noindex\">` for the detail page. Not access control - the entity resolves by id and slug like any other. Always `false` for a draft link.
      *
      * @return self
      */

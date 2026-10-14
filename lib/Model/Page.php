@@ -48,7 +48,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'string',
         'target' => 'string',
         'container' => 'string',
-        'jsonld' => 'object',
+        'jsonld' => 'array<string,mixed>',
         'breadcrumb' => '\Flyo\Model\Breadcrumb[]',
         'translation' => '\Flyo\Model\Translation[]'
     ];
@@ -858,7 +858,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets jsonld
      *
-     * @return object|null
+     * @return array<string,mixed>|null
      */
     public function getJsonld()
     {
@@ -868,7 +868,7 @@ class Page implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets jsonld
      *
-     * @param object|null $jsonld A JSON-LD object with schema.org information about the page
+     * @param array<string,mixed>|null $jsonld A JSON-LD object with schema.org information about the page
      *
      * @return self
      */

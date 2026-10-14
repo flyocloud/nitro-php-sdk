@@ -1,4 +1,5 @@
 .php-cs-fixer.dist.php
+docs/Api/BlocksApi.md
 docs/Api/ConfigApi.md
 docs/Api/EntitiesApi.md
 docs/Api/PagesApi.md
@@ -6,6 +7,8 @@ docs/Api/SearchApi.md
 docs/Api/SitemapApi.md
 docs/Api/VersionApi.md
 docs/Model/Block.md
+docs/Model/BlockCollection.md
+docs/Model/BlockCollectionLinks.md
 docs/Model/BlockSlotValue.md
 docs/Model/Breadcrumb.md
 docs/Model/ConfigResponse.md
@@ -25,6 +28,7 @@ docs/Model/SitemapinterfaceInner.md
 docs/Model/Translation.md
 docs/Model/TranslationLanguage.md
 docs/Model/VersionResponse.md
+lib/Api/BlocksApi.php
 lib/Api/ConfigApi.php
 lib/Api/EntitiesApi.php
 lib/Api/PagesApi.php
@@ -36,6 +40,8 @@ lib/Configuration.php
 lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/Block.php
+lib/Model/BlockCollection.php
+lib/Model/BlockCollectionLinks.php
 lib/Model/BlockSlotValue.php
 lib/Model/Breadcrumb.php
 lib/Model/ConfigResponse.php

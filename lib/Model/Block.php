@@ -34,6 +34,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'mixed[]',
         'content' => 'object',
         'config' => 'object',
+        'collection' => '\Flyo\Model\BlockCollection',
         'identifier' => 'string',
         'uid' => 'string',
         'component' => 'string',
@@ -51,6 +52,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => null,
         'content' => null,
         'config' => null,
+        'collection' => null,
         'identifier' => null,
         'uid' => null,
         'component' => null,
@@ -66,6 +68,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => false,
         'content' => false,
         'config' => false,
+        'collection' => false,
         'identifier' => false,
         'uid' => false,
         'component' => false,
@@ -161,6 +164,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'items',
         'content' => 'content',
         'config' => 'config',
+        'collection' => 'collection',
         'identifier' => 'identifier',
         'uid' => 'uid',
         'component' => 'component',
@@ -176,6 +180,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'setItems',
         'content' => 'setContent',
         'config' => 'setConfig',
+        'collection' => 'setCollection',
         'identifier' => 'setIdentifier',
         'uid' => 'setUid',
         'component' => 'setComponent',
@@ -191,6 +196,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'getItems',
         'content' => 'getContent',
         'config' => 'getConfig',
+        'collection' => 'getCollection',
         'identifier' => 'getIdentifier',
         'uid' => 'getUid',
         'component' => 'getComponent',
@@ -257,6 +263,7 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('items', $data ?? [], null);
         $this->setIfExists('content', $data ?? [], null);
         $this->setIfExists('config', $data ?? [], null);
+        $this->setIfExists('collection', $data ?? [], null);
         $this->setIfExists('identifier', $data ?? [], null);
         $this->setIfExists('uid', $data ?? [], null);
         $this->setIfExists('component', $data ?? [], null);
@@ -298,6 +305,9 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['config'] === null) {
             $invalidProperties[] = "'config' can't be null";
+        }
+        if ($this->container['collection'] === null) {
+            $invalidProperties[] = "'collection' can't be null";
         }
         if ($this->container['identifier'] === null) {
             $invalidProperties[] = "'identifier' can't be null";
@@ -403,6 +413,33 @@ class Block implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable config cannot be null');
         }
         $this->container['config'] = $config;
+
+        return $this;
+    }
+
+    /**
+     * Gets collection
+     *
+     * @return \Flyo\Model\BlockCollection
+     */
+    public function getCollection()
+    {
+        return $this->container['collection'];
+    }
+
+    /**
+     * Sets collection
+     *
+     * @param \Flyo\Model\BlockCollection $collection collection
+     *
+     * @return self
+     */
+    public function setCollection($collection)
+    {
+        if (is_null($collection)) {
+            throw new \InvalidArgumentException('non-nullable collection cannot be null');
+        }
+        $this->container['collection'] = $collection;
 
         return $this;
     }

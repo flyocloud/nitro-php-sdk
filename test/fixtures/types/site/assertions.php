@@ -202,7 +202,7 @@ function containerIdentifiers(): string
 }
 
 /** A typed container must be accepted anywhere the generic model is expected. */
-function acceptedAsGenericContainer(ContainerFooter $container): \Flyo\Model\ConfigResponseContainersValue
+function acceptedAsGenericContainer(ContainerFooter $container): \Flyo\Model\Container
 {
     return $container;
 }

@@ -3,7 +3,7 @@
 namespace Flyo\Test\Generator;
 
 use Flyo\Model\ConfigResponse;
-use Flyo\Model\ConfigResponseContainersValue;
+use Flyo\Model\Container;
 use Flyo\Model\ContainerPage;
 use Flyo\Model\Entity;
 use Flyo\Model\EntityInterface;
@@ -22,7 +22,7 @@ class TypesAccessPatternTest extends TestCase
     /** @var class-string<Entity> */
     private const ENTITY = 'Fixture\Site\Entities\EntityArticle';
 
-    /** @var class-string<ConfigResponseContainersValue> */
+    /** @var class-string<Container> */
     private const CONTAINER = 'Fixture\Site\Containers\ContainerMain';
 
     /** @var class-string<ContainerPage> */
@@ -109,7 +109,7 @@ class TypesAccessPatternTest extends TestCase
 
         $this->assertIsArray($containers);
         $this->assertArrayHasKey(constant(self::CONTAINER . '::IDENTIFIER'), $containers);
-        $this->assertInstanceOf(ConfigResponseContainersValue::class, $containers['main']);
+        $this->assertInstanceOf(Container::class, $containers['main']);
         $this->assertNotInstanceOf(self::CONTAINER, $containers['main']);
     }
 
@@ -162,10 +162,10 @@ class TypesAccessPatternTest extends TestCase
     {
         $payload = self::configPayload()->containers->main;
 
-        $generic = ObjectSerializer::deserialize($payload, ConfigResponseContainersValue::class, []);
+        $generic = ObjectSerializer::deserialize($payload, Container::class, []);
         $typed = ObjectSerializer::deserialize($payload, self::CONTAINER, []);
 
-        $this->assertInstanceOf(ConfigResponseContainersValue::class, $typed);
+        $this->assertInstanceOf(Container::class, $typed);
         $this->assertSame(json_encode($generic), json_encode($typed));
 
         $item = $payload->items[0];
@@ -216,7 +216,7 @@ class TypesAccessPatternTest extends TestCase
         return ObjectSerializer::deserialize(self::configPayload(), ConfigResponse::class, []);
     }
 
-    private static function main(): ConfigResponseContainersValue
+    private static function main(): Container
     {
         return (self::config()->getContainers() ?? [])['main'];
     }

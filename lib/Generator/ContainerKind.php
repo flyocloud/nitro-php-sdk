@@ -9,7 +9,7 @@ namespace Flyo\Generator;
  * schema their pages reference.
  *
  * Unlike a block's content, a container is hydrated into real SDK models all the way down:
- * ConfigApi::config() returns each container as a \Flyo\Model\ConfigResponseContainersValue whose
+ * ConfigApi::config() returns each container as a \Flyo\Model\Container whose
  * items and their children are \Flyo\Model\ContainerPage. So the item schema becomes a class of
  * its own rather than an inline shape, and only `properties`, the one untyped map on
  * ContainerPage, is described as a shape. It is also the part that differs per site.
@@ -17,7 +17,7 @@ namespace Flyo\Generator;
 final class ContainerKind implements Kind
 {
     /** The SDK model every container class extends. */
-    public const PARENT_CLASS = '\Flyo\Model\ConfigResponseContainersValue';
+    public const PARENT_CLASS = '\Flyo\Model\Container';
 
     /** The SDK model every container item class extends. */
     public const ITEM_PARENT_CLASS = '\Flyo\Model\ContainerPage';

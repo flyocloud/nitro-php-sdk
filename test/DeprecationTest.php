@@ -2,18 +2,18 @@
 
 namespace Flyo\Test;
 
-use Flyo\Model\ConfigResponseContainersValue;
+use Flyo\Model\Container;
 use PHPUnit\Framework\TestCase;
 
 class DeprecationTest extends TestCase
 {
     /**
-     * Test that ConfigResponseContainersValue constructor doesn't trigger deprecation warnings
+     * Test that Container constructor doesn't trigger deprecation warnings
      * about implicitly marking parameter as nullable.
      *
      * This test ensures PHP 8.4+ compatibility where implicit nullable parameters are deprecated.
      */
-    public function testConfigResponseContainersValueConstructorNoDeprecation()
+    public function testContainerConstructorNoDeprecation()
     {
         // Capture any errors/warnings triggered during object instantiation
         $errorTriggered = false;
@@ -29,13 +29,13 @@ class DeprecationTest extends TestCase
 
         try {
             // Test with null
-            new ConfigResponseContainersValue(null);
+            new Container(null);
             
             // Test with empty array
-            new ConfigResponseContainersValue([]);
+            new Container([]);
             
             // Test with data
-            new ConfigResponseContainersValue([
+            new Container([
                 'items' => [],
                 'uid' => 'test-uid',
                 'identifier' => 'test-identifier',
@@ -55,16 +55,16 @@ class DeprecationTest extends TestCase
     /**
      * Test that the model works correctly with null data
      */
-    public function testConfigResponseContainersValueWithNullData()
+    public function testContainerWithNullData()
     {
-        $model = new ConfigResponseContainersValue(null);
-        $this->assertInstanceOf(ConfigResponseContainersValue::class, $model);
+        $model = new Container(null);
+        $this->assertInstanceOf(Container::class, $model);
     }
 
     /**
      * Test that the model works correctly with valid data
      */
-    public function testConfigResponseContainersValueWithValidData()
+    public function testContainerWithValidData()
     {
         $data = [
             'items' => [],
@@ -73,8 +73,8 @@ class DeprecationTest extends TestCase
             'label' => 'Test Label'
         ];
         
-        $model = new ConfigResponseContainersValue($data);
-        $this->assertInstanceOf(ConfigResponseContainersValue::class, $model);
+        $model = new Container($data);
+        $this->assertInstanceOf(Container::class, $model);
         $this->assertEquals('test-uid', $model->getUid());
         $this->assertEquals('test-identifier', $model->getIdentifier());
         $this->assertEquals('Test Label', $model->getLabel());

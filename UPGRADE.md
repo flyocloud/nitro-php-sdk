@@ -25,6 +25,9 @@ Search your code for the old names (type hints, `instanceof`, `@var`/`@return` d
 `ObjectSerializer::deserialize()` calls) and replace them. `EntityByUniqueid404Response` was already
 deprecated in 3.x; see below.
 
+Container classes made by `flyo-generate-types` extend the container model, so classes generated
+with 3.x fail to load. Run `vendor/bin/flyo-generate-types` again after upgrading.
+
 ## From 3.7 to 3.8
 
 ### Generated types: constants for field options

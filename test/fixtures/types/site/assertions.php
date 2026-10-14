@@ -124,7 +124,7 @@ function eventSoldOut(EntityEvent $entity): ?bool
 }
 
 /** Everything that is the same for every entity type keeps the SDK's own types. */
-function entityInheritedGetters(EntityArticle $entity): ?\Flyo\Model\EntityInterface
+function entityInheritedGetters(EntityArticle $entity): \Flyo\Model\EntityInterface
 {
     return $entity->getEntity();
 }

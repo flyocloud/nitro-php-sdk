@@ -188,6 +188,37 @@ two options would get the same name, neither gets a constant and the generator p
 a name never quietly starts to mean a different option. Only `flyo-generate-types` generates these
 constants; the deprecated `flyo-generate-blocks` does not.
 
+A block whose items are a **collection** (paged, sorted and filtered through
+`/blocks/collection/{key}`), or that aggregates facets, gets a second class, `<Block>Collection`,
+which its `getCollection()` returns. It narrows the getters of `\Flyo\Model\BlockCollection` to what
+the block definition allows, and lists the fields in `SORTABLE`, `FILTERABLE` and `FACETS`:
+
+```php
+use App\Flyo\Blocks\BlockEventList;
+use App\Flyo\Blocks\BlockEventListCollection;
+
+/** @var BlockEventList $block */
+$collection = $block->getCollection();              // BlockEventListCollection
+
+$collection->getSortable();                         // list<'position'|'title'|'date'>
+foreach ($collection->getFacets()['category'] as $facet) {   // a typo is an unknown offset
+    echo $facet->getLabel(), ' (', $facet->getCount(), ')';
+}
+
+// the constants need no instance: check a request before it reaches the API
+$sort = in_array($requested, BlockEventListCollection::SORTABLE, true) ? $requested : 'position';
+
+/** @var BlockEventList $page */                   // the endpoint answers the same block
+$page = (new \Flyo\Api\BlocksApi())->blockCollection($collection->getKey(), 2, $sort);
+```
+
+Unlike content, config and items, the collection is an SDK model at runtime, and so are its links
+and the facet values. A facet's `getValue()` is always a string, also for a number or a date field,
+because the SDK model declares it so. A getter is only narrowed where the document says more than
+the model does, so the class gets more precise as the server pins more of a collection (its page
+size, or that a collection always has a sort and links). A block that is neither a collection nor
+aggregates facets gets no collection class. The deprecated `flyo-generate-blocks` generates none.
+
 **Entities** narrow `getModel()`, the part of an entity response whose shape depends on its type:
 
 ```php

@@ -1,5 +1,37 @@
 # Upgrade
 
+## From 4.0 to 4.1
+
+### Generated types: a class for the collection of a block
+
+`flyo-generate-types` gives every block whose items are a collection, or that aggregates facets, a
+second class `<Block>Collection` next to it, and narrows the block's `getCollection()` to it:
+
+```diff
+  class BlockEventList extends \Flyo\Model\Block
+  {
+      // ...
++
++     /** @return \App\Flyo\Blocks\BlockEventListCollection */
++     public function getCollection()
+  }
++
++ class BlockEventListCollection extends \Flyo\Model\BlockCollection
++ {
++     public const SORTABLE = ['position', 'title', 'date'];
++     public const FILTERABLE = ['title', 'date', 'category', 'link'];
++     public const FACETS = ['category'];
++     // getEnabled(), getSortable(), getFilterable(), getFacets(), ... narrowed
++ }
+```
+
+Nothing changes for code that uses `getCollection()` as a `\Flyo\Model\BlockCollection`, since the
+collection class extends it. `--check` reports the new files until you run
+`vendor/bin/flyo-generate-types` again. If a block component is named like the collection class of
+another block (`EventListCollection` next to `EventList`), the block keeps its name, the collection
+class is numbered and the generator prints a warning. The deprecated `flyo-generate-blocks` is
+unchanged.
+
 ## From 3.x to 4.0
 
 The models are generated from version 3.5 of the OpenAPI document, which gives the inline schemas

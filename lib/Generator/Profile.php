@@ -56,7 +56,7 @@ final class Profile
         return new self(
             program: 'flyo-generate-blocks',
             // Frozen: enum constants came after this command was deprecated.
-            kinds: [new BlockKind(enumConstants: false)],
+            kinds: [new BlockKind(enumConstants: false, collections: false)],
             flat: true,
             reportUnsupported: false,
             deprecation: 'flyo-generate-blocks is deprecated and will be removed in the next major '

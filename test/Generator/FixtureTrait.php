@@ -32,6 +32,7 @@ trait FixtureTrait
         'blocks/collisions' => ['Fixture\Collisions', 'blocks'],
         'types/site' => ['Fixture\Site', 'types'],
         'types/enums' => ['Fixture\Enums', 'types'],
+        'types/collections' => ['Fixture\Collections', 'types'],
     ];
 
     /**

@@ -1,0 +1,1100 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Flyo Nitro - Block collections",
+        "description": "Blocks whose collection is typed: two collections (one with the sort, links and page size pinned, one without), a block that is no collection but aggregates facets, and a block with neither.",
+        "version": "edge"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "BlockEventList": {
+                "title": "Event List",
+                "type": "object",
+                "x-schema-type": "block",
+                "description": "Block definition \"event_list\" (component: EventList).",
+                "required": [
+                    "identifier",
+                    "uid",
+                    "component",
+                    "content",
+                    "config",
+                    "items",
+                    "slots",
+                    "collection"
+                ],
+                "properties": {
+                    "identifier": {
+                        "enum": [
+                            "event_list"
+                        ],
+                        "type": "string"
+                    },
+                    "uid": {
+                        "type": "string"
+                    },
+                    "component": {
+                        "enum": [
+                            "EventList"
+                        ],
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "object",
+                        "description": "Block content fields.",
+                        "properties": {
+                            "heading": {
+                                "type": "string"
+                            },
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "description": "Block configuration fields.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "Iterated content pool items mapped to block fields.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "date": {
+                                    "type": "integer"
+                                },
+                                "category": {
+                                    "type": "object",
+                                    "required": [
+                                        "value",
+                                        "options",
+                                        "label"
+                                    ],
+                                    "properties": {
+                                        "value": {
+                                            "type": "string",
+                                            "enum": [
+                                                "concert",
+                                                "theatre"
+                                            ],
+                                            "nullable": true
+                                        },
+                                        "options": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                {
+                                                    "maxItems": 0,
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            ]
+                                        },
+                                        "label": {
+                                            "type": "string",
+                                            "nullable": true
+                                        }
+                                    }
+                                },
+                                "price": {
+                                    "type": "number"
+                                },
+                                "link": {
+                                    "type": "object",
+                                    "description": "Generated detail-page link for the item.",
+                                    "properties": {
+                                        "entity_slug": {
+                                            "type": "string"
+                                        },
+                                        "routes": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "slots": {
+                        "type": "object",
+                        "description": "Named slot containers for nested blocks.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "collection": {
+                        "title": "Event List Collection",
+                        "type": "object",
+                        "description": "How the items of the block are delivered.",
+                        "required": [
+                            "enabled",
+                            "key",
+                            "per_page",
+                            "inline_first_page",
+                            "total",
+                            "page_count",
+                            "current_page",
+                            "sort",
+                            "sortable",
+                            "filterable",
+                            "links",
+                            "facets"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "type": "boolean",
+                                "enum": [
+                                    true
+                                ],
+                                "description": "Whether the items of this block are a collection."
+                            },
+                            "key": {
+                                "type": "string",
+                                "description": "The key of the collection.",
+                                "example": "news-data"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "description": "The items per page, set in the block definition.",
+                                "example": 12,
+                                "enum": [
+                                    12
+                                ]
+                            },
+                            "inline_first_page": {
+                                "type": "boolean",
+                                "description": "Whether the page JSON carries the first page in items.",
+                                "enum": [
+                                    true
+                                ]
+                            },
+                            "total": {
+                                "type": "integer",
+                                "description": "The number of items.",
+                                "example": 512
+                            },
+                            "page_count": {
+                                "type": "integer",
+                                "description": "The number of pages, at least 1.",
+                                "example": 22
+                            },
+                            "current_page": {
+                                "type": "integer",
+                                "description": "The page items holds, starting at 1.",
+                                "example": 1
+                            },
+                            "sort": {
+                                "type": "string",
+                                "description": "The sort of this page. Null when the block is no collection.",
+                                "example": "position",
+                                "pattern": "^-?(position|title|date|price)(,-?(position|title|date|price))*$"
+                            },
+                            "sortable": {
+                                "type": "array",
+                                "description": "The fields sort accepts.",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "position",
+                                        "title",
+                                        "date",
+                                        "price"
+                                    ]
+                                },
+                                "example": [
+                                    "position",
+                                    "title",
+                                    "date",
+                                    "price"
+                                ]
+                            },
+                            "filterable": {
+                                "type": "array",
+                                "description": "The fields filter accepts.",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "title",
+                                        "date",
+                                        "category",
+                                        "price",
+                                        "link"
+                                    ]
+                                },
+                                "example": [
+                                    "title",
+                                    "date",
+                                    "category",
+                                    "price",
+                                    "link"
+                                ]
+                            },
+                            "links": {
+                                "type": "object",
+                                "description": "Absolute urls on the collection endpoint. Null when the block is no collection.",
+                                "required": [
+                                    "base",
+                                    "self",
+                                    "first",
+                                    "prev",
+                                    "next",
+                                    "last"
+                                ],
+                                "properties": {
+                                    "base": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The collection without page, sort or filter."
+                                    },
+                                    "self": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "This page."
+                                    },
+                                    "first": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The first page."
+                                    },
+                                    "prev": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The previous page, null on the first.",
+                                        "nullable": true
+                                    },
+                                    "next": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The next page, null on the last.",
+                                        "nullable": true
+                                    },
+                                    "last": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The last page."
+                                    }
+                                }
+                            },
+                            "facets": {
+                                "title": "Event List Collection Facets",
+                                "type": "object",
+                                "description": "The distinct values of every mapping item the block aggregates.",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "category": {
+                                        "type": "array",
+                                        "items": {
+                                            "title": "Event List Collection Facets category Value",
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "type": "string",
+                                                    "description": "The value, exactly as the items carry it."
+                                                },
+                                                "label": {
+                                                    "type": "string",
+                                                    "nullable": true,
+                                                    "description": "The label of a dropdown value."
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "description": "The number of items that carry the value.",
+                                                    "example": 8
+                                                }
+                                            },
+                                            "required": [
+                                                "value",
+                                                "label",
+                                                "count"
+                                            ]
+                                        }
+                                    },
+                                    "price": {
+                                        "type": "array",
+                                        "items": {
+                                            "title": "Event List Collection Facets price Value",
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "type": "number",
+                                                    "description": "The value, exactly as the items carry it."
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "description": "The number of items that carry the value.",
+                                                    "example": 8
+                                                }
+                                            },
+                                            "required": [
+                                                "value",
+                                                "count"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "category",
+                                    "price"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "BlockNewsFeed": {
+                "title": "News Feed",
+                "type": "object",
+                "x-schema-type": "block",
+                "description": "Block definition \"news_feed\" (component: NewsFeed).",
+                "required": [
+                    "identifier",
+                    "uid",
+                    "component",
+                    "content",
+                    "config",
+                    "items",
+                    "slots",
+                    "collection"
+                ],
+                "properties": {
+                    "identifier": {
+                        "enum": [
+                            "news_feed"
+                        ],
+                        "type": "string"
+                    },
+                    "uid": {
+                        "type": "string"
+                    },
+                    "component": {
+                        "enum": [
+                            "NewsFeed"
+                        ],
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "object",
+                        "description": "Block content fields.",
+                        "properties": {
+                            "heading": {
+                                "type": "string"
+                            },
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "description": "Block configuration fields.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "Iterated content pool items mapped to block fields.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "topic": {
+                                    "type": "string"
+                                },
+                                "link": {
+                                    "type": "object",
+                                    "description": "Generated detail-page link for the item.",
+                                    "properties": {
+                                        "entity_slug": {
+                                            "type": "string"
+                                        },
+                                        "routes": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "slots": {
+                        "type": "object",
+                        "description": "Named slot containers for nested blocks.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "collection": {
+                        "title": "News Feed Collection",
+                        "type": "object",
+                        "description": "How the items of the block are delivered.",
+                        "required": [
+                            "enabled",
+                            "key",
+                            "per_page",
+                            "inline_first_page",
+                            "total",
+                            "page_count",
+                            "current_page",
+                            "sort",
+                            "sortable",
+                            "filterable",
+                            "links",
+                            "facets"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "type": "boolean",
+                                "enum": [
+                                    true
+                                ],
+                                "description": "Whether the items of this block are a collection."
+                            },
+                            "key": {
+                                "type": "string",
+                                "description": "The key of the collection.",
+                                "example": "news-data"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "description": "The items per page, set in the block definition.",
+                                "example": 12
+                            },
+                            "inline_first_page": {
+                                "type": "boolean",
+                                "description": "Whether the page JSON carries the first page in items."
+                            },
+                            "total": {
+                                "type": "integer",
+                                "description": "The number of items.",
+                                "example": 512
+                            },
+                            "page_count": {
+                                "type": "integer",
+                                "description": "The number of pages, at least 1.",
+                                "example": 22
+                            },
+                            "current_page": {
+                                "type": "integer",
+                                "description": "The page items holds, starting at 1.",
+                                "example": 1
+                            },
+                            "sort": {
+                                "type": "string",
+                                "description": "The sort of this page. Null when the block is no collection.",
+                                "example": "position",
+                                "nullable": true,
+                                "pattern": "^-?(position|title|topic)(,-?(position|title|topic))*$"
+                            },
+                            "sortable": {
+                                "type": "array",
+                                "description": "The fields sort accepts.",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "position",
+                                        "title",
+                                        "topic"
+                                    ]
+                                },
+                                "example": [
+                                    "position",
+                                    "title",
+                                    "topic"
+                                ]
+                            },
+                            "filterable": {
+                                "type": "array",
+                                "description": "The fields filter accepts.",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "title",
+                                        "topic",
+                                        "link"
+                                    ]
+                                },
+                                "example": [
+                                    "title",
+                                    "topic",
+                                    "link"
+                                ]
+                            },
+                            "links": {
+                                "type": "object",
+                                "description": "Absolute urls on the collection endpoint. Null when the block is no collection.",
+                                "required": [
+                                    "base",
+                                    "self",
+                                    "first",
+                                    "prev",
+                                    "next",
+                                    "last"
+                                ],
+                                "properties": {
+                                    "base": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The collection without page, sort or filter."
+                                    },
+                                    "self": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "This page."
+                                    },
+                                    "first": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The first page."
+                                    },
+                                    "prev": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The previous page, null on the first.",
+                                        "nullable": true
+                                    },
+                                    "next": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The next page, null on the last.",
+                                        "nullable": true
+                                    },
+                                    "last": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The last page."
+                                    }
+                                },
+                                "nullable": true
+                            },
+                            "facets": {
+                                "title": "News Feed Collection Facets",
+                                "type": "object",
+                                "description": "The distinct values of every mapping item the block aggregates.",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "topic": {
+                                        "type": "array",
+                                        "items": {
+                                            "title": "News Feed Collection Facets topic Value",
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "type": "string",
+                                                    "description": "The value, exactly as the items carry it."
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "description": "The number of items that carry the value.",
+                                                    "example": 8
+                                                }
+                                            },
+                                            "required": [
+                                                "value",
+                                                "count"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "topic"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "BlockTagCloud": {
+                "title": "Tag Cloud",
+                "type": "object",
+                "x-schema-type": "block",
+                "description": "Block definition \"tag_cloud\" (component: TagCloud).",
+                "required": [
+                    "identifier",
+                    "uid",
+                    "component",
+                    "content",
+                    "config",
+                    "items",
+                    "slots",
+                    "collection"
+                ],
+                "properties": {
+                    "identifier": {
+                        "enum": [
+                            "tag_cloud"
+                        ],
+                        "type": "string"
+                    },
+                    "uid": {
+                        "type": "string"
+                    },
+                    "component": {
+                        "enum": [
+                            "TagCloud"
+                        ],
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "object",
+                        "description": "Block content fields.",
+                        "properties": {
+                            "heading": {
+                                "type": "string"
+                            },
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "description": "Block configuration fields.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "Iterated content pool items mapped to block fields.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tag": {
+                                    "type": "string"
+                                },
+                                "link": {
+                                    "type": "object",
+                                    "description": "Generated detail-page link for the item.",
+                                    "properties": {
+                                        "entity_slug": {
+                                            "type": "string"
+                                        },
+                                        "routes": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "slots": {
+                        "type": "object",
+                        "description": "Named slot containers for nested blocks.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "collection": {
+                        "title": "Tag Cloud Collection",
+                        "type": "object",
+                        "description": "How the items of the block are delivered.",
+                        "required": [
+                            "enabled",
+                            "key",
+                            "per_page",
+                            "inline_first_page",
+                            "total",
+                            "page_count",
+                            "current_page",
+                            "sort",
+                            "sortable",
+                            "filterable",
+                            "links",
+                            "facets"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "type": "boolean",
+                                "enum": [
+                                    false
+                                ],
+                                "description": "Whether the items of this block are a collection."
+                            },
+                            "key": {
+                                "type": "string",
+                                "description": "The key of the collection.",
+                                "example": "news-data"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "description": "The items per page, set in the block definition.",
+                                "example": 12
+                            },
+                            "inline_first_page": {
+                                "type": "boolean",
+                                "description": "Whether the page JSON carries the first page in items.",
+                                "enum": [
+                                    true
+                                ]
+                            },
+                            "total": {
+                                "type": "integer",
+                                "description": "The number of items.",
+                                "example": 512
+                            },
+                            "page_count": {
+                                "type": "integer",
+                                "description": "The number of pages, at least 1.",
+                                "example": 22
+                            },
+                            "current_page": {
+                                "type": "integer",
+                                "description": "The page items holds, starting at 1.",
+                                "example": 1
+                            },
+                            "sort": {
+                                "type": "string",
+                                "description": "The sort of this page. Null when the block is no collection.",
+                                "example": "position",
+                                "nullable": true
+                            },
+                            "sortable": {
+                                "type": "array",
+                                "description": "The fields sort accepts.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 0
+                            },
+                            "filterable": {
+                                "type": "array",
+                                "description": "The fields filter accepts.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 0
+                            },
+                            "links": {
+                                "type": "object",
+                                "description": "Absolute urls on the collection endpoint. Null when the block is no collection.",
+                                "required": [
+                                    "base",
+                                    "self",
+                                    "first",
+                                    "prev",
+                                    "next",
+                                    "last"
+                                ],
+                                "properties": {
+                                    "base": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The collection without page, sort or filter."
+                                    },
+                                    "self": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "This page."
+                                    },
+                                    "first": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The first page."
+                                    },
+                                    "prev": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The previous page, null on the first.",
+                                        "nullable": true
+                                    },
+                                    "next": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The next page, null on the last.",
+                                        "nullable": true
+                                    },
+                                    "last": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The last page."
+                                    }
+                                },
+                                "nullable": true
+                            },
+                            "facets": {
+                                "title": "Tag Cloud Collection Facets",
+                                "type": "object",
+                                "description": "The distinct values of every mapping item the block aggregates.",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "tag": {
+                                        "type": "array",
+                                        "items": {
+                                            "title": "Tag Cloud Collection Facets tag Value",
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "type": "string",
+                                                    "description": "The value, exactly as the items carry it."
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "description": "The number of items that carry the value.",
+                                                    "example": 8
+                                                }
+                                            },
+                                            "required": [
+                                                "value",
+                                                "count"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "tag"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "BlockText": {
+                "title": "Text",
+                "type": "object",
+                "x-schema-type": "block",
+                "description": "Block definition \"text\" (component: Text).",
+                "required": [
+                    "identifier",
+                    "uid",
+                    "component",
+                    "content",
+                    "config",
+                    "items",
+                    "slots",
+                    "collection"
+                ],
+                "properties": {
+                    "identifier": {
+                        "enum": [
+                            "text"
+                        ],
+                        "type": "string"
+                    },
+                    "uid": {
+                        "type": "string"
+                    },
+                    "component": {
+                        "enum": [
+                            "Text"
+                        ],
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "object",
+                        "description": "Block content fields.",
+                        "properties": {
+                            "heading": {
+                                "type": "string"
+                            },
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "description": "Block configuration fields.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "Iterated content pool items mapped to block fields.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "link": {
+                                    "type": "object",
+                                    "description": "Generated detail-page link for the item.",
+                                    "properties": {
+                                        "entity_slug": {
+                                            "type": "string"
+                                        },
+                                        "routes": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "slots": {
+                        "type": "object",
+                        "description": "Named slot containers for nested blocks.",
+                        "properties": {
+                            "_empty": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "collection": {
+                        "title": "Text Collection",
+                        "type": "object",
+                        "description": "How the items of the block are delivered.",
+                        "required": [
+                            "enabled",
+                            "key",
+                            "per_page",
+                            "inline_first_page",
+                            "total",
+                            "page_count",
+                            "current_page",
+                            "sort",
+                            "sortable",
+                            "filterable",
+                            "links",
+                            "facets"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "type": "boolean",
+                                "enum": [
+                                    false
+                                ],
+                                "description": "Whether the items of this block are a collection."
+                            },
+                            "key": {
+                                "type": "string",
+                                "description": "The key of the collection.",
+                                "example": "news-data"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "description": "The items per page, set in the block definition.",
+                                "example": 12
+                            },
+                            "inline_first_page": {
+                                "type": "boolean",
+                                "description": "Whether the page JSON carries the first page in items.",
+                                "enum": [
+                                    true
+                                ]
+                            },
+                            "total": {
+                                "type": "integer",
+                                "description": "The number of items.",
+                                "example": 512
+                            },
+                            "page_count": {
+                                "type": "integer",
+                                "description": "The number of pages, at least 1.",
+                                "example": 22
+                            },
+                            "current_page": {
+                                "type": "integer",
+                                "description": "The page items holds, starting at 1.",
+                                "example": 1
+                            },
+                            "sort": {
+                                "type": "string",
+                                "description": "The sort of this page. Null when the block is no collection.",
+                                "example": "position",
+                                "nullable": true
+                            },
+                            "sortable": {
+                                "type": "array",
+                                "description": "The fields sort accepts.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 0
+                            },
+                            "filterable": {
+                                "type": "array",
+                                "description": "The fields filter accepts.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 0
+                            },
+                            "links": {
+                                "type": "object",
+                                "description": "Absolute urls on the collection endpoint. Null when the block is no collection.",
+                                "required": [
+                                    "base",
+                                    "self",
+                                    "first",
+                                    "prev",
+                                    "next",
+                                    "last"
+                                ],
+                                "properties": {
+                                    "base": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The collection without page, sort or filter."
+                                    },
+                                    "self": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "This page."
+                                    },
+                                    "first": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The first page."
+                                    },
+                                    "prev": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The previous page, null on the first.",
+                                        "nullable": true
+                                    },
+                                    "next": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The next page, null on the last.",
+                                        "nullable": true
+                                    },
+                                    "last": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The last page."
+                                    }
+                                },
+                                "nullable": true
+                            },
+                            "facets": {
+                                "title": "Text Collection Facets",
+                                "type": "object",
+                                "description": "The distinct values of every mapping item the block aggregates.",
+                                "additionalProperties": false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

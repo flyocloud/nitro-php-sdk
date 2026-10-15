@@ -402,6 +402,114 @@ class DegenerateSchemaTest extends TestCase
     }
 
     /**
+     * The collection of the generic spec says nothing about the block, so the block keeps the
+     * getCollection() of the SDK model and gets no collection class.
+     */
+    public function testAnUntypedCollectionGetsNoClass(): void
+    {
+        $source = self::render([
+            'BlockPlain' => [
+                'type' => 'object',
+                'x-schema-type' => 'block',
+                'properties' => [
+                    'component' => ['enum' => ['Plain'], 'type' => 'string'],
+                    'collection' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'enabled' => ['type' => 'boolean'],
+                            'sortable' => ['type' => 'array', 'items' => ['type' => 'string']],
+                            'facets' => [
+                                'type' => 'object',
+                                'additionalProperties' => ['type' => 'array', 'items' => ['type' => 'object']],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertSame(['Blocks/BlockPlain.php'], array_keys($source));
+        $this->assertStringNotContainsString('getCollection', $source['Blocks/BlockPlain.php']);
+    }
+
+    /**
+     * A collection whose lists and facets are not what the server sends must still produce valid
+     * PHP, narrowing only what can be read.
+     */
+    public function testAMalformedCollectionStillProducesValidPhp(): void
+    {
+        $source = self::render([
+            'BlockOdd' => [
+                'type' => 'object',
+                'x-schema-type' => 'block',
+                'properties' => [
+                    'component' => ['enum' => ['Odd'], 'type' => 'string'],
+                    'collection' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'enabled' => ['type' => 'boolean', 'enum' => [true]],
+                            'per_page' => ['type' => 'integer', 'enum' => ['twelve']],
+                            'sortable' => ['type' => 'array', 'items' => ['type' => 'string', 'enum' => [['nested']]]],
+                            'filterable' => ['type' => 'array', 'items' => 'string'],
+                            'sort' => 'string',
+                            'facets' => ['type' => 'object', 'properties' => 'none', 'additionalProperties' => false],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertSame(['Blocks/BlockOdd.php', 'Blocks/BlockOddCollection.php'], array_keys($source));
+
+        $collection = $source['Blocks/BlockOddCollection.php'];
+        $this->assertStringContainsString('@return true', $collection);
+        $this->assertStringNotContainsString('getPerPage', $collection);
+        $this->assertStringNotContainsString('getSortable', $collection);
+        $this->assertStringNotContainsString('getFilterable', $collection);
+        $this->assertStringNotContainsString('getSort()', $collection);
+        $this->assertStringNotContainsString('getFacets', $collection);
+        $this->assertStringNotContainsString('public const', $collection);
+        $this->assertStringNotContainsString('The constants', $collection);
+        self::assertValidPhp($collection);
+        self::assertValidPhp($source['Blocks/BlockOdd.php']);
+    }
+
+    /**
+     * A facet field is a JSON key, so it can be numeric or need quoting in a shape.
+     */
+    public function testFacetFieldsAreQuotedWhereTheyAreNoIdentifier(): void
+    {
+        $value = ['type' => 'array', 'items' => ['type' => 'object']];
+        $source = self::render([
+            'BlockKeys' => [
+                'type' => 'object',
+                'x-schema-type' => 'block',
+                'properties' => [
+                    'component' => ['enum' => ['Keys'], 'type' => 'string'],
+                    'collection' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'enabled' => ['type' => 'boolean', 'enum' => [false]],
+                            'facets' => [
+                                'type' => 'object',
+                                'properties' => ['2024' => $value, 'my-field' => $value],
+                                'required' => ['my-field'],
+                                'additionalProperties' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $collection = $source['Blocks/BlockKeysCollection.php'];
+        $this->assertStringContainsString("public const FACETS = ['2024', 'my-field'];", $collection);
+        $this->assertStringContainsString("'2024'?: list<", $collection);
+        $this->assertStringContainsString("'my-field': list<", $collection);
+        self::assertValidPhp($collection);
+    }
+
+    /**
      * @param array<string, mixed> $schemas
      * @return array<string, string>
      */

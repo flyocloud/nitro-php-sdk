@@ -336,9 +336,20 @@ final class TypeMapper
             return $opaque;
         }
 
-        // A small shape reads better on one line. Purely length-driven, so it stays deterministic,
-        // and because inner shapes are rendered first an outer one collapses whenever its children
-        // did.
+        return self::shape($open, $lines);
+    }
+
+    /**
+     * Lays out the entries of a shape, `title: string` each, on one line or one per line.
+     *
+     * A small shape reads better on one line. Purely length-driven, so it stays deterministic, and
+     * because inner shapes are rendered first an outer one collapses whenever its children did.
+     *
+     * @param string $open `object{` or `array{`
+     * @param non-empty-list<string> $lines
+     */
+    public static function shape(string $open, array $lines): string
+    {
         $oneLine = $open . implode(', ', $lines) . '}';
         if (!str_contains($oneLine, "\n") && mb_strlen($oneLine) <= self::MAX_ONE_LINE) {
             return $oneLine;
@@ -561,7 +572,7 @@ final class TypeMapper
     /**
      * A shape key, quoted when it is not a bare PHP identifier (`my-field`, `length (cm)`).
      */
-    private static function key(string $name): string
+    public static function key(string $name): string
     {
         if (preg_match('/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/', $name) === 1) {
             return $name;

@@ -9,7 +9,7 @@ namespace Flyo\Generator;
  *
  * The deprecated `flyo-generate-blocks` renders these same classes, so any change to their output
  * shows up as drift in every consumer's `--check` and has to be deliberate. That is why it plans
- * them without the {@see EnumConstants}, which came later.
+ * them without the {@see EnumConstants} and the {@see BlockCollectionClass}, which came later.
  */
 final class BlockKind implements Kind
 {
@@ -17,9 +17,10 @@ final class BlockKind implements Kind
     public const PARENT_CLASS = '\Flyo\Model\Block';
 
     /**
-     * Only these three getters are overridden. `getSlots()`, `getIdentifier()`, `getComponent()`
-     * and `getUid()` are already exactly typed by \Flyo\Model\Block, so narrowing them would add
-     * noise and no information.
+     * Only these three getters are overridden, plus `getCollection()` when the collection gets a
+     * {@see BlockCollectionClass}. `getSlots()`, `getIdentifier()`, `getComponent()` and `getUid()`
+     * are already exactly typed by \Flyo\Model\Block, so narrowing them would add noise and no
+     * information.
      *
      * @var array<string, string> block schema property => getter name
      */
@@ -42,9 +43,13 @@ final class BlockKind implements Kind
     /**
      * @param bool $enumConstants name the options of every content and config field that has a
      *  fixed set of them; off for the deprecated flyo-generate-blocks, whose output stays as it was
+     * @param bool $collections give the collection of a block a class of its own, returned by its
+     *  getCollection(); off for the deprecated flyo-generate-blocks, like $enumConstants
      */
-    public function __construct(private readonly bool $enumConstants = true)
-    {
+    public function __construct(
+        private readonly bool $enumConstants = true,
+        private readonly bool $collections = true,
+    ) {
     }
 
     public function schemaType(): string
@@ -78,19 +83,38 @@ final class BlockKind implements Kind
             $blockClasses[$schemaKey] = $namespace . '\\' . $className;
         }
 
+        $collectionNames = $this->collections
+            ? BlockCollectionClass::classNames($schemas, $classNames, $warnings)
+            : [];
+
         $types = new TypeMapper($document, $blockClasses, $warnings);
 
         // Pass 2: plan.
         $classes = [];
         foreach ($schemas as $schemaKey => $schema) {
+            $collectionClass = $collectionNames[$schemaKey] ?? null;
+
             $classes[] = $this->classDef(
                 $schemaKey,
                 $schema,
                 $classNames[$schemaKey],
                 $namespace,
+                $collectionClass === null ? null : $namespace . '\\' . $collectionClass,
                 $types,
                 $warnings,
             );
+
+            if ($collectionClass !== null) {
+                $classes[] = BlockCollectionClass::classDef(
+                    $schemaKey,
+                    $schema,
+                    Schema::property($schema, 'collection') ?? [],
+                    $collectionClass,
+                    $classNames[$schemaKey],
+                    $namespace,
+                    $types,
+                );
+            }
         }
 
         return $classes;
@@ -98,12 +122,15 @@ final class BlockKind implements Kind
 
     /**
      * @param array<string, mixed> $schema
+     * @param string|null $collectionClass the fully qualified class of the block's collection, when
+     *  it has one
      */
     private function classDef(
         string $schemaKey,
         array $schema,
         string $className,
         string $namespace,
+        ?string $collectionClass,
         TypeMapper $types,
         Warnings $warnings,
     ): ClassDef {
@@ -122,6 +149,15 @@ final class BlockKind implements Kind
                 $getter,
                 $types->propertyType($propSchema, [$schemaKey, $property], in_array($property, $required, true)),
                 Schema::text($propSchema, 'description'),
+            );
+        }
+
+        $collection = Schema::property($schema, 'collection');
+        if ($collectionClass !== null && $collection !== null) {
+            $methods[] = new MethodDef(
+                'getCollection',
+                '\\' . $collectionClass . (in_array('collection', $required, true) ? '' : '|null'),
+                Schema::text($collection, 'description'),
             );
         }
 
@@ -154,8 +190,10 @@ final class BlockKind implements Kind
             Schema::text($schema, 'description'),
             $slots === [] ? [] : ['Declared slots: ' . implode(', ', $slots) . '.'],
             'Documentation-only type: at runtime a block is always a ' . self::PARENT_CLASS
-                . ', and the values these getters return are plain \stdClass objects. Annotate a '
-                . 'variable with @var; do not instantiate this class.',
+                . ', and the values these getters return are plain \stdClass objects'
+                . ($collectionClass === null ? '' : ', except getCollection(), which returns the SDK model '
+                    . BlockCollectionClass::PARENT_CLASS)
+                . '. Annotate a variable with @var; do not instantiate this class.',
             $constants,
             $methods,
         );

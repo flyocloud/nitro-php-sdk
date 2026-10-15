@@ -263,4 +263,69 @@ class GoldenTest extends TestCase
         );
         $this->assertArrayNotHasKey('Containers/Containers.php', $files);
     }
+
+    /**
+     * The collection classes came after flyo-generate-blocks was deprecated, like the enum
+     * constants: under it, a block keeps the getCollection() of the SDK model.
+     */
+    public function testOnlyTheTypesCommandGeneratesCollectionClasses(): void
+    {
+        $raw = self::loadDocument('types/collections');
+
+        $legacy = self::renderAll($raw, 'App\Blocks', 'blocks');
+        $types = self::renderAll($raw, 'App', 'types');
+
+        $this->assertSame(
+            ['BlockEventList.php', 'BlockNewsFeed.php', 'BlockTagCloud.php', 'BlockText.php'],
+            array_keys($legacy)
+        );
+        foreach ($legacy as $relative => $contents) {
+            $this->assertStringNotContainsString('getCollection', $contents, $relative);
+        }
+
+        $this->assertSame(
+            [
+                'Blocks/BlockEventList.php',
+                'Blocks/BlockEventListCollection.php',
+                'Blocks/BlockNewsFeed.php',
+                'Blocks/BlockNewsFeedCollection.php',
+                'Blocks/BlockTagCloud.php',
+                'Blocks/BlockTagCloudCollection.php',
+                'Blocks/BlockText.php',
+            ],
+            array_keys($types)
+        );
+    }
+
+    /**
+     * A block keeps its class name when it collides with the collection class of another block:
+     * the collection class is numbered instead, and the generator says so.
+     */
+    public function testACollectionClassNeverTakesTheNameOfABlock(): void
+    {
+        $raw = self::loadDocument('types/collections');
+        $schemas = $raw['components']['schemas'];
+        $raw['components']['schemas'] = [
+            'BlockEventList' => $schemas['BlockEventList'],
+            'BlockEventListCollection' => $schemas['BlockText'],
+        ];
+        $raw['components']['schemas']['BlockEventListCollection']['properties']['component']['enum'] = ['EventListCollection'];
+
+        $warnings = new Warnings();
+        $files = self::renderAll($raw, 'App', 'types', $warnings);
+
+        $this->assertStringContainsString(
+            'class BlockEventListCollection extends \Flyo\Model\Block' . "\n",
+            $files['Blocks/BlockEventListCollection.php']
+        );
+        $this->assertStringContainsString(
+            'class BlockEventListCollection2 extends \Flyo\Model\BlockCollection',
+            $files['Blocks/BlockEventListCollection2.php']
+        );
+        $this->assertStringContainsString(
+            '@return \App\Blocks\BlockEventListCollection2',
+            $files['Blocks/BlockEventList.php']
+        );
+        $this->assertStringContainsString('BlockEventList -> BlockEventListCollection2', implode("\n", $warnings->all()));
+    }
 }

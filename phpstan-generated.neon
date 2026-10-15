@@ -18,5 +18,6 @@ parameters:
     # Output of flyo-generate-types, one sub-namespace per kind.
     - test/fixtures/types/site
     - test/fixtures/types/enums
+    - test/fixtures/types/collections
   bootstrapFiles:
     - vendor/autoload.php

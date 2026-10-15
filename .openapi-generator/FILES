@@ -8,6 +8,7 @@ docs/Api/SitemapApi.md
 docs/Api/VersionApi.md
 docs/Model/Block.md
 docs/Model/BlockCollection.md
+docs/Model/BlockCollectionFacetsValue.md
 docs/Model/BlockCollectionLinks.md
 docs/Model/BlockSlotValue.md
 docs/Model/Breadcrumb.md
@@ -41,6 +42,7 @@ lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/Block.php
 lib/Model/BlockCollection.php
+lib/Model/BlockCollectionFacetsValue.php
 lib/Model/BlockCollectionLinks.php
 lib/Model/BlockSlotValue.php
 lib/Model/Breadcrumb.php

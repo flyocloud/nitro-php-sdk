@@ -42,7 +42,8 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         'sort' => 'string',
         'sortable' => 'string[]',
         'filterable' => 'string[]',
-        'links' => '\Flyo\Model\BlockCollectionLinks'
+        'links' => '\Flyo\Model\BlockCollectionLinks',
+        'facets' => 'array<string,\Flyo\Model\BlockCollectionFacetsValue[]>'
     ];
 
     /**
@@ -63,7 +64,8 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         'sort' => null,
         'sortable' => null,
         'filterable' => null,
-        'links' => null
+        'links' => null,
+        'facets' => null
     ];
 
     /**
@@ -82,7 +84,8 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         'sort' => true,
         'sortable' => false,
         'filterable' => false,
-        'links' => true
+        'links' => true,
+        'facets' => false
     ];
 
     /**
@@ -181,7 +184,8 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         'sort' => 'sort',
         'sortable' => 'sortable',
         'filterable' => 'filterable',
-        'links' => 'links'
+        'links' => 'links',
+        'facets' => 'facets'
     ];
 
     /**
@@ -200,7 +204,8 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         'sort' => 'setSort',
         'sortable' => 'setSortable',
         'filterable' => 'setFilterable',
-        'links' => 'setLinks'
+        'links' => 'setLinks',
+        'facets' => 'setFacets'
     ];
 
     /**
@@ -219,7 +224,8 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         'sort' => 'getSort',
         'sortable' => 'getSortable',
         'filterable' => 'getFilterable',
-        'links' => 'getLinks'
+        'links' => 'getLinks',
+        'facets' => 'getFacets'
     ];
 
     /**
@@ -290,6 +296,7 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('sortable', $data ?? [], null);
         $this->setIfExists('filterable', $data ?? [], null);
         $this->setIfExists('links', $data ?? [], null);
+        $this->setIfExists('facets', $data ?? [], null);
     }
 
     /**
@@ -351,6 +358,9 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['links'] === null && !$this->isNullableSetToNull('links')) {
             $invalidProperties[] = "'links' can't be null";
+        }
+        if ($this->container['facets'] === null) {
+            $invalidProperties[] = "'facets' can't be null";
         }
         return $invalidProperties;
     }
@@ -674,6 +684,33 @@ class BlockCollection implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['links'] = $links;
+
+        return $this;
+    }
+
+    /**
+     * Gets facets
+     *
+     * @return array<string,\Flyo\Model\BlockCollectionFacetsValue[]>
+     */
+    public function getFacets()
+    {
+        return $this->container['facets'];
+    }
+
+    /**
+     * Sets facets
+     *
+     * @param array<string,\Flyo\Model\BlockCollectionFacetsValue[]> $facets The distinct values of every mapping item the block aggregates, each with the number of items that carry it, to build a filter from. They describe all items of the block, whatever the request filters by. Text and dropdown labels are sorted alphabetically, numbers and dates by value; empty values are left out, and a field has at most 100 values. An empty object when the block aggregates no mapping item.
+     *
+     * @return self
+     */
+    public function setFacets($facets)
+    {
+        if (is_null($facets)) {
+            throw new \InvalidArgumentException('non-nullable facets cannot be null');
+        }
+        $this->container['facets'] = $facets;
 
         return $this;
     }

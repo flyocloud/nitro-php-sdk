@@ -15,5 +15,6 @@ Name | Type | Description | Notes
 **sortable** | **string[]** | The fields &#x60;sort&#x60; accepts. &#x60;position&#x60; stands for the order the editor set. |
 **filterable** | **string[]** | The fields &#x60;filter&#x60; accepts. A field of an object is addressed with &#x60;:&#x60; (&#x60;category:value&#x60;), a field of the entries of a list with &#x60;.&#x60; (&#x60;authors.name&#x60;). |
 **links** | [**\Flyo\Model\BlockCollectionLinks**](BlockCollectionLinks.md) |  |
+**facets** | **array<string,\Flyo\Model\BlockCollectionFacetsValue[]>** | The distinct values of every mapping item the block aggregates, each with the number of items that carry it, to build a filter from. They describe all items of the block, whatever the request filters by. Text and dropdown labels are sorted alphabetically, numbers and dates by value; empty values are left out, and a field has at most 100 values. An empty object when the block aggregates no mapping item. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

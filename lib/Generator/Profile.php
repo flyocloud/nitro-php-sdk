@@ -8,10 +8,10 @@ namespace Flyo\Generator;
  * What one binary generates, and where it puts it.
  *
  * `flyo-generate-types` writes every kind into a sub-namespace and directory of its own
- * (`<namespace>\Blocks`, `<namespace>\Containers`, `<namespace>\Entities`). The deprecated
- * `flyo-generate-blocks` generates blocks only, straight into `<namespace>`, and must keep
- * producing byte-identical files for as long as it exists, or upgrading the package would make
- * every consumer's `--check` fail.
+ * (`<namespace>\Blocks`, `<namespace>\Containers`, `<namespace>\Entities`,
+ * `<namespace>\Wysiwyg`). The deprecated `flyo-generate-blocks` generates blocks only, straight
+ * into `<namespace>`, and must keep producing byte-identical files for as long as it exists, or
+ * upgrading the package would make every consumer's `--check` fail.
  */
 final class Profile
 {
@@ -39,7 +39,7 @@ final class Profile
     {
         return new self(
             program: 'flyo-generate-types',
-            kinds: [new BlockKind(), new ContainerKind(), new EntityKind()],
+            kinds: [new BlockKind(), new ContainerKind(), new EntityKind(), new WysiwygNodeKind()],
             flat: false,
             reportUnsupported: true,
             deprecation: null,
@@ -188,8 +188,8 @@ final class Profile
         {$kinds}
 
         Each directory is a sub-namespace of <namespace>, e.g. App\\Flyo\\Blocks. The classes carry
-        no logic: they narrow inherited getters of the SDK models so an IDE and PHPStan know the
-        shape of the data. Pass --lowercase for lower-case directories and sub-namespaces, e.g.
+        no logic: they narrow inherited getters of the SDK models, or add one getter per attribute
+        of a WYSIWYG element, so an IDE and PHPStan know the shape of the data. Pass --lowercase for lower-case directories and sub-namespaces, e.g.
         for Yii 2: app/flyo flyo --lowercase puts app\\flyo\\blocks in flyo/blocks.
 
         Arguments:
@@ -268,7 +268,8 @@ final class Profile
     {
         $lowercase = $kindDirectories
             ? "\n      --lowercase       name the kind directories and sub-namespaces blocks,\n"
-                . '                        containers, entities instead of Blocks, Containers, Entities'
+                . "                        containers, entities, wysiwyg instead of Blocks,\n"
+                . '                        Containers, Entities, Wysiwyg'
             : '';
 
         return <<<TXT

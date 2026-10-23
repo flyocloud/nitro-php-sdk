@@ -9,7 +9,9 @@ parameters:
   paths:
     - lib/Generator
     - lib/Blocks
+    - lib/Wysiwyg
     - test/Generator
+    - test/Wysiwyg
     - bin/flyo-generate-types
     - bin/flyo-generate-blocks
   excludePaths:

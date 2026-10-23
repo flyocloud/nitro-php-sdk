@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d98208d3a5b4e9241d9a016cb0a4127",
+    "content-hash": "b92c0c5b695a29938f00386105566767",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -330,6 +330,52 @@
                 }
             ],
             "time": "2025-08-23T21:21:41+00:00"
+        },
+        {
+            "name": "nadar/prosemirror-json-parser",
+            "version": "2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nadar/prosemirror-json-parser.git",
+                "reference": "8fd07f3f44841212d1d63e5ef8e71c741c77736c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nadar/prosemirror-json-parser/zipball/8fd07f3f44841212d1d63e5ef8e71c741c77736c",
+                "reference": "8fd07f3f44841212d1d63e5ef8e71c741c77736c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.2",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^11.5",
+                "rector/rector": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nadar\\ProseMirror\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nadar",
+                    "email": "git@nadar.io"
+                }
+            ],
+            "description": "A library that easily converts ProseMirror/TipTap JSON into customizable HTML elements.",
+            "support": {
+                "issues": "https://github.com/nadar/prosemirror-json-parser/issues",
+                "source": "https://github.com/nadar/prosemirror-json-parser/tree/2.2"
+            },
+            "time": "2026-10-23T13:18:01+00:00"
         },
         {
             "name": "psr/http-client",
@@ -2344,5 +2390,5 @@
         "ext-mbstring": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }

@@ -33,6 +33,7 @@ trait FixtureTrait
         'types/site' => ['Fixture\Site', 'types'],
         'types/enums' => ['Fixture\Enums', 'types'],
         'types/collections' => ['Fixture\Collections', 'types'],
+        'types/wysiwyg' => ['Fixture\Nodes', 'types'],
     ];
 
     /**

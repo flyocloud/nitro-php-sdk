@@ -45,7 +45,8 @@ sub-namespace of its own:
 app/Flyo/
 ├── Blocks/        BlockHero.php, BlockText.php, ...       one per block, narrowing \Flyo\Model\Block
 ├── Containers/    ContainerMain.php, ContainerItem.php    one per navigation container, plus its item class
-└── Entities/      EntityArticle.php, ...                  one per entity type, narrowing \Flyo\Model\Entity
+├── Entities/      EntityArticle.php, ...                  one per entity type, narrowing \Flyo\Model\Entity
+└── Wysiwyg/       WysiwygNodePersonCard.php, ...          one per custom WYSIWYG element
 ```
 
 A directory only appears once the document has something for it, and more kinds will follow as
@@ -99,7 +100,7 @@ vendor/bin/flyo-generate-types \
 | argument | meaning |
 |----------|---------|
 | `<source>` | OpenAPI URL, a local `.json` path, or `-` to read from stdin |
-| `<namespace>` | PSR-4 root namespace; the kinds become `<namespace>\Blocks`, `<namespace>\Containers`, `<namespace>\Entities` |
+| `<namespace>` | PSR-4 root namespace; the kinds become `<namespace>\Blocks`, `<namespace>\Containers`, `<namespace>\Entities`, `<namespace>\Wysiwyg` |
 | `<target>` | the directory that namespace maps to |
 
 ### Where the classes go
@@ -122,8 +123,8 @@ same trailing segment to both. The target directory is created if it does not ex
 Some frameworks map lower-case directories to lower-case namespaces. In Yii 2's basic template the
 root namespace `app` is the project root itself, so there is no `app/` directory:
 `app\flyo\blocks\BlockHero` lives in `flyo/blocks/BlockHero.php`. Pass `--lowercase` and the kind
-directories and sub-namespaces become `blocks`, `containers` and `entities`; the class names keep
-their case:
+directories and sub-namespaces become `blocks`, `containers`, `entities` and `wysiwyg`; the class
+names keep their case:
 
 ```sh
 vendor/bin/flyo-generate-types <source> app/flyo flyo --lowercase
@@ -133,7 +134,8 @@ vendor/bin/flyo-generate-types <source> app/flyo flyo --lowercase
 flyo/
 ├── blocks/        BlockHero.php        namespace app\flyo\blocks
 ├── containers/    ContainerMain.php    namespace app\flyo\containers
-└── entities/      EntityArticle.php    namespace app\flyo\entities
+├── entities/      EntityArticle.php    namespace app\flyo\entities
+└── wysiwyg/       WysiwygNodeBox.php   namespace app\flyo\wysiwyg
 ```
 
 Use the same flag for every run, `--check` included: switching it changes every file.
@@ -144,9 +146,9 @@ Typed schemas only exist on the **authenticated** `/nitro/v1/openapi/schemas` en
 
 ### Using them
 
-The generated classes are documentation-only: nothing instantiates them, and at runtime the API
-still returns the plain SDK models. You swap the annotation at the framework boundary and
-everything below it becomes typed.
+The generated classes are documentation-only, except the WYSIWYG elements (see below): nothing
+instantiates them, and at runtime the API still returns the plain SDK models. You swap the
+annotation at the framework boundary and everything below it becomes typed.
 
 **Blocks** narrow `getContent()`, `getConfig()` and `getItems()`:
 
@@ -256,6 +258,35 @@ foreach ($main->getItems() as $item) {
     }
 }
 ```
+
+**WYSIWYG elements** are the custom elements of your organisation's WYSIWYG library, the nodes you
+render with `addNode()` of [nadar/prosemirror-json-parser](https://github.com/nadar/prosemirror-json-parser),
+directly or through `Wysiwyg::render()` of [flyo/nitro-php-bridge](https://github.com/flyocloud/nitro-php-bridge).
+Each class carries the element's node name and label and one getter per attribute, so the
+attributes are the contract a renderer is written against:
+
+```php
+use App\Flyo\Wysiwyg\WysiwygNodePersonCard;
+use Flyo\Bridge\Wysiwyg;
+
+echo Wysiwyg::render($block->getContent()->text->json, fn (Wysiwyg $parser) => $parser
+    ->addNode(WysiwygNodePersonCard::IDENTIFIER, fn (WysiwygNodePersonCard $node) =>
+        '<h3>' . $node->getAttrUser()?->name . '</h3>'     // string|null
+        . '<p>' . $node->getTitle() . '</p>'               // 'Person Card', the label in Flyo
+        . $node->renderContent()));                        // the rich text it wraps, if any
+```
+
+These are the only generated classes that exist at runtime, because PHP checks a closure's
+parameter type. They extend `\Flyo\Wysiwyg\WysiwygNode`, which implements the parser's
+`NodeInterface`: when a renderer's parameter is typed with one, `addNode()` hands it an instance
+instead of the parser's own node. A renderer typed with a class of another element throws as soon as
+that node is rendered. `WysiwygNodePersonCard::from($node)` builds one from any decoded node,
+arrays or objects.
+
+A getter is named `getAttr` plus the attribute's identifier in studly case (`card-size` gives
+`getAttrCardSize()`), and an attribute that is not always there returns null. Options get constants
+like a block's, prefixed `ATTR_`: `WysiwygNodePersonCard::ATTR_CARD_SIZE_WIDE`. Two attributes that
+would share a getter get none, and the generator prints a warning.
 
 Values below the top level really are plain objects (the API decodes with
 `json_decode($json, false)`) so property access there needs no support from the SDK, and a typo

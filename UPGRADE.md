@@ -1,5 +1,48 @@
 # Upgrade
 
+## From 4.1 to 4.2
+
+### Generated types: a class for every custom WYSIWYG element
+
+`flyo-generate-types` generates one class per custom element of the organisation's WYSIWYG library
+into `<target>/Wysiwyg` (`wysiwyg` with `--lowercase`), named `WysiwygNode<Name>`. Each one has the
+element's node name and label, one typed getter per attribute and the same option constants as a
+block, prefixed `ATTR_`:
+
+```php
+class WysiwygNodePersonCard extends \Flyo\Wysiwyg\WysiwygNode
+{
+    public const IDENTIFIER = 'person_card';
+    public const TITLE = 'Person Card';
+    public const ATTR_CARD_SIZE_COMPACT = 'compact';
+
+    /** @return object{unique_id: string, name: string}|null */
+    public function getAttrUser() { ... }
+}
+```
+
+Unlike the other generated classes they exist at runtime: type a renderer's parameter with one and
+the parser's `addNode()` hands it an instance instead of its own node. That works the same through
+flyo/nitro-php-bridge, whose `Wysiwyg` extends the parser:
+
+```php
+Wysiwyg::render($json, fn (Wysiwyg $parser) => $parser
+    ->addNode(WysiwygNodePersonCard::IDENTIFIER, fn (WysiwygNodePersonCard $node) =>
+        "<h3>{$node->getAttrUser()?->name}</h3>"));
+```
+
+For that, `flyo/nitro-php` now requires `nadar/prosemirror-json-parser` `^2.2`, whose
+`NodeInterface` the base class `\Flyo\Wysiwyg\WysiwygNode` implements. Projects on nitro-laravel or
+nitro-yii2 already have the parser through the bridge and move from 2.1 to 2.2 on
+`composer update`; anything else gains it, without further dependencies. Renderers typed with
+`Nadar\ProseMirror\Node`, or not typed at all, keep getting the parser's node.
+
+`--check` reports the new files until you run `vendor/bin/flyo-generate-types` again. The summary
+line also counts WYSIWYG elements now (`1 block, 2 containers, 2 entities, 0 WYSIWYG elements`), in
+case a script parses it. An attribute that would get the same getter as another one (`cta-link` and
+`cta_link`) gets none and the generator prints a warning, like an option constant. The deprecated
+`flyo-generate-blocks` is unchanged.
+
 ## From 4.0 to 4.1
 
 ### Generated types: a class for the collection of a block

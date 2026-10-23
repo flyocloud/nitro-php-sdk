@@ -19,5 +19,6 @@ parameters:
     - test/fixtures/types/site
     - test/fixtures/types/enums
     - test/fixtures/types/collections
+    - test/fixtures/types/wysiwyg
   bootstrapFiles:
     - vendor/autoload.php

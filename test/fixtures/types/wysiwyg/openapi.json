@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Flyo Nitro - Typed Schemas",
+    "version": "test"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "WysiwygNodePersonCard": {
+        "title": "Person Card",
+        "description": "Custom WYSIWYG element \"Person Card\", delivered as a node of type `person_card` inside the `json` of a WYSIWYG field.",
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The node name of this element, which is how it is recognised while walking the content.",
+            "example": "person_card",
+            "enum": ["person_card"]
+          },
+          "attrs": {
+            "title": "Person Card Attributes",
+            "description": "The values the editor filled in, keyed by the identifier of the field. Absent on a node that carries no values at all.",
+            "type": "object",
+            "properties": {
+              "user": {
+                "title": "Person",
+                "description": "The person shown on the card.",
+                "type": "object",
+                "required": ["unique_id", "name"],
+                "properties": {
+                  "unique_id": {"type": "string", "example": "a1b2c3"},
+                  "name": {"type": "string", "example": "Jane Doe"},
+                  "email": {"type": "string", "nullable": true, "example": "jane@example.com"}
+                }
+              },
+              "role": {
+                "title": "Role",
+                "type": "string",
+                "example": "Head of Design"
+              },
+              "card-size": {
+                "title": "Card size",
+                "type": "object",
+                "required": ["value", "options", "label"],
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "nullable": true,
+                    "enum": ["compact", "wide", null]
+                  },
+                  "options": {
+                    "oneOf": [
+                      {"type": "object", "additionalProperties": {"type": "string"}},
+                      {"type": "array", "maxItems": 0, "items": {}}
+                    ]
+                  },
+                  "label": {"type": "string", "nullable": true}
+                }
+              },
+              "years": {
+                "title": "Years with us",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 80
+              }
+            }
+          }
+        },
+        "x-schema-type": "wysiwygNode"
+      },
+      "WysiwygNodeInfoBox": {
+        "title": "Info Box",
+        "description": "Custom WYSIWYG element \"Info Box\", delivered as a node of type `info_box` inside the `json` of a WYSIWYG field.",
+        "type": "object",
+        "required": ["type", "attrs"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "info_box",
+            "enum": ["info_box"]
+          },
+          "attrs": {
+            "title": "Info Box Attributes",
+            "type": "object",
+            "required": ["heading"],
+            "properties": {
+              "heading": {
+                "title": "Heading",
+                "type": "string"
+              },
+              "tone": {
+                "title": "Tone",
+                "type": "string",
+                "enum": ["info", "warning"]
+              }
+            }
+          },
+          "content": {
+            "title": "Info Box Content",
+            "description": "The rich text nodes this element wraps, in the same TipTap notation as the document itself.",
+            "type": "array",
+            "items": {"type": "object", "additionalProperties": true}
+          }
+        },
+        "x-schema-type": "wysiwygNode"
+      },
+      "WysiwygNodeDivider": {
+        "title": "Divider",
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["divider"]
+          },
+          "attrs": {
+            "title": "Divider Attributes",
+            "type": "object",
+            "properties": {
+              "s": {"title": "Spacing", "type": "string"},
+              "cta-link": {"title": "Link", "type": "string"},
+              "cta_link": {"title": "Other link", "type": "string"}
+            }
+          }
+        },
+        "x-schema-type": "wysiwygNode"
+      }
+    }
+  }
+}

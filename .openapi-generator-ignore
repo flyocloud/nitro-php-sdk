@@ -10,5 +10,7 @@ phpunit.xml.dist
 bin/
 lib/Generator/
 lib/Blocks/
+# Hand-written: the runtime base of the generated WYSIWYG element classes.
+lib/Wysiwyg/
 phpstan-generator.neon
 phpstan-generated.neon

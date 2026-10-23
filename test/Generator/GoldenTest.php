@@ -108,7 +108,7 @@ class GoldenTest extends TestCase
 
             $expectedClass = basename($relative, '.php');
             $this->assertMatchesRegularExpression(
-                '/^class ' . $expectedClass . ' extends \\\\Flyo\\\\Model\\\\\w+$/m',
+                '/^class ' . $expectedClass . ' extends \\\\Flyo\\\\(Model\\\\\w+|Wysiwyg\\\\WysiwygNode)$/m',
                 $contents,
                 $relative . ' should declare class ' . $expectedClass
             );

@@ -73,7 +73,7 @@ class CliTest extends TestCase
             );
         }
 
-        $this->assertStringContainsString('1 block, 2 containers, 2 entities -> ', $out);
+        $this->assertStringContainsString('1 block, 2 containers, 2 entities, 0 WYSIWYG elements -> ', $out);
     }
 
     /**
@@ -185,7 +185,7 @@ class CliTest extends TestCase
         $this->assertStringContainsString('removed: Blocks/BlockTeaser.php', $out);
         $this->assertStringContainsString('removed: Containers/ContainerItem.php', $out);
         $this->assertStringContainsString('removed: Entities/EntityArticle.php', $out);
-        $this->assertStringContainsString('1 block, 0 containers, 0 entities -> ', $out);
+        $this->assertStringContainsString('1 block, 0 containers, 0 entities, 0 WYSIWYG elements -> ', $out);
         $this->assertFileExists($this->dir . '/Blocks/BlockHero.php');
         $this->assertFileExists($this->dir . '/Entities/MyHelper.php');
         $this->assertFileDoesNotExist($this->dir . '/Entities/EntityArticle.php');
@@ -223,7 +223,7 @@ class CliTest extends TestCase
         [$status, $out] = $this->invoke([self::fixture('blocks/entities-only'), 'App\Flyo', $this->dir]);
 
         $this->assertSame(ExitCode::OK, $status);
-        $this->assertStringContainsString('0 blocks, 0 containers, 2 entities -> ', $out);
+        $this->assertStringContainsString('0 blocks, 0 containers, 2 entities, 0 WYSIWYG elements -> ', $out);
         $this->assertDirectoryDoesNotExist($this->dir . '/Blocks');
         $this->assertDirectoryDoesNotExist($this->dir . '/Containers');
     }
@@ -243,7 +243,7 @@ class CliTest extends TestCase
         $this->assertSame(ExitCode::NO_TYPES, $status);
         $this->assertStringContainsString(
             'the document declares no typed schemas: 0 of 2 schemas carry an x-schema-type of '
-                . '"block", "container", "entity" (1 has none, 1 is "gadget").',
+                . '"block", "container", "entity", "wysiwygNode" (1 has none, 1 is "gadget").',
             $err
         );
         $this->assertStringContainsString('--allow-empty', $err);

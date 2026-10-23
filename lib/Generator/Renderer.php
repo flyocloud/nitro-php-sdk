@@ -160,7 +160,7 @@ final class Renderer
             ...self::docblock(self::typeTag('@var', $method->type), self::INDENT . self::INDENT),
         ];
 
-        $lines[] = self::INDENT . self::INDENT . 'return parent::' . $method->name . '();';
+        $lines[] = self::INDENT . self::INDENT . 'return ' . ($method->body ?? 'parent::' . $method->name . '()') . ';';
         $lines[] = self::INDENT . '}';
 
         return $lines;

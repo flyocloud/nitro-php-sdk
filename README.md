@@ -59,21 +59,27 @@ Generating is something you repeat on every schema change, so keep the arguments
 ```json
 {
     "scripts": {
-        "flyo:types": "vendor/bin/flyo-generate-types https://api.flyo.cloud/nitro/v1/openapi/schemas App/Flyo app/Flyo"
+        "flyo:types": "[ ! -f .env ] || . ./.env; vendor/bin/flyo-generate-types \"https://api.flyo.cloud/nitro/v1/openapi/schemas?token=${FLYO_TOKEN:?set FLYO_TOKEN in .env}\" App/Flyo app/Flyo"
     }
 }
 ```
 
 ```sh
-export FLYO_TOKEN=your-nitro-token
+# .env
+FLYO_TOKEN=your-nitro-token
+```
 
+```sh
 composer flyo:types              # regenerate
 composer flyo:types -- --check   # exit 6 when the committed classes are out of date
 ```
 
 Composer appends anything after `--` to the script, so one entry covers both the write and the CI
-check. The token stays out of `composer.json`: Composer does not read a framework `.env`, so export
-it in your shell or hand it in as a CI secret.
+check. The token stays out of `composer.json`: Composer does not read `.env` itself, so the script
+sources it when there is one, and `${FLYO_TOKEN:?...}` stops with a clear message when the token is
+missing. In CI, where there is usually no `.env`, set `FLYO_TOKEN` as a secret instead. The same
+pattern works for any source that takes a token, such as an integration's components definition:
+`"https://api.flyo.cloud/integration/organisation/<id>/components-definition/<key>?token=${FLYO_TOKEN:?set FLYO_TOKEN in .env}"`.
 
 **Use forward slashes for the namespace in `composer.json`.** `App/Flyo` is normalised to
 `App\Flyo`, and unlike a backslash it has nothing to survive: a backslash has to get past JSON
